@@ -25,21 +25,26 @@ SOFTWARE.
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QList>
+#include <QFileInfo>
 
-#include "QNetDiagsLogger.hpp"
-#include "QNetDiagsConfig.hpp"
+#include "commands/commands.hpp"
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
+bool testFiles();
 
 QList<QCommandLineOption> commandLineOptions;
+
+QString targetHost = QString();
+qint64 targetPort = -1;
+bool useSsl = false;
+QString certFile = QString();
+QString keyFile = QString();
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QNetDiagsLogger::fileName = "qnetdiags_log.txt";
-    QNetDiagsLogger::install();
 
     QCommandLineParser p;
     initArgumentParser(a,p);
@@ -59,7 +64,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
     // Convenience options
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.setApplicationDescription("qnetdiags Provides diagnostics for TCP, SSL and HTTP client/server");
+    parser.setApplicationDescription("qnetdiags Provides diagnostics for TCP, SSL and HTTP client/server.\r\n\r\nThe application of SSL is inferred by the presence of the key and cert options.");
 
     initArgumentOptions(app,parser);
     parser.process(app);
@@ -67,62 +72,78 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 }
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
-    /*
-        Various ways to create options:
-            Simplest:
-                parser.addOption({{"o","output"},"Write to file","file"});
-            Create a list:
-                QList<QCommandLineOption> commandLineOptions;
-                QCommandLineOption op1("short name","description","long name");
-                parser.addOption(op1);
-                commandLineOptions.append(op1);
-        Positional arguments
-            parser.addPositionalArgument("list-types", "List supported types");
-    */
-
     // Positional arguments
     parser.addPositionalArgument("client", "Client connection diagnostics.");
     parser.addPositionalArgument("server", "Server listen diagnostic.s");
-    parser.addPositionalArgument("tcp", "Plain TCP.");
-    parser.addPositionalArgument("http", "Plain HTTP.");
-    parser.addPositionalArgument("ssl", "Use SSL.");
+    parser.addPositionalArgument("tcp", "TCP client or server.");
+    parser.addPositionalArgument("http", "HTTP client or server.");
 
     // Options
     parser.addOption({{"t","target"},"Target IP address. Required for client connections.","IP address"});
     parser.addOption({{"p","port"},"Port number. Required for both client connections and server listen.","int"});
-    parser.addOption({{"c","cert"},"Certificate file. Required for SS (TCP and HTTP), both client and server.","file"});
+    parser.addOption({{"c","cert"},"Certificate file. Required for SSL (TCP and HTTP), both client and server.","file"});
     parser.addOption({{"k","key"},"Private key file. Required for SSL (TCP and HTTP) server.","file"});
 
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
-    // CODECOMP Process supplied options
-    /*
-       Individually:
-        if(parser.isSet(<QString name|QCommandLineOption>)){
-            Either get the value of an option:
-                QString s = parser.value(<QString name|QCommandLineOption>);
-            Or operate on a switch, e.g. parser.isSet("verbose"):
-        }
-       Grouped as QString names:
-            for(QString n : parser.optionNames()){
-                As above, but no isSet(...) test need
-            }
-       Grouped as QCommandLineOptions:
-            for(QCommandLineOption clo : commandLineOptions ){
-                As above
-            }
-       Manage incorrect/unrecognised/missing options:
-            for( QString opt : parser.unknownOptionNames() ){
-                qWarning() << ""; // recoverable error
-                qCritical() << ""; // non-recoverable error, usually a system error such as read/write/execute privileges
-                qFatal(""); // non-recoverable error, will exit and dump core
-            }
-        Poistional arguments:
-            for(QString pos : parser.positionalArguments()){
-                qDebug() << "[debug] Positional argument: " << pos;
-            }
-    */
+    if( parser.isSet("port") ){
+        targetPort = parser.value("port").toInt();
+    }
+    else{
+        qCritical() << "No port  number is set. Everything needs a port number to call home.";
+        parser.showHelp( 1 );
+    }
 
+    if( parser.isSet("target") ) targetHost = parser.value("target");
+    if( parser.isSet("key") ) keyFile = parser.value("key");
+    if( parser.isSet("cert") ) certFile = parser.value("cert");
+
+    QStringList arguments = parser.positionalArguments();
+    if( arguments.contains("client") ){
+        if( targetHost.isEmpty() ){
+            qCritical() << "Target host must be set.";
+            parser.showHelp( 2 );
+        }
+        client( targetHost, targetPort, certFile);
+    }
+    else if( arguments.contains("server") ){
+        QFileInfo certFileInfo( certFile );
+        QFileInfo keyFileInfo( keyFile );
+        QFile certInputFile( certFileInfo.absoluteFilePath() );
+        QFile keyInputFile( keyFileInfo.absoluteFilePath() );
+        useSsl = testFiles();
+        if( useSsl )
+            server(targetPort, certFileInfo.absoluteFilePath(), keyFileInfo.absoluteFilePath());
+        else
+            server(targetPort);
+    }
+    else{
+        qCritical() << "No switch is set for client or server.";
+        parser.showHelp( 3 );
+    }
 }
 
+bool testFiles(){
+    if( certFile.isEmpty() || keyFile.isEmpty() ){
+        qInfo() << "Certificate file or private key file not set. Running as plain text TCP server";
+        return( false );
+    }
+    else{
+        QFileInfo certFileInfo( certFile );
+        QFileInfo keyFileInfo( keyFile );
+        QFile certInputFile( certFileInfo.absoluteFilePath() );
+        QFile keyInputFile( keyFileInfo.absoluteFilePath() );
+        if( !certFileInfo.exists() || !keyFileInfo.exists() ){
+            qCritical() << "Certificate or private key file doesn't exist.";
+            return(false);
+        }
+        if( !certInputFile.open( QIODevice::ReadOnly) || !keyInputFile.open( QIODevice::ReadOnly) ){
+            qCritical() << "Unable to open certificate or private key file..";
+            return( false );
+        }
+        if( certInputFile.isOpen() ) certInputFile.close();
+        if( keyInputFile.isOpen() ) keyInputFile.close();
+    }
+    return( true );
+}

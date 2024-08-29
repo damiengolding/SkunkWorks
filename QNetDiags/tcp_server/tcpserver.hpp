@@ -21,27 +21,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #pragma once
 
 #include <QObject>
-#include <QDir>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QAbstractSocket>
+#include <QRunnable>
+#include <QThread>
+#include <QThreadPool>
 
-class QNetDiagsLogger : public QObject
+#include "tcpreceivesocket.hpp"
+
+class TcpServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit QNetDiagsLogger(QObject *parent = nullptr);
-    ~QNetDiagsLogger();
+    explicit TcpServer(QObject *parent = nullptr);
+    ~TcpServer();
 
-    static bool isLogging;
-    static QString fileName;
-    static void install();
-    static void uninstall();
-    static void messageHandler(QtMsgType type, const QMessageLogContext &ctxt, const QString &msg);
+public slots:
+    void start(qint64 port);
+    void stop();
 
-private:
-    static QFile outFile;
+private slots:
+    void acceptError(QAbstractSocket::SocketError socketError);
+    void newConnection();
+    void pendingConnectionAvailable();
 
+protected:
+    void incomingConnection(qintptr handle) override;
 };
 
