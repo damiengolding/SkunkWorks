@@ -1,0 +1,20 @@
+# Additional static linkage for the ODBC portion of the Qt SQL module
+LIBS += -lodbc32
+
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L"C:\Users\damie\source\repos\PtngDataVisualizationStatic\libparser\release" -llibparser
+win32:CONFIG(debug, debug|release): LIBS += -L"C:\Users\damie\source\repos\PtngDataVisualizationStatic\libparser\release" -llibparser
+INCLUDEPATH += "C:\Users\damie\source\repos\PtngDataVisualizationStatic\libparser\inc"
+DEPENDPATH += "C:\Users\damie\source\repos\PtngDataVisualizationStatic\libparser\inc"
+
+# WaifsAndStrays
+win32: LIBS += -L"C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\release" -lWaifsAndStrays
+INCLUDEPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
+DEPENDPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
+
+# For a direct link to QScintilla, i.e. not using CONFIG += qscintilla2
+
+# QScintilla - because it's looking in the static build directory
+win32: LIBS += -L"C:\Users\damie\source\repos\QScintillaBuild\Deploy\static" -lqscintilla2_qt6
+INCLUDEPATH += "C:\Users\damie\source\repos\QScintillaBuild\Deploy\inc"
+DEPENDPATH += "C:\Users\damie\source\repos\QScintillaBuild\Deploy\inc"

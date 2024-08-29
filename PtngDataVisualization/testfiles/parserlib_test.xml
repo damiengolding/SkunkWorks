@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parser_lib_test>
+<!-- PtngIdent -->
+  <ptngident name="nmap" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptngident name="nessus" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  <ptngident name="dnsrecon" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  <ptngident name="host" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_host_01.txt" />
+  <ptngident name="nmap_axfr" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_nmap_01.xml" />
+  <ptngident name="dig" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_dig_01.txt" />
+  <ptngident name="nslookup_windows" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_nswin_01.txt" />
+  <ptngident name="nslookup_linux" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\sample_strikeforce_nslookup_lin_axfr_01.txt" />
+  <ptngident name="fierce" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_fierce_01.txt" />
+  <ptngident name="arpscan" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_arp-scan_01.txt" />
+  <ptngident name="nbtscan" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nbtscan_01.txt" />
+  <ptngident name="sslscan" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\sample_sslscan.xml" />
+  <ptngident name="hashes" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\sample_hashes.txt" />
+  <ptngident name="dgml" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nessus_01.dgml" />
+  <ptngident name="metasploit" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\sample_msf_01.xml" />
+  <ptngident name="owasp_zap" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\web\zap\muillidae_01.xml" />
+  <ptngident name="unsupported" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\unsupported\unsupported.file"/>
+  
+  <!-- PtngInputParser - nmap & nessus -->
+  <ptnginputparser name="nmap" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptnginputparser name="nessus" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  
+  <!-- PtngInputParser - AXFR files -->
+  <ptnginputparser name="dnsrecon" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  <ptnginputparser name="nslookup_windows" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_nswin_01.txt" />
+  <ptnginputparser name="nslookup_linux" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\sample_strikeforce_nslookup_lin_axfr_01.txt" />
+  <ptnginputparser name="arpscan" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_arp-scan_01.txt" />
+  <ptnginputparser name="nbtscan" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nbtscan_01.txt" />
+  <ptnginputparser name="host" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_host_01.txt" />
+  <ptnginputparser name="nmap_axfr" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_nmap_01.xml" />
+  
+  <!-- PtngDGMLBuilder -->
+  <ptngdgmlbuilder name="nmap" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptngdgmlbuilder name="nessus" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  <ptngdgmlbuilder name="axfr" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  
+  <!-- PtngDGMLConv -->
+  <ptngdgmlconv name="dot" value="C:\Users\damie\source\repos\PtngDataVisualization\testfiles\inf\discworld_nessus_01.dot" />
+  
+</parser_lib_test>

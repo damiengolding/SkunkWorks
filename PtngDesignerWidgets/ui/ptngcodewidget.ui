@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PtngCodeWidget</class>
+ <widget class="QWidget" name="PtngCodeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="labelBanner">
+     <property name="text">
+      <string>&lt;No file selected&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Select language (if not inferred from file extension):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>&lt;Select&gt;</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bash</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CXX</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CSS</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>HTML</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>JSON</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Markdown</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Perl</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Python</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ruby</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>SQL</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>XML</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Yaml</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QsciScintilla" name="textEditCode">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="font">
+      <font>
+       <family>JetBrains Mono</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QsciScintilla</class>
+   <extends>QAbstractScrollArea</extends>
+   <header>Qsci/qsciscintilla.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

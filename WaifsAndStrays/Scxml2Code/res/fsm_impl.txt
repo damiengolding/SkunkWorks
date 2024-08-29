@@ -1,0 +1,13 @@
+#include "%{FSM_HDR}"
+
+void %{FSM_CLASS}::start()
+{
+}
+
+void %{FSM_CLASS}::stop()
+{
+}
+
+void %{FSM_CLASS}::initActions()
+{
+}

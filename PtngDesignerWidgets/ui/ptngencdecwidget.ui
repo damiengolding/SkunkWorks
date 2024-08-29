@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PtngEncDecWidget</class>
+ <widget class="QWidget" name="PtngEncDecWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QLabel" name="labelConvert">
+     <property name="text">
+      <string>Convert:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QComboBox" name="comboBoxConvert">
+     <item>
+      <property name="text">
+       <string>Plain text -&gt; Base64</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Base 64 -&gt; plain text</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Plain URL -&gt; percent encoding</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>URL encoded -&gt; plain URL</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QRadioButton" name="radioButtonConvertOnPaste">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Convert on paste:</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="pushButtonConvert">
+     <property name="minimumSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>&gt;&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelInput">
+     <property name="text">
+      <string>Input:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="5">
+    <widget class="QTextEdit" name="textEditInput"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="labelOutput">
+     <property name="text">
+      <string>Output:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="5">
+    <widget class="QTextEdit" name="textEditOutput"/>
+   </item>
+   <item row="0" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>textEditInput</tabstop>
+  <tabstop>textEditOutput</tabstop>
+  <tabstop>comboBoxConvert</tabstop>
+  <tabstop>radioButtonConvertOnPaste</tabstop>
+  <tabstop>pushButtonConvert</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

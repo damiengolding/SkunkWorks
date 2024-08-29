@@ -1,0 +1,24 @@
+#pragma once
+
+#include <QObject>
+#include "IFiniteStateMachine.hpp"
+#include "fsm_includes.hpp"
+
+class %{FSM_CLASS} : public IFiniteStateMachine
+{
+    Q_OBJECT
+public:
+    explicit %{FSM_CLASS}(QObject *parent = nullptr){}
+    ~%{FSM_CLASS}(){}
+
+    // IFiniteStateMachine interface
+public slots:
+    void start() override;
+    void stop() override;
+
+protected:
+    void initActions() override;
+
+signals:
+
+};

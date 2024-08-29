@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Images/GG_ICON.png</file>
+        <file>Resources/Images/GG_SPLASH_GREY.png</file>
+        <file>Resources/Images/GG_SPLASH_WHITE.png</file>
+        <file>Resources/Images/SETTINGS.png</file>
+        <file>Resources/Images/PLAYLIST_RUN.png</file>
+        <file>Resources/Images/PLAYLIST.png</file>
+        <file>Resources/Images/PLAYLIST_SCHEDULER.png</file>
+        <file>Resources/Images/ACTIVE_MACHINE.png</file>
+        <file>Resources/Images/AVAILABLE_MACHINES.png</file>
+        <file>Resources/Images/IDLE_MACHINE.png</file>
+        <file>Resources/Images/RUNNING_MACHINES.png</file>
+        <file>Resources/Images/MACHINE_INFORMATION.png</file>
+        <file>Resources/Images/MEMORY_USAGE.png</file>
+        <file>Resources/Images/OUTPUT_APPLICATION.png</file>
+        <file>Resources/Images/OUTPUT_COMMAND.png</file>
+        <file>Resources/Images/REFRESH.png</file>
+        <file>Resources/Images/PLUGIN.png</file>
+        <file>Resources/Images/FOLDER.png</file>
+        <file>Resources/Images/SNAPSHOTS.png</file>
+        <file>Resources/Images/DVD.png</file>
+        <file>Resources/Images/FLOPPY.png</file>
+        <file>Resources/Images/HDD.png</file>
+        <file>Resources/Images/STORAGE_MEDIA.png</file>
+        <file>Resources/Images/NETWORK.png</file>
+    </qresource>
+</RCC>

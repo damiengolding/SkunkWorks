@@ -1,0 +1,19 @@
+#pragma once
+
+#include <QObject>
+#include "IFiniteStateMachine.hpp"
+
+class %{STATE_CLASS} : public IFiniteState
+{
+    Q_OBJECT
+public:
+    explicit %{STATE_CLASS}(QObject *parent = nullptr){}
+    ~%{STATE_CLASS}(){}
+
+    // IFiniteState interface
+public slots:
+    void enter() override;
+
+signals:
+
+};

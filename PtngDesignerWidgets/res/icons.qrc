@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>goldings_gym_core_00_white.png</file>
+        <file>computer_01.png</file>
+        <file>lan_01.png</file>
+        <file>node_active_01.png</file>
+        <file>node_idle_01.png</file>
+    </qresource>
+</RCC>
