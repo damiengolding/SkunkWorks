@@ -24,40 +24,35 @@ SOFTWARE.
 #pragma once
 
 #include <QObject>
-#include <QTcpSocket>
-#include <QMetaEnum>
-#include <QRunnable>
-#include <QThread>
+#include <QSslSocket>
+#include <QAbstractSocket>
+#include <QCoreApplication>
+#include <QSslCertificate>
+#include <QSslKey>
+#include <QSslCertificateExtension>
 
-#include "tcpserversignalhandler.hpp"
-
-class TcpReceiveSocket : public QObject, public QRunnable
+class SslClientSignalHandler : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(qintptr handle READ handle MEMBER m_handle NOTIFY handleChanged FINAL)
-    Q_PROPERTY(QTcpSocket *socket READ socket MEMBER m_socket NOTIFY socketChanged FINAL)
-    Q_PROPERTY(TcpServerSignalHandler *handler READ handler MEMBER m_handler NOTIFY handlerChanged FINAL)
-
 public:
-    explicit TcpReceiveSocket(qintptr handle, QObject *parent = nullptr);
-    ~TcpReceiveSocket();
+    explicit SslClientSignalHandler(QObject *parent = nullptr);
+    ~SslClientSignalHandler();
 
-public:
-    void run() override;
+public slots:
+    void on_socket_connected();
+    void on_socket_modeChanged(QSslSocket::SslMode mode);
+    void on_socket_peerVerifyError(const QSslError &error);
+    void on_socket_encrypted();
+    void on_socket_readyRead();
+    void on_socket_encryptedBytesWritten(qint64 written);
+    void on_socket_disconnected();
+    void on_socket_errorOccurred(QAbstractSocket::SocketError socketError);
+    void on_socket_hostFound();
+    void on_socket_proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
+    void on_socket_stateChanged(QAbstractSocket::SocketState socketState);
+    void sslErrors(const QList<QSslError> &errors);
 
-    qintptr handle() const;
-    QTcpSocket *socket() const;
-    TcpServerSignalHandler *handler() const;
-
-signals:
-    void handleChanged();
-    void socketChanged();
-    void handlerChanged();
-
-private:
-    qintptr m_handle;
-    QTcpSocket* m_socket = nullptr;
-    TcpServerSignalHandler* m_handler = nullptr;
-
+private slots:
+    void certificateAnalysis( QSslSocket* socket );
 };
 

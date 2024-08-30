@@ -24,40 +24,50 @@ SOFTWARE.
 #pragma once
 
 #include <QObject>
-#include <QTcpSocket>
+#include <QSslSocket>
+#include <QFile>
+#include <QSslKey>
 #include <QMetaEnum>
 #include <QRunnable>
 #include <QThread>
 
-#include "tcpserversignalhandler.hpp"
+#include "sslserversignalhandler.hpp"
 
-class TcpReceiveSocket : public QObject, public QRunnable
+class SslReceiveSocket : public QObject, public QRunnable
 {
     Q_OBJECT
-    Q_PROPERTY(qintptr handle READ handle MEMBER m_handle NOTIFY handleChanged FINAL)
-    Q_PROPERTY(QTcpSocket *socket READ socket MEMBER m_socket NOTIFY socketChanged FINAL)
-    Q_PROPERTY(TcpServerSignalHandler *handler READ handler MEMBER m_handler NOTIFY handlerChanged FINAL)
+    Q_PROPERTY(QString keyFile READ keyFile WRITE setKeyFile NOTIFY keyFileChanged FINAL)
+    Q_PROPERTY(QString certFile READ certFile WRITE setCertFile NOTIFY certFileChanged FINAL)
 
 public:
-    explicit TcpReceiveSocket(qintptr handle, QObject *parent = nullptr);
-    ~TcpReceiveSocket();
+    explicit SslReceiveSocket(qintptr handle, QObject *parent = nullptr);
+    ~SslReceiveSocket();
 
 public:
     void run() override;
 
-    qintptr handle() const;
-    QTcpSocket *socket() const;
-    TcpServerSignalHandler *handler() const;
+    void certificateAnalysis(QSslSocket *socket);
+
+    QString keyFile() const;
+    void setKeyFile(const QString &newKeyFile);
+    QString certFile() const;
+    void setCertFile(const QString &newCertFile);
+
+    QSslSocket *socket() const;
 
 signals:
-    void handleChanged();
-    void socketChanged();
-    void handlerChanged();
+    void keyFileChanged();
+    void certFileChanged();
 
 private:
+    void init();
     qintptr m_handle;
-    QTcpSocket* m_socket = nullptr;
-    TcpServerSignalHandler* m_handler = nullptr;
+    QSslSocket* m_socket = nullptr;
+    SslServerSignalHandler* m_handler = nullptr;
+
+private:
+    QString m_keyFile = QString();
+    QString m_certFile = QString();
 
 };
 

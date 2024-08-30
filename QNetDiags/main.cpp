@@ -32,7 +32,9 @@ SOFTWARE.
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
-bool testFiles();
+
+bool testCertAndKeyFiles();
+bool testCertFile();
 
 QList<QCommandLineOption> commandLineOptions;
 
@@ -48,8 +50,6 @@ int main(int argc, char *argv[])
 
     QCommandLineParser p;
     initArgumentParser(a,p);
-
-    // CODECOMP Add logic after arguments are parsed
 
     // return(0);
     return(a.exec());
@@ -77,12 +77,15 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addPositionalArgument("server", "Server listen diagnostic.s");
     parser.addPositionalArgument("tcp", "TCP client or server.");
     parser.addPositionalArgument("http", "HTTP client or server.");
+    parser.addPositionalArgument("ssl", "Use SSL if certificate and key files are valid.");
 
     // Options
-    parser.addOption({{"t","target"},"Target IP address. Required for client connections.","IP address"});
+    parser.addOption({{"t","target"},"Target IP address. Required for all client connections.","IP address"});
     parser.addOption({{"p","port"},"Port number. Required for both client connections and server listen.","int"});
     parser.addOption({{"c","cert"},"Certificate file. Required for SSL (TCP and HTTP), both client and server.","file"});
     parser.addOption({{"k","key"},"Private key file. Required for SSL (TCP and HTTP) server.","file"});
+    parser.addOption({{"m","method"},"HTTP method. Required for HTTP(s) client.","get|put|post|delete"});
+    parser.addOption({{"d","data"},"Data to append. Required for HTTP(s) client with either the put or post method.","get|put|post|delete"});
 
 }
 
@@ -105,18 +108,42 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             qCritical() << "Target host must be set.";
             parser.showHelp( 2 );
         }
-        client( targetHost, targetPort, certFile);
+        if( arguments.contains("tcp") ){
+            if( arguments.contains("ssl") && testCertFile() )
+                tcp_client( targetHost, targetPort, certFile);
+            else
+                tcp_client( targetHost, targetPort );
+        }
+        else if( arguments.contains("http") ){
+                http_client(targetHost, targetPort);
+        }
+        else{
+            qInfo() << "No switch is set for TCP or HTTP";
+            parser.showHelp( 3 );
+        }
     }
     else if( arguments.contains("server") ){
         QFileInfo certFileInfo( certFile );
         QFileInfo keyFileInfo( keyFile );
         QFile certInputFile( certFileInfo.absoluteFilePath() );
         QFile keyInputFile( keyFileInfo.absoluteFilePath() );
-        useSsl = testFiles();
-        if( useSsl )
-            server(targetPort, certFileInfo.absoluteFilePath(), keyFileInfo.absoluteFilePath());
-        else
-            server(targetPort);
+
+        if( arguments.contains("tcp") ){
+            if( arguments.contains("ssl") && testCertAndKeyFiles() )
+                tcp_server(targetPort, certFileInfo.absoluteFilePath(), keyFileInfo.absoluteFilePath());
+            else
+                tcp_server(targetPort);
+        }
+        else if( arguments.contains("http") ){
+            if( arguments.contains("ssl") && testCertAndKeyFiles() )
+                http_server(targetPort, certFileInfo.absoluteFilePath(), keyFileInfo.absoluteFilePath());
+            else
+                http_server(targetPort);
+        }
+        else{
+            qInfo() << "No switch is set for TCP or HTTP";
+            parser.showHelp( 3 );
+        }
     }
     else{
         qCritical() << "No switch is set for client or server.";
@@ -124,7 +151,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     }
 }
 
-bool testFiles(){
+bool testCertAndKeyFiles(){
     if( certFile.isEmpty() || keyFile.isEmpty() ){
         qInfo() << "Certificate file or private key file not set. Running as plain text TCP server";
         return( false );
@@ -144,6 +171,23 @@ bool testFiles(){
         }
         if( certInputFile.isOpen() ) certInputFile.close();
         if( keyInputFile.isOpen() ) keyInputFile.close();
+    }
+    return( true );
+}
+
+bool testCertFile(){
+    if( certFile.isEmpty() ){
+        qInfo() << "Certificate file not set for client.";
+        return( false );
+    }
+    else{
+        QFileInfo certFileInfo( certFile );
+        QFile certInputFile( certFileInfo.absoluteFilePath() );
+        if( !certFileInfo.exists() ){
+            qCritical() << "Certificate file doesn't exist.";
+            return(false);
+        }
+        if( certInputFile.isOpen() ) certInputFile.close();
     }
     return( true );
 }

@@ -21,26 +21,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#pragma once
 
-#include <QObject>
-#include <QTcpSocket>
-#include <QAbstractSocket>
+#include <QThreadPool>
+#include <QThread>
 
-class TcpSignalHandler : public QObject
-{
-    Q_OBJECT
-public:
-    explicit TcpSignalHandler(QObject *parent = nullptr);
-    ~TcpSignalHandler();
+#include "commands.hpp"
+#include "../tcp_client/tcpsendsocket.hpp"
+#include "../ssl_client/sslsendsocket.hpp"
 
-public slots:
-    void on_socket_connected();
-    void on_socket_readyRead();
-    void on_socket_disconnected();
-    void on_socket_errorOccurred(QAbstractSocket::SocketError socketError);
-    void on_socket_hostFound();
-    void on_socket_proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
-    void on_socket_stateChanged(QAbstractSocket::SocketState socketState);
-};
+void tcp_client( const QString& host, qint64 port, const QString& certFile ){
+    if( certFile.isEmpty() ){ // Plain text client
+        qInfo() << "TCP plain text client";
+        TcpSendSocket* socket = new TcpSendSocket( host, port );
+        QThreadPool* pool = QThreadPool::globalInstance();
+        pool->start( socket );
+        socket->setAutoDelete(true);
+    }
+    else{
+        qInfo() << "TCP SSL client";
+        SslSendSocket* socket = new SslSendSocket( host,  port, certFile );
+        QThreadPool* pool = QThreadPool::globalInstance();
+        pool->start( socket );
+        socket->setAutoDelete(true);
+    }
+}
 
+void http_client( const QString& host, qint64 port, const QString& certFile){
+    if( certFile.isEmpty() ){ // Plain text client
+        qInfo() << "HTTP plain text client";
+    }
+    else{
+        qInfo() << "HTTP SSL client";
+    }
+}

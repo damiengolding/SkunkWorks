@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
     QCommandLineParser p;
     initArgumentParser(a,p);
 
-    // CODECOMP Add logic after arguments are parsed
     processScxml();
     // return(a.exec());
     return(0);
@@ -59,7 +58,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
     parser.addHelpOption();
     parser.addVersionOption();
 
-    parser.setApplicationDescription("scxml2code Converts an scxml file created qith Qt Creator to classes, with pre-defined interfaces");
+    parser.setApplicationDescription("scxml2code Converts an scxml file created with Qt Creator intto classes, with pre-defined interfaces");
     initArgumentOptions(app,parser);
     parser.process(app);
     processArgumentOptions(app, parser);

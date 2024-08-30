@@ -26,14 +26,27 @@ SOFTWARE.
 
 #include <QFile>
 #include "tcp_server/tcpserver.hpp"
+#include "ssl_server/sslserver.hpp"
 
-void server( qint64 port, const QString& certFile, const QString& keyFile ){
+void tcp_server( qint64 port, const QString& certFile, const QString& keyFile ){
     if( certFile.isEmpty() || keyFile.isEmpty() ){ // Plain text TCP server
+        qInfo() << "TCP plain text server";
         TcpServer* server = new TcpServer();
         server->start( port );
     }
     else{ // SSL server
+        qInfo() << "TCP SSL server";
+        SslServer* server = new SslServer( certFile, keyFile );
+        server->start( port );
+    }
+}
 
+void http_server( qint64 port, const QString& certFile, const QString& keyFile ){
+    if( certFile.isEmpty() || keyFile.isEmpty() ){ // Plain text TCP server
+        qInfo() << "HTTP plain text server";
+    }
+    else{ // SSL server
+        qInfo() << "HTTP SSL server";
     }
 }
 

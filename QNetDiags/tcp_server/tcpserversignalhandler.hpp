@@ -21,46 +21,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "tcpreceivesocket.hpp"
+#pragma once
 
-TcpReceiveSocket::TcpReceiveSocket(qintptr handle, QObject *parent)
-    : QObject{parent}
+#include <QObject>
+#include <QTcpSocket>
+#include <QAbstractSocket>
+
+class TcpServerSignalHandler : public QObject
 {
-    m_handle = handle;
-}
+    Q_OBJECT
+public:
+    explicit TcpServerSignalHandler(QObject *parent = nullptr);
+    ~TcpServerSignalHandler();
 
-TcpReceiveSocket::~TcpReceiveSocket()
-{
+public slots:
+    void on_socket_connected();
+    void on_socket_readyRead();
+    void on_socket_disconnected();
+    void on_socket_errorOccurred(QAbstractSocket::SocketError socketError);
+    void on_socket_hostFound();
+    void on_socket_proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
+    void on_socket_stateChanged(QAbstractSocket::SocketState socketState);
+};
 
-}
-
-
-void TcpReceiveSocket::run()
-{
-    qInfo() << "Running ReceiveSocket in thread" << QThread::currentThread();
-    m_handler = new TcpServerSignalHandler();
-    m_socket = new QTcpSocket(m_handler);
-    m_socket->setSocketOption( QAbstractSocket::KeepAliveOption, true );
-    m_socket->setObjectName("socket");
-    QMetaObject::connectSlotsByName(m_handler);
-    if( !m_socket->setSocketDescriptor( m_handle ) ){
-        qCritical() << "m_socket/m_handle is invalid";
-        return;
-    }
-    m_socket->waitForReadyRead();
-}
-
-qintptr TcpReceiveSocket::handle() const
-{
-    return m_handle;
-}
-
-QTcpSocket *TcpReceiveSocket::socket() const
-{
-    return m_socket;
-}
-
-TcpServerSignalHandler *TcpReceiveSocket::handler() const
-{
-    return m_handler;
-}

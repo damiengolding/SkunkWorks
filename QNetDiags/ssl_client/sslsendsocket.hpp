@@ -21,46 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "tcpreceivesocket.hpp"
+#pragma once
 
-TcpReceiveSocket::TcpReceiveSocket(qintptr handle, QObject *parent)
-    : QObject{parent}
+#include <QObject>
+#include <QSslSocket>
+#include <QFile>
+#include <QMetaEnum>
+#include <QRunnable>
+#include <QThread>
+#include <QSslConfiguration>
+
+#include "sslclientsignalhandler.hpp"
+
+class SslSendSocket : public QObject, public QRunnable
 {
-    m_handle = handle;
-}
+    Q_OBJECT
+public:
+    explicit SslSendSocket(const QString& host, qint64 port, const QString& certFile, QObject *parent = nullptr);
+    ~SslSendSocket();
 
-TcpReceiveSocket::~TcpReceiveSocket()
-{
+public:
+    void run() override;
 
-}
+private:
+    void init();
+    QString m_host = QString();
+    qint64 m_port;
+    QSslSocket* m_socket = nullptr;
+    SslClientSignalHandler* m_handler = nullptr;
+    QString m_certFile = QString();
+};
 
-
-void TcpReceiveSocket::run()
-{
-    qInfo() << "Running ReceiveSocket in thread" << QThread::currentThread();
-    m_handler = new TcpServerSignalHandler();
-    m_socket = new QTcpSocket(m_handler);
-    m_socket->setSocketOption( QAbstractSocket::KeepAliveOption, true );
-    m_socket->setObjectName("socket");
-    QMetaObject::connectSlotsByName(m_handler);
-    if( !m_socket->setSocketDescriptor( m_handle ) ){
-        qCritical() << "m_socket/m_handle is invalid";
-        return;
-    }
-    m_socket->waitForReadyRead();
-}
-
-qintptr TcpReceiveSocket::handle() const
-{
-    return m_handle;
-}
-
-QTcpSocket *TcpReceiveSocket::socket() const
-{
-    return m_socket;
-}
-
-TcpServerSignalHandler *TcpReceiveSocket::handler() const
-{
-    return m_handler;
-}

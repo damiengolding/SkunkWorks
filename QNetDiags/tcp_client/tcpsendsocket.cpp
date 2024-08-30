@@ -21,46 +21,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "tcpreceivesocket.hpp"
+#include "tcpsendsocket.hpp"
 
-TcpReceiveSocket::TcpReceiveSocket(qintptr handle, QObject *parent)
+TcpSendSocket::TcpSendSocket(const QString &host, qint64 port, QObject *parent)
     : QObject{parent}
 {
-    m_handle = handle;
+    m_host = host;
+    m_port  = port;
 }
 
-TcpReceiveSocket::~TcpReceiveSocket()
+TcpSendSocket::~TcpSendSocket()
 {
-
+    m_handler->deleteLater();
 }
 
 
-void TcpReceiveSocket::run()
+void TcpSendSocket::run()
 {
-    qInfo() << "Running ReceiveSocket in thread" << QThread::currentThread();
-    m_handler = new TcpServerSignalHandler();
-    m_socket = new QTcpSocket(m_handler);
-    m_socket->setSocketOption( QAbstractSocket::KeepAliveOption, true );
+    m_handler = new TcpClientSignalHandler();
+    m_socket = new QTcpSocket( m_handler );
     m_socket->setObjectName("socket");
-    QMetaObject::connectSlotsByName(m_handler);
-    if( !m_socket->setSocketDescriptor( m_handle ) ){
-        qCritical() << "m_socket/m_handle is invalid";
-        return;
-    }
+    QMetaObject::connectSlotsByName( m_handler );
+    m_socket->connectToHost( m_host, m_port );
+    m_socket->write("Hello server");
     m_socket->waitForReadyRead();
-}
 
-qintptr TcpReceiveSocket::handle() const
-{
-    return m_handle;
-}
-
-QTcpSocket *TcpReceiveSocket::socket() const
-{
-    return m_socket;
-}
-
-TcpServerSignalHandler *TcpReceiveSocket::handler() const
-{
-    return m_handler;
+    m_socket->close();
+    m_socket->deleteLater();
 }

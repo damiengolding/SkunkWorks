@@ -21,32 +21,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "tcpsignalhandler.hpp"
+#include "tcpserversignalhandler.hpp"
 
-TcpSignalHandler::TcpSignalHandler(QObject *parent)
+TcpServerSignalHandler::TcpServerSignalHandler(QObject *parent)
     : QObject{parent}
 {
 
 }
 
-TcpSignalHandler::~TcpSignalHandler()
+TcpServerSignalHandler::~TcpServerSignalHandler()
 {
 
 }
 
 #pragma Slots {
 
-void TcpSignalHandler::on_socket_readyRead(){
+void TcpServerSignalHandler::on_socket_readyRead(){
     qInfo() << "Socket readyRead";
     QTcpSocket* socket = qobject_cast<QTcpSocket*>( sender() );
-    qInfo() << "Connection from:" << socket->peerName();
-    qInfo() << "Connection from address:" << socket->peerAddress();
+    qInfo() << "Connection from address:" << socket->peerAddress().toString();
     qInfo() << "Connection from port:" << socket->peerPort();
     qInfo() << "Connection type:" << socket->socketType();
     qInfo() << "Connection error:" << socket->error();
-    qInfo() << "Connection error string:" << socket->errorString();
-    qInfo() << "";
-    qInfo() << "Read from client:\r\n\r\n" << socket->readAll();
+    qInfo() << "Read from client:" << socket->readAll();
     QByteArray response = "Hello client";
     socket->write(response);
     socket->waitForBytesWritten();
@@ -54,7 +51,7 @@ void TcpSignalHandler::on_socket_readyRead(){
     socket->deleteLater();
 }
 
-void TcpSignalHandler::on_socket_connected()
+void TcpServerSignalHandler::on_socket_connected()
 {
     qInfo() << "Socket connected";
     QTcpSocket* socket = qobject_cast<QTcpSocket*>( sender() );
@@ -66,27 +63,29 @@ void TcpSignalHandler::on_socket_connected()
     qInfo() << "Connection error string:" << socket->errorString();
 }
 
-void TcpSignalHandler::on_socket_disconnected()
+void TcpServerSignalHandler::on_socket_disconnected()
 {
     qInfo() << "Socket disconnected";
+    qInfo() << "########################################";
+    qInfo() << "";
 }
 
-void TcpSignalHandler::on_socket_errorOccurred(QAbstractSocket::SocketError socketError)
+void TcpServerSignalHandler::on_socket_errorOccurred(QAbstractSocket::SocketError socketError)
 {
     qInfo() << "Socket errorOccurred";
 }
 
-void TcpSignalHandler::on_socket_hostFound()
+void TcpServerSignalHandler::on_socket_hostFound()
 {
     qInfo() << "Socket hostFound";
 }
 
-void TcpSignalHandler::on_socket_proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator)
+void TcpServerSignalHandler::on_socket_proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator)
 {
     qInfo() << "Socket proxyAuthenticationRequired";
 }
 
-void TcpSignalHandler::on_socket_stateChanged(QAbstractSocket::SocketState socketState)
+void TcpServerSignalHandler::on_socket_stateChanged(QAbstractSocket::SocketState socketState)
 {
     qInfo() << "Socket state changed:" << socketState;
 }
