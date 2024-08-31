@@ -1,0 +1,39 @@
+function New-ServerCertificate{
+    openssl req -x509 -out SERVER-CERT.pem -subj "/CN=localhost" -nodes -newkey rsa:2048 -keyout SERVER-KEY.pem
+}
+
+function New-ClientConfig{
+    New-Item "CLIENT-CONF.conf"
+    Add-Content "CLIENT-CONF.conf" "[req]"
+    Add-Content "CLIENT-CONF.conf" "default_bits = 2048"
+    Add-Content "CLIENT-CONF.conf" "prompt = no"
+    Add-Content "CLIENT-CONF.conf" "default_md = sha256"
+    Add-Content "CLIENT-CONF.conf" "req_extensions = req_ext"
+    Add-Content "CLIENT-CONF.conf" "distinguished_name = dn"
+    Add-Content "CLIENT-CONF.conf" "[dn]"
+    Add-Content "CLIENT-CONF.conf" "C = UK"
+    Add-Content "CLIENT-CONF.conf" "ST = Londinum"
+    Add-Content "CLIENT-CONF.conf" "L = London"
+    Add-Content "CLIENT-CONF.conf" "O = Client one"
+    Add-Content "CLIENT-CONF.conf" "OU = OpSec"
+    Add-Content "CLIENT-CONF.conf" "emailAddress = client1@test.com"
+    Add-Content "CLIENT-CONF.conf" "CN = client1.test.com"
+    Add-Content "CLIENT-CONF.conf" "[req_ext]"
+    Add-Content "CLIENT-CONF.conf" "subjectAltName = @alt_names"
+    Add-Content "CLIENT-CONF.conf" "extendedKeyUsage=clientAuth"
+    Add-Content "CLIENT-CONF.conf" "[alt_names]"
+    Add-Content "CLIENT-CONF.conf" "DNS = test.com"
+}
+
+function New-ClientCertificate{
+    openssl genrsa -out CLIENT-KEY.pem 2048
+    openssl req -new -key CLIENT-KEY.pem -out CLIENT-CSR.pem -subj "/CN=client1"
+    openssl x509 -req -days 365 -in CLIENT-CSR.pem -CA SERVER-CERT.pem -CAkey SERVER-KEY.pem -CAcreateserial -out CLIENT-CERT.pem -extfile CLIENT-CONF.conf -extensions req_ext
+    openssl verify -CAfile .\SERVER-CERT.pem .\SERVER-CERT.pem .\CLIENT-CERT.pem
+}
+
+function New-SslServerClientCertificates{
+    New-ServerCertificate
+    New-ClientConfig
+    New-ClientCertificate
+}

@@ -32,6 +32,12 @@ SOFTWARE.
 #include <QList>
 #include <QFile>
 
+#include <QSslSocket>
+#include <QAbstractSocket>
+#include <QSslCertificate>
+#include <QSslKey>
+#include <QSslCertificateExtension>
+
 class NetDiagsUtils : public QObject
 {
     Q_OBJECT
@@ -53,6 +59,8 @@ public:
 
     // Verified populated QDomDocument* from a QString file name
     static QDomDocument* VerifiedDomDocument(const QString& fileName );
+
+    static void certificateAnalysis(QSslSocket *socket);
 
 private:
 

@@ -30,6 +30,7 @@ SOFTWARE.
 #include <QSslCertificate>
 #include <QSslKey>
 #include <QSslCertificateExtension>
+#include "../utils/netdiagsutils.hpp"
 
 class SslServerSignalHandler : public QObject
 {
@@ -52,7 +53,5 @@ public slots:
     void on_socket_stateChanged(QAbstractSocket::SocketState socketState);
     void sslErrors(const QList<QSslError> &errors);
 
-private slots:
-    void certificateAnalysis( QSslSocket* socket );
 };
 

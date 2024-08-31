@@ -74,4 +74,113 @@ QDomDocument* NetDiagsUtils::VerifiedDomDocument(const QString &fileName)
     return(doc);
 }
 
+void NetDiagsUtils::certificateAnalysis(QSslSocket *socket)
+{
+    QSslCertificate cert = socket->peerCertificate();
+    if( cert.isNull() ){
+        qInfo() << "The client has not presented a certificate";
+        return;
+    }
+    QList<QSslCertificate> chain = socket->peerCertificateChain();
+    qInfo() << "";
+    qInfo() << "#################### Certificate analysis  ####################";
+    qInfo() << "Certificate chain length:" << chain.count();
+    qInfo() << "Self-signed:" << cert.isSelfSigned();
+    qInfo() << "Valid from:" << cert.effectiveDate().toString();
+    qInfo() << "Valid until:" << cert.expiryDate().toString();
+    qInfo() << "Serial number:" << cert.serialNumber();
+    qInfo() << "Version:" << cert.version();
+    qInfo() << "SHA256 digest:" << cert.digest(QCryptographicHash::Sha256);
+    qInfo() << "";
+    qInfo() << "Issuer information:";
+    qInfo() << "\tIssuer display name:" << cert.issuerDisplayName();
+    qInfo() << "\tIssuer Organization (O):" << cert.issuerInfo( QSslCertificate::Organization ).join(" ");
+    qInfo() << "\tIssuer Common Name (CN) :" << cert.issuerInfo( QSslCertificate::CommonName ).join(" ");
+    qInfo() << "\tIssuer Locality (L) :" << cert.issuerInfo( QSslCertificate::LocalityName ).join(" ");
+    qInfo() << "\tIssuer Organizational Unit (OU):" << cert.issuerInfo( QSslCertificate::OrganizationalUnitName ).join(" ");
+    qInfo() << "\tIssuer Country Name (C):" << cert.issuerInfo( QSslCertificate::CountryName ).join(" ");
+    qInfo() << "\tIssuer State/province (ST):" << cert.issuerInfo( QSslCertificate::StateOrProvinceName ).join(" ");
+    qInfo() << "\tIssuer Distinguished Name Qualifier:" << cert.issuerInfo( QSslCertificate::DistinguishedNameQualifier ).join(" ");
+    qInfo() << "\tIssuer Serial Number:" << cert.issuerInfo( QSslCertificate::SerialNumber ).join(" ");
+    qInfo() << "\tIssuer E-Mail Address:" << cert.issuerInfo( QSslCertificate::EmailAddress ).join(" ");
+    qInfo() << "";
+    qInfo() << "Subject information:";
+    qInfo() << "\tSubject display name:" << cert.subjectDisplayName();
+    qInfo() << "\tSubject Organization (O):" << cert.subjectInfo( QSslCertificate::Organization ).join(" ");
+    qInfo() << "\tSubject Common Name (CN) :" << cert.subjectInfo( QSslCertificate::CommonName ).join(" ");
+    qInfo() << "\tSubject Locality (L) :" << cert.subjectInfo( QSslCertificate::LocalityName ).join(" ");
+    qInfo() << "\tSubject Organizational Unit (OU):" << cert.subjectInfo( QSslCertificate::OrganizationalUnitName ).join(" ");
+    qInfo() << "\tSubject Country Name (C):" << cert.subjectInfo( QSslCertificate::CountryName ).join(" ");
+    qInfo() << "\tSubject State/province (ST):" << cert.subjectInfo( QSslCertificate::StateOrProvinceName ).join(" ");
+    qInfo() << "\tSubject Distinguished Name Qualifier:" << cert.subjectInfo( QSslCertificate::DistinguishedNameQualifier ).join(" ");
+    qInfo() << "\tSubject Serial Number:" << cert.subjectInfo( QSslCertificate::SerialNumber ).join(" ");
+    qInfo() << "\tSubject E-Mail Address:" << cert.subjectInfo( QSslCertificate::EmailAddress ).join(" ");
+    qInfo() << "";
+    qInfo() << "Server public key:";
+    qInfo() << "";
+    qInfo().noquote() << cert.publicKey().toPem();
+
+    if( cert.extensions().count() > 0 ){
+        qInfo() << "Certificate extensions:";
+        for( auto extension : cert.extensions() ){
+            qInfo() << "\tExtension name:" << extension.name();
+            qInfo() << "\t\tCritical:" << extension.isCritical();
+            qInfo() << "\t\tSupported:" << extension.isSupported();
+            qInfo() << "\t\tOID:" << extension.oid();
+
+            QString variantType = extension.value().typeName();
+            variantType = variantType.toLower();
+            // qInfo() << "Variant type:"<<variantType;
+            if( variantType == "qbytearray" ){
+                qInfo() << "\t\tValue:" << extension.value().toByteArray();
+            }
+            else if( variantType == "qstring" ){
+                qInfo() << "\t\tValue:" << extension.value().toString();
+            }
+            else if( variantType == "bool" ){
+                qInfo() << "\t\tValue:" << extension.value().toBool();
+            }
+            else if(  variantType == "qvariantmap" ){
+                for( auto [name,value] : extension.value().toMap().asKeyValueRange() ){
+                    QString nameValue;
+                    QString map_name = name;
+                    QVariant map_variant = value;
+                    QString varType = map_variant.typeName();
+                    varType = varType.toLower();
+                    if( varType == "qbytearray" ){
+                        nameValue += name % "=" % map_variant.toByteArray();
+                    }
+                    else if( varType == "bool" ){
+                        nameValue += name % "=" % QVariant(map_variant.toBool()).toString();
+                    }
+                    else if( varType == "qstring" ){
+                        nameValue += name % "=" % map_variant.toString();
+                    }
+                    else{
+                        nameValue += name % "=" % map_variant.toString();
+                    }
+                    qInfo().noquote() << "\t\tValue:" << nameValue;
+                }
+            }
+            else{
+                qInfo() << "\t\tValue:" << extension.value();
+            }
+        }
+    }
+
+    if( chain.count() > 0 ){
+        qInfo() << "";
+        qInfo() << "Certificate chain:";
+        for( auto cert : chain ){
+            qInfo() << "Certificate name:" << cert.subjectDisplayName();
+            qInfo() << "Public key:";
+            qInfo() << "";
+            qInfo().noquote() << cert.publicKey().toPem();
+        }
+    }
+    qInfo() << "#################### End of certificate analysis  ####################";
+    qInfo() << "";
+}
+
 NetDiagsUtils::~NetDiagsUtils(){}
+

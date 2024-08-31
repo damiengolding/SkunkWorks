@@ -72,8 +72,8 @@ private slots:
 
 private: // Members
     QSslConfiguration m_sslconfig;
-    QString m_certFile = QString();
-    QString m_keyFile = QString();
+    QString m_certFile = {};
+    QString m_keyFile = {};
 
 protected:
     void incomingConnection(qintptr handle) override;

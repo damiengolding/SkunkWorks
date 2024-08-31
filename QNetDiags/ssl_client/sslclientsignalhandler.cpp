@@ -81,7 +81,7 @@ void SslClientSignalHandler::on_socket_encrypted()
 {
     qInfo() << "Socket encrypted";
     QSslSocket* socket = qobject_cast<QSslSocket*>( sender() );
-    certificateAnalysis( socket );
+    NetDiagsUtils::certificateAnalysis(socket);
 }
 
 void SslClientSignalHandler::on_socket_disconnected()
@@ -112,70 +112,11 @@ void SslClientSignalHandler::on_socket_stateChanged(QAbstractSocket::SocketState
 void SslClientSignalHandler::sslErrors(const QList<QSslError> &errors)
 {
     QSslSocket* socket = qobject_cast<QSslSocket*>(sender());
-    qInfo() << "SslErrors:" << errors;
+    qInfo() << "SslErrors:";
+    for( auto error : errors ){
+        qInfo() << "\tError:" << error;
+    }
     socket->ignoreSslErrors( errors );
-}
-
-void SslClientSignalHandler::certificateAnalysis(QSslSocket *socket)
-{
-    QSslCertificate cert = socket->peerCertificate();
-    QList<QSslCertificate> chain = socket->peerCertificateChain();
-    qInfo() << "";
-    qInfo() << "#################### Certificate analysis  ####################";
-    qInfo() << "Certificate chain length:" << chain.count();
-    qInfo() << "Self-signed:" << cert.isSelfSigned();
-    qInfo() << "Valid from:" << cert.effectiveDate().toString();
-    qInfo() << "Valid until:" << cert.expiryDate().toString();
-
-    qInfo() << "Issuer information:";
-    qInfo() << "\tIssuer display name:" << cert.issuerDisplayName();
-    qInfo() << "\tIssuer Organization (O):" << cert.issuerInfo( QSslCertificate::Organization );
-    qInfo() << "\tIssuer Common Name (CN) :" << cert.issuerInfo( QSslCertificate::CommonName );
-    qInfo() << "\tIssuer Locality (L) :" << cert.issuerInfo( QSslCertificate::LocalityName );
-    qInfo() << "\tIssuer Organizational Unit (OU):" << cert.issuerInfo( QSslCertificate::OrganizationalUnitName );
-    qInfo() << "\tIssuer Country Name (C):" << cert.issuerInfo( QSslCertificate::CountryName );
-    qInfo() << "\tIssuer State/province (ST):" << cert.issuerInfo( QSslCertificate::StateOrProvinceName );
-    qInfo() << "\tIssuer Distinguished Name Qualifier:" << cert.issuerInfo( QSslCertificate::DistinguishedNameQualifier );
-    qInfo() << "\tIssuer Serial Number:" << cert.issuerInfo( QSslCertificate::SerialNumber );
-    qInfo() << "\tIssuer E-Mail Address:" << cert.issuerInfo( QSslCertificate::EmailAddress );
-
-    qInfo() << "Subject information:";
-    qInfo() << "\tSubject display name:" << cert.subjectDisplayName();
-    qInfo() << "\tSubject Organization (O):" << cert.subjectInfo( QSslCertificate::Organization );
-    qInfo() << "\tSubject Common Name (CN) :" << cert.subjectInfo( QSslCertificate::CommonName );
-    qInfo() << "\tSubject Locality (L) :" << cert.subjectInfo( QSslCertificate::LocalityName );
-    qInfo() << "\tSubject Organizational Unit (OU):" << cert.subjectInfo( QSslCertificate::OrganizationalUnitName );
-    qInfo() << "\tSubject Country Name (C):" << cert.subjectInfo( QSslCertificate::CountryName );
-    qInfo() << "\tSubject State/province (ST):" << cert.subjectInfo( QSslCertificate::StateOrProvinceName );
-    qInfo() << "\tSubject Distinguished Name Qualifier:" << cert.subjectInfo( QSslCertificate::DistinguishedNameQualifier );
-    qInfo() << "\tSubject Serial Number:" << cert.subjectInfo( QSslCertificate::SerialNumber );
-    qInfo() << "\tSubject E-Mail Address:" << cert.subjectInfo( QSslCertificate::EmailAddress );
-
-    qInfo() << "Server public key:";
-    qInfo().noquote() << cert.publicKey().toPem();
-
-    if( cert.extensions().count() > 0 ){
-        qInfo() << "Certificate extensions:";
-        for( auto extension : cert.extensions() ){
-            qInfo() << "\tExtension name:";
-            qInfo() << "\t\tCritical:" << extension.isCritical();
-            qInfo() << "\t\tSupported:" << extension.isSupported();
-            qInfo() << "\t\tOID:" << extension.oid();
-            qInfo() << "\t\tValue:" << extension.value();
-        }
-    }
-
-    if( chain.count() > 0 ){
-        qInfo() << "Certificate chain:";
-        for( auto cert : chain ){
-            qInfo() << "Certificate name:" << cert.subjectDisplayName();
-            qInfo() << "Public key:";
-            qInfo().noquote() << cert.publicKey().toPem();
-        }
-        qInfo() << "";
-    }
-    qInfo() << "#################### End of certificate analysis  ####################";
-    qInfo() << "";
 }
 
 #pragma Slots }

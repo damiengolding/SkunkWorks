@@ -66,8 +66,8 @@ private:
     SslServerSignalHandler* m_handler = nullptr;
 
 private:
-    QString m_keyFile = QString();
-    QString m_certFile = QString();
+    QString m_keyFile = {};
+    QString m_certFile = {};
 
 };
 

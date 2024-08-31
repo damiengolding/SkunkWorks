@@ -36,19 +36,59 @@ SOFTWARE.
 class SslSendSocket : public QObject, public QRunnable
 {
     Q_OBJECT
+    Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged FINAL)
+    Q_PROPERTY(qint64 port READ port WRITE setPort NOTIFY portChanged FINAL)
+    Q_PROPERTY(QSslSocket *socket READ socket WRITE setSocket NOTIFY socketChanged FINAL)
+    Q_PROPERTY(SslClientSignalHandler *handler READ handler WRITE setHandler NOTIFY handlerChanged FINAL)
+    Q_PROPERTY(QString caCertFile READ caCertFile WRITE setCaCertFile NOTIFY caCertFileChanged FINAL)
+    Q_PROPERTY(QString clientCertFile READ clientCertFile WRITE setClientCertFile NOTIFY clientCertFileChanged FINAL)
+    Q_PROPERTY(QString clientKeyFile READ clientKeyFile WRITE setClientKeyFile NOTIFY clientKeyFileChanged FINAL)
+    Q_PROPERTY(QSslConfiguration sslconf READ sslconf WRITE setSslconf NOTIFY sslconfChanged FINAL)
+
 public:
-    explicit SslSendSocket(const QString& host, qint64 port, const QString& certFile, QObject *parent = nullptr);
+    explicit SslSendSocket(const QString& host, qint64 port, QObject *parent = nullptr);
     ~SslSendSocket();
 
 public:
     void run() override;
 
+    QString host() const;
+    void setHost(const QString &newHost);
+    qint64 port() const;
+    void setPort(qint64 newPort);
+    QSslSocket *socket() const;
+    void setSocket(QSslSocket *newSocket);
+    SslClientSignalHandler *handler() const;
+    void setHandler(SslClientSignalHandler *newHandler);
+    QString caCertFile() const;
+    void setCaCertFile(const QString &newCaCertFile);
+    QString clientCertFile() const;
+    void setClientCertFile(const QString &newClientCertFile);
+    QString clientKeyFile() const;
+    void setClientKeyFile(const QString &newClientKeyFile);
+    QSslConfiguration sslconf() const;
+    void setSslconf(const QSslConfiguration &newSslconf);
+
+signals:
+    void hostChanged();
+    void portChanged();
+    void socketChanged();
+    void handlerChanged();
+    void caCertFileChanged();
+    void clientCertFileChanged();
+    void clientKeyFileChanged();
+    void sslconfChanged();
+
 private:
     void init();
-    QString m_host = QString();
+    void setClientCert();
+    QString m_host = {};
     qint64 m_port;
     QSslSocket* m_socket = nullptr;
     SslClientSignalHandler* m_handler = nullptr;
-    QString m_certFile = QString();
+    QString m_caCertFile = {};
+    QString m_clientCertFile = {};
+    QString m_clientKeyFile = {};
+    QSslConfiguration m_sslconf;
 };
 

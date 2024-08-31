@@ -142,7 +142,7 @@ void SslReceiveSocket::init(){
 
     m_socket->setPrivateKey( sslKey );
     m_socket->setLocalCertificate( sslCert );
-    // m_socket->setPeerVerifyMode(QSslSocket::VerifyPeer );
+    m_socket->setPeerVerifyMode(QSslSocket::VerifyPeer );
 
     // TODO - is this necessary/useful?
     m_socket->setSocketOption( QAbstractSocket::KeepAliveOption, true );

@@ -29,8 +29,8 @@ SOFTWARE.
 #include "../tcp_client/tcpsendsocket.hpp"
 #include "../ssl_client/sslsendsocket.hpp"
 
-void tcp_client( const QString& host, qint64 port, const QString& certFile ){
-    if( certFile.isEmpty() ){ // Plain text client
+void tcp_client(const QString& host, qint64 port, const QString& caCertFile, const QString& clientCertFile, const QString& clientKeyFile ){
+    if( caCertFile.isEmpty() ){ // Plain text client
         qInfo() << "TCP plain text client";
         TcpSendSocket* socket = new TcpSendSocket( host, port );
         QThreadPool* pool = QThreadPool::globalInstance();
@@ -39,7 +39,10 @@ void tcp_client( const QString& host, qint64 port, const QString& certFile ){
     }
     else{
         qInfo() << "TCP SSL client";
-        SslSendSocket* socket = new SslSendSocket( host,  port, certFile );
+        SslSendSocket* socket = new SslSendSocket( host,  port );
+        socket->setCaCertFile(caCertFile);
+        socket->setClientCertFile(clientCertFile);
+        socket->setClientKeyFile(clientKeyFile);
         QThreadPool* pool = QThreadPool::globalInstance();
         pool->start( socket );
         socket->setAutoDelete(true);
