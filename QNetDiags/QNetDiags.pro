@@ -13,6 +13,8 @@ else{
 SOURCES += \
     commands/client_commands.cpp \
     commands/server_commands.cpp \
+    http_client/httpclient.cpp \
+    http_server/httpserver.cpp \
         main.cpp \
     ssl_client/sslclientsignalhandler.cpp \
     ssl_client/sslsendsocket.cpp \
@@ -28,6 +30,8 @@ SOURCES += \
 
 HEADERS += \
     commands/commands.hpp \
+    http_client/httpclient.hpp \
+    http_server/httpserver.hpp \
     ssl_client/sslclientsignalhandler.hpp \
     ssl_client/sslsendsocket.hpp \
     ssl_server/sslreceivesocket.hpp \

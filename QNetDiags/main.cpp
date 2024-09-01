@@ -45,6 +45,8 @@ qint64 targetPort = -1;
 QString caCertFile = {};
 QString clientCertFile = {};
 QString keyFile = {};
+QString httpMethod = {};
+QString httpFile = {};
 
 int main(int argc, char *argv[])
 {
@@ -112,6 +114,8 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( parser.isSet("key") ) keyFile = parser.value("key");
     if( parser.isSet("cert") ) caCertFile = parser.value("cert");
     if( parser.isSet("supplicant") ) clientCertFile = parser.value("supplicant");
+    if( parser.isSet("method") ) httpMethod = parser.value("method");
+    if( parser.isSet("file") ) httpFile = parser.value("file");
 
     QStringList arguments = parser.positionalArguments();
     if( arguments.contains("client") ){
@@ -120,21 +124,25 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             parser.showHelp( 2 );
         }
         if( arguments.contains("tcp") ){
-
             if( arguments.contains("ssl") && testFile(caCertFile, "CA_CERT" ) )
                 tcp_client( targetHost, targetPort, caCertFile, clientCertFile, keyFile );
             else
                 tcp_client( targetHost, targetPort ); // Simple (plain text) TCP
-
-            // if( arguments.contains("ssl") && ( testFile(caCertFile, "CA_CERT" ) && testFile(clientCertFile, "CLIENT_CERT") && testFile(keyFile, "CLIENT_KEY") )  )
-            //     tcp_client( targetHost, targetPort, caCertFile, clientCertFile, keyFile ); // With client certificate and key
-            // else if ( arguments.contains("ssl") && ( testFile(caCertFile, "CA_CERT" ) ) )
-            //     tcp_client( targetHost, targetPort, caCertFile ); // No client authorisation, simple SSL
-            // else
-            //     tcp_client( targetHost, targetPort ); // Simple (plain text) TCP
         }
         else if( arguments.contains("http") ){
-                http_client(targetHost, targetPort);
+            QStringList supportedHttpMethods;
+            supportedHttpMethods << "get" << "put" << "post" << "delete";
+            if( httpMethod.isEmpty() ||!supportedHttpMethods.contains( httpMethod.toLower() ) ){
+                qInfo() << "No supported HTTP method is specified";
+                parser.showHelp( 3 );
+            }
+            http_client( targetHost,
+                         targetPort,
+                         caCertFile,
+                         clientCertFile,
+                         keyFile,
+                         httpMethod,
+                         httpFile);
         }
         else{
             qInfo() << "No switch is set for TCP or HTTP";

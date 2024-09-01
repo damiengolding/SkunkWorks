@@ -26,8 +26,9 @@ SOFTWARE.
 #include <QThread>
 
 #include "commands.hpp"
-#include "../tcp_client/tcpsendsocket.hpp"
-#include "../ssl_client/sslsendsocket.hpp"
+#include "tcp_client/tcpsendsocket.hpp"
+#include "ssl_client/sslsendsocket.hpp"
+#include "http_client/httpclient.hpp"
 
 void tcp_client(const QString& host, qint64 port, const QString& caCertFile, const QString& clientCertFile, const QString& clientKeyFile ){
     if( caCertFile.isEmpty() ){ // Plain text client
@@ -49,11 +50,24 @@ void tcp_client(const QString& host, qint64 port, const QString& caCertFile, con
     }
 }
 
-void http_client( const QString& host, qint64 port, const QString& certFile){
+void http_client( const QString& host, qint64 port, const QString& certFile, const QString& clientCertFile, const QString& clientKeyFile, const QString& httpMethod, const QString& httpFile){
+    HttpClient* client = new HttpClient();
     if( certFile.isEmpty() ){ // Plain text client
         qInfo() << "HTTP plain text client";
+        client->setUrl( host );
+        client->setPortNumber( port );
+        client->setHttpMethod(httpMethod);
+        client->setHttpFile(httpFile);
     }
     else{
         qInfo() << "HTTP SSL client";
+        client->setUrl( host );
+        client->setPortNumber( port );
+        client->setHttpMethod(httpMethod);
+        client->setHttpFile(httpFile);
+        client->setCaCertFile(certFile);
+        client->setClientCertFile(clientCertFile);
+        client->setClientKeyFile(clientKeyFile);
     }
+    client->start();
 }

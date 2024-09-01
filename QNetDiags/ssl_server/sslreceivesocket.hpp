@@ -46,8 +46,6 @@ public:
 public:
     void run() override;
 
-    void certificateAnalysis(QSslSocket *socket);
-
     QString keyFile() const;
     void setKeyFile(const QString &newKeyFile);
     QString certFile() const;

@@ -48,4 +48,5 @@ void TcpSendSocket::run()
 
     m_socket->close();
     m_socket->deleteLater();
+    // QCoreApplication::exit(0);
 }

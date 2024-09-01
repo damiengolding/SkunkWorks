@@ -94,6 +94,7 @@ void SslServer::incomingConnection(qintptr handle)
     qInfo() << "Starting SslReceiveSocket in thread:" << QThread::currentThread();
     pool->start( receiveSocket );
     receiveSocket->setAutoDelete(true);
+    addPendingConnection( receiveSocket->socket() );
 }
 
 void SslServer::start(qint64 port)

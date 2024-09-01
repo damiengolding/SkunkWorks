@@ -21,52 +21,55 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #pragma once
 
-#include <QString>
-#include <QMetaEnum>
-#include <QDomDocument>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QList>
-#include <QFile>
-
-#include <QSslSocket>
-#include <QAbstractSocket>
+#include <QObject>
+#include <QHttpServer>
+#include <QHttpServerResponse>
 #include <QSslCertificate>
 #include <QSslKey>
-#include <QSslCertificateExtension>
 
-class NetDiagsUtils : public QObject
+#include <QFile>
+#include <QString>
+#include <QDir>
+
+#include "utils/netdiagsutils.hpp"
+
+class HttpServer : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(qint64 port READ port WRITE setPort NOTIFY portChanged FINAL)
+    Q_PROPERTY(QString certFile READ certFile WRITE setCertFile NOTIFY certFileChanged FINAL)
+    Q_PROPERTY(QString keyFile READ keyFile WRITE setKeyFile NOTIFY keyFileChanged FINAL)
+    Q_PROPERTY(bool ssl READ ssl WRITE setSsl NOTIFY sslChanged FINAL)
 
 public:
-    explicit NetDiagsUtils(QObject *parent = nullptr);
-    ~NetDiagsUtils();
+    explicit HttpServer(QObject *parent = nullptr);
+    ~HttpServer();
 
-    // QMetaEnum conversion to string
-    template<typename E>
-    static E EnumFromString(const QString &textValue);
+public:
+    void start();
 
-    // QMetaEnum conversion from string
-    template<typename E>
-    static QString StringFromEnum(E value);
-
-    // QList of verified QDomElements from QDomNodeList
-    static QList<QDomElement> DomElementList(const QDomNodeList &list);
-
-    // Verified populated QDomDocument* from a QString file name
-    static QDomDocument* VerifiedDomDocument(const QString& fileName );
-
-    // QSslCertificate introspection and display
-    static void certificateAnalysis(QSslSocket *socket);
-    static void certificateAnalysis(QSslCertificate certificate, QList<QSslCertificate> certificateChain);
-
-private:
+    qint64 port() const;
+    void setPort(qint64 newPort);
+    QString certFile() const;
+    void setCertFile(const QString &newCertFile);
+    QString keyFile() const;
+    void setKeyFile(const QString &newKeyFile);
+    bool ssl() const;
+    void setSsl(bool newSsl);
 
 signals:
+    void portChanged();
+    void certFileChanged();
+    void keyFileChanged();
+    void sslChanged();
 
+private:
+    qint64 m_port = -1;
+    QString m_certFile = QString{};
+    QString m_keyFile = QString{};
+    QHttpServer* m_server;
+    bool m_ssl = false;
 };
 

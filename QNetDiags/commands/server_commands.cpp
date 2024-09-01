@@ -27,6 +27,7 @@ SOFTWARE.
 #include <QFile>
 #include "tcp_server/tcpserver.hpp"
 #include "ssl_server/sslserver.hpp"
+#include "http_server/httpserver.hpp"
 
 void tcp_server( qint64 port, const QString& certFile, const QString& keyFile ){
     if( certFile.isEmpty() || keyFile.isEmpty() ){ // Plain text TCP server
@@ -43,10 +44,18 @@ void tcp_server( qint64 port, const QString& certFile, const QString& keyFile ){
 
 void http_server( qint64 port, const QString& certFile, const QString& keyFile ){
     if( certFile.isEmpty() || keyFile.isEmpty() ){ // Plain text TCP server
-        qInfo() << "HTTP plain text server";
+        qInfo() << "(ST) HTTP plain text server";
+        HttpServer* server = new HttpServer();
+        server->setPort(port);
+        server->start();
     }
     else{ // SSL server
-        qInfo() << "HTTP SSL server";
+        qInfo() << "(ST) HTTP SSL server";
+        HttpServer* server = new HttpServer();
+        server->setPort(port);
+        server->setCertFile(certFile);
+        server->setKeyFile(keyFile);
+        server->start();
     }
 }
 

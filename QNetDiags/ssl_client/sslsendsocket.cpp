@@ -46,6 +46,7 @@ void SslSendSocket::run()
     m_socket->connectToHostEncrypted( m_host, m_port );
     m_socket->write("Hello SSL Server");
     m_socket->waitForReadyRead();
+    // QCoreApplication::exit(0);
 }
 
 void SslSendSocket::init()
@@ -68,8 +69,6 @@ void SslSendSocket::init()
     QSslCertificate sslCert(certBytes);
     QList<QSslCertificate> certificateList;
     certificateList.append(sslCert);
-    // QSslConfiguration conf;
-    // setClientCert();
     m_sslconf.setCaCertificates(certificateList);
     m_socket->setSslConfiguration(m_sslconf);
     m_socket->setProtocol(QSsl::SecureProtocols);
