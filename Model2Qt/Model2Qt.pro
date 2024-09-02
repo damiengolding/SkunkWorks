@@ -10,10 +10,27 @@ isActiveConfig(debug,debug|release){
 }
 
 SOURCES += \
-        fsmutils.cpp \
+    commands/commands_class.cpp \
+    commands/commands_qtfsm.cpp \
+    commands/commands_qtsmf.cpp \
         main.cpp \
+    uml/umlclass.cpp \
+    utils/fsmutils.cpp
+
+
+RESOURCES += \
+    Model2Qt.qrc
+
+STATECHARTS += \
+    test_models/FsmTest.scxml
 
 HEADERS += \
-    commands.hpp \
-    fsmutils.hpp
+    commands/commands.hpp \
+    uml/umlclass.hpp \
+    utils/fsmutils.hpp
+
+INCLUDEPATH += ./utils/ ./uml/ ./commands/
+
+DISTFILES += \
+    test_models/ClassTest.qmodel
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="FsmTest" qt:editorversion="14.0.1" initial="ParentState">
+    <qt:editorinfo initialGeometry="262.03;89.05;-20;-20;40;40"/>
+    <state id="ParentState">
+        <qt:editorinfo scenegeometry="378.72;230.30;294.15;180.30;581;650.81" geometry="378.72;230.30;-84.57;-50;581;650.81"/>
+        <transition type="external" event="ExitSuccess" target="FinalSuccess"/>
+        <transition type="external" event="ExitFail" target="FinalFail"/>
+        <parallel id="ParallelState">
+            <qt:editorinfo scenegeometry="442.19;309.21;347.38;259.21;437.69;211.63" geometry="63.47;78.91;-94.81;-50;437.69;211.63"/>
+            <state id="StateOne">
+                <qt:editorinfo scenegeometry="436.04;359.27;376.04;309.27;120;100" geometry="-6.15;50.06;-60;-50;120;100"/>
+            </state>
+            <state id="StateTwo">
+                <qt:editorinfo scenegeometry="637.36;359.27;577.36;309.27;120;100" geometry="195.17;50.06;-60;-50;120;100"/>
+            </state>
+            <transition type="external" event="InternalTransition" target="ChildState">
+                <qt:editorinfo endTargetFactors="36.31;11.09"/>
+            </transition>
+        </parallel>
+        <state id="ChildState">
+            <qt:editorinfo scenegeometry="399.71;585.48;339.71;535.48;520.06;266.99" geometry="20.99;355.18;-60;-50;520.06;266.99"/>
+            <state id="StateThree">
+                <qt:editorinfo scenegeometry="412.01;627.44;352.01;577.44;208.37;100" geometry="12.30;41.96;-60;-50;208.37;100"/>
+                <transition type="external" event="TransitionThreeToFour" target="StateFour"/>
+            </state>
+            <state id="StateFour">
+                <qt:editorinfo scenegeometry="784.57;624.38;724.57;574.38;120;100" geometry="384.86;38.90;-60;-50;120;100"/>
+                <transition type="external" event="TransitionChildStateFinal" target="FinalChild"/>
+            </state>
+            <final id="FinalChild">
+                <qt:editorinfo scenegeometry="671.46;750.28;651.46;730.28;40;40" geometry="271.75;164.80;-20;-20;40;40"/>
+            </final>
+        </state>
+    </state>
+    <final id="FinalSuccess">
+        <qt:editorinfo scenegeometry="1039.95;315.35;1019.95;295.35;40;40" geometry="1039.95;315.35;-20;-20;40;40"/>
+    </final>
+    <final id="FinalFail">
+        <qt:editorinfo scenegeometry="1009.24;568.08;989.24;548.08;40;40" geometry="1009.24;568.08;-20;-20;40;40"/>
+    </final>
+</scxml>

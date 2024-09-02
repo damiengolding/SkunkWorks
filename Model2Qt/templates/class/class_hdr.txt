@@ -1,0 +1,28 @@
+#pragma once
+
+#include <QObject>
+#include <QDebug>
+%{ADDITIONAL_INCLUDES}
+%{START_NAMESPACE}
+class %{CLASS_NAME} : public QObject
+{
+    Q_OBJECT
+public:
+    explicit %{CLASS_NAME}(QObject* parent = nullptr);
+    virtual ~%{CLASS_NAME}();
+
+    friend QDebug operator<<(QDebug debug, const %{CLASS_NAME} &c)
+    {
+        QDebugStateSaver saver(debug);
+        debug.nospace() << "";
+        return debug;
+    }
+
+%{MEMBERS}
+
+public slots:
+
+signals:
+
+};
+%{END_NAMESPACE}

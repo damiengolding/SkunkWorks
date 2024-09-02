@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include "IFiniteStateMachine.hpp"
+#include "ifinitestatemachine.hpp"
 
 class %{STATE_CLASS} : public IFiniteState
 {

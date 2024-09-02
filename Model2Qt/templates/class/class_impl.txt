@@ -1,0 +1,14 @@
+#include "%{CLASS_HDR}.hpp"
+
+%{START_NAMESPACE}
+%{CLASS_NAME}::%{CLASS_NAME}(QObject *parent)
+    : QObject{parent}
+{
+
+}
+
+%{CLASS_NAME}::~%{CLASS_NAME}()
+{
+
+}
+%{END_NAMESPACE}

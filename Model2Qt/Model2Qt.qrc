@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>templates/qtfsm/fsm_hdr.txt</file>
+        <file>templates/qtfsm/fsm_impl.txt</file>
+        <file>templates/qtfsm/fsm_interface.txt</file>
+        <file>templates/qtfsm/state_hdr.txt</file>
+        <file>templates/qtfsm/state_impl.txt</file>
+        <file>templates/class/class_hdr.txt</file>
+        <file>templates/class/class_impl.txt</file>
+        <file>templates/class/interface_hdr.txt</file>
+    </qresource>
+</RCC>

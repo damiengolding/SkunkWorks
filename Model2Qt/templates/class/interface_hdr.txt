@@ -1,0 +1,11 @@
+#pragma once
+
+%{ADDITIONAL_INCLUDES}
+
+%{START_NAMESPACE}
+class %{CLASS_NAME}
+public:
+    %{MEMBERS}
+
+};
+%{END_NAMESPACE}
