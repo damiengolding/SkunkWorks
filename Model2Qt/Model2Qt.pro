@@ -3,10 +3,10 @@ CONFIG += c++20 cmdline warn_off
 
 isActiveConfig(debug,debug|release){
     BUILD_TYPE = Debug
-    TARGET = scxml2coded
+    TARGET = model2qtd
 }else{
     BUILD_TYPE = Release
-    TARGET = scxml2code
+    TARGET = model2qt
 }
 
 SOURCES += \
@@ -14,8 +14,6 @@ SOURCES += \
         main.cpp \
 
 HEADERS += \
+    commands.hpp \
     fsmutils.hpp
-
-RESOURCES += \
-    res/Scxml2Code.qrc
 

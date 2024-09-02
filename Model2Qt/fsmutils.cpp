@@ -25,7 +25,7 @@ SOFTWARE.
 #include "fsmutils.hpp"
 
 FsmUtils::FsmUtils( QObject* parent) : QObject{parent}{}
-
+FsmUtils::~FsmUtils(){}
 
 template<typename E>
 E FsmUtils::EnumFromString(const QString &textValue)
@@ -75,4 +75,3 @@ QDomDocument* FsmUtils::VerifiedDomDocument(const QString &fileName)
     return(doc);
 }
 
-FsmUtils::~FsmUtils(){}

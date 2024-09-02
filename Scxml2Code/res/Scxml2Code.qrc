@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/templates">
-        <file>fsm_hdr.txt</file>
-        <file>fsm_impl.txt</file>
-        <file>fsm_interface.txt</file>
-        <file>state_hdr.txt</file>
-        <file>state_impl.txt</file>
-    </qresource>
-</RCC>

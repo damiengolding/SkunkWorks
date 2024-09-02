@@ -32,11 +32,16 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
 
-void processScxml();
+#include "commands.hpp"
 
 QList<QCommandLineOption> commandLineOptions;
-QString inputFile;
+QString inputFile = {};
+QString headerDirectory = {};
+QString sourceDirectory = {};
 bool preserveCaseFileNames = false;
+bool qtFsm = false;
+bool qtSmf = false;
+bool qtClass = false;
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +49,7 @@ int main(int argc, char *argv[])
     QCommandLineParser p;
     initArgumentParser(a,p);
 
-    processScxml();
+    processQtFsm();
     // return(a.exec());
     return(0);
 }
@@ -66,24 +71,43 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addOption({{"i","input"},"Input file","file"});
+    parser.addOption({{"h","hdr-dir"},"Output directory for header files [.]","directory"});
+    parser.addOption({{"s","src-dir"},"Output directory for header files [.]","directory"});
+
     parser.addPositionalArgument("preserve-case", "Preserve case for file names");
+    parser.addPositionalArgument("qtfsm", "Finite State Machine with QObjects");
+    parser.addPositionalArgument("qtsmf", "Finite State Machine with QStates");
+    parser.addPositionalArgument("qtclass", "Qt Creator class model diagram to QObjects");
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( !parser.isSet("input") ){
         parser.showHelp(1);
     }
-
     inputFile = parser.value("input");
+    if( parser.isSet("hdr-dir") ) headerDirectory = parser.value("hdr-dir");
+    if( parser.isSet("src-dir") ) sourceDirectory = parser.value("src-dir");
 
-    for( auto pos : parser.positionalArguments() ){
-        if( pos == "preserve-case" ){
-            preserveCaseFileNames = true;
-        }
+    QStringList arguments = parser.positionalArguments();
+
+    if( arguments.contains("qtfsm") ){
+        qtFsm = true;
     }
+    else if( arguments.contains("qtsmf") ){
+        qtSmf = true;
+    }
+    else if( arguments.contains("qtclass") ){
+        qtClass = true;
+    }
+    else{
+        qCritical() << "No positional argument is set for input type (qtfsm|qtsmf|qtclass)";
+        parser.showHelp(2);
+    }
+
+    if( arguments.contains("preserve-case") ) preserveCaseFileNames = true;
 }
 
-void processScxml(){
+void processQtFsm(){
     qInfo() << "Processing scxml";
     QString fsmName;
     QDomDocument* doc = FsmUtils::VerifiedDomDocument(inputFile);

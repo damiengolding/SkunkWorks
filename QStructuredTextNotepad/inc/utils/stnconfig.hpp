@@ -27,13 +27,13 @@ SOFTWARE.
 #include <QObject>
 #include <QDir>
 
-class QNetDiagsConfig : public QObject
+class StnConfig : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit QNetDiagsConfig(QObject *parent = nullptr);
-    ~QNetDiagsConfig();
+    explicit StnConfig(QObject *parent = nullptr);
+    ~StnConfig();
 
     static QString userApplicationHome;
     static QString myConfigProperty;

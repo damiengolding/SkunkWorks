@@ -21,13 +21,33 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#pragma once
 
-#include "QNetDiagsConfig.hpp"
+#include <QObject>
+#include <QTcpSocket>
+#include <QFile>
+#include <QMetaEnum>
+#include <QRunnable>
+#include <QThread>
+#include <QCoreApplication>
 
-QString QNetDiagsConfig::userApplicationHome = QDir::homePath();
-QString QNetDiagsConfig::myConfigProperty = "propertyValue";
+#include "tcpclientsignalhandler.hpp"
 
-QNetDiagsConfig::QNetDiagsConfig( QObject* parent) : QObject{parent}{}
+class TcpSendSocket : public QObject, public QRunnable
+{
+    Q_OBJECT
+public:
+    explicit TcpSendSocket( const QString& host, qint64 port, QObject *parent = nullptr);
+    ~TcpSendSocket();
 
 
-QNetDiagsConfig::~QNetDiagsConfig(){}
+public:
+    void run() override;
+
+private:
+    QString m_host = {};
+    qint64 m_port;
+    QTcpSocket* m_socket = nullptr;
+    TcpClientSignalHandler* m_handler = nullptr;
+};
+

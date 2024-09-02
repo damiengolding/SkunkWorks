@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/logos/goldings_gym_core_trans.png</file>
+        <file>res/logos/goldings_gym_core_white.png</file>
+        <file>res/logos/goldings_gym_masthead3.png</file>
+    </qresource>
+</RCC>
