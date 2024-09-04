@@ -36,7 +36,7 @@ SOFTWARE.
 #include <QFile>
 #include <QFileInfo>
 
-#include "fsmutils.hpp"
+#include "modelutils.hpp"
 
 class UmlClassFactory;
 
@@ -54,12 +54,19 @@ public:
 
     bool isNull() const;
     QString className() const;
-
     bool isInterface() const;
+
+    bool isClass() const;
+    bool isControl() const;
+    bool isBoundary() const;
+    bool isEntity() const;
+
+    QString classUid() const;
 
 protected:
     QString m_namespace = {};
     QString m_class_name = {};
+    QString m_class_uid = {};
     QStringList m_namespaces;
     QStringList m_additional_includes;
     QStringList m_public_functions;
@@ -69,8 +76,12 @@ protected:
     QStringList m_private_members;
     QStringList m_protected_members;
 
-    bool m_isInterface = false;
     bool m_isNull = false;
+    bool m_isClass = false;
+    bool m_isInterface = false;
+    bool m_isControl = false;
+    bool m_isBoundary = false;
+    bool m_isEntity = false;
 };
 /*!
  * \brief The UmlClassFactory class

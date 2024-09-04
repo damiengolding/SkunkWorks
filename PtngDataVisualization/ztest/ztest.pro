@@ -16,8 +16,8 @@ TEMPLATE = app
 
 SOURCES +=  tst_ptngtest.cpp
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../Tools/Libraries/PtngDataVisualization/Static/ -llibparser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../Tools/Libraries/PtngDataVisualization/Static/ -llibparserd
-
-INCLUDEPATH += $$PWD/../../../../../../Tools/Libraries/PtngDataVisualization/Static/inc
-DEPENDPATH += $$PWD/../../../../../../Tools/Libraries/PtngDataVisualization/Static/inc
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libparser/debug/ -llibparserd
+INCLUDEPATH += $$PWD/../libparser/inc
+DEPENDPATH += $$PWD/../libparser/inc

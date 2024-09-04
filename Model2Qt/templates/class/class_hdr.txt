@@ -19,7 +19,6 @@ public:
     }
 
 %{MEMBERS}
-
 public slots:
 
 signals:

@@ -29,7 +29,7 @@ SOFTWARE.
 void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces){
     qInfo() << "Processing scxml" << QDir::toNativeSeparators( inputFile ) << "into Qt QObjects";
     QString fsmName;
-    QDomDocument* doc = FsmUtils::VerifiedDomDocument(inputFile);
+    QDomDocument* doc = ModelUtils::VerifiedDomDocument(inputFile);
     Q_ASSERT( doc != nullptr );
     qInfo() << "Scxml doc is OK";
     QDomNodeList stateNodeList = doc->elementsByTagName("state");
@@ -38,8 +38,8 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
     qInfo() << "States:"<<stateNodeList.count();
     qInfo() << "Parallels:"<<parallelNodeList.count();
 
-    QList<QDomElement> states = FsmUtils::DomElementList(stateNodeList);
-    QList<QDomElement> parallels = FsmUtils::DomElementList(parallelNodeList);
+    QList<QDomElement> states = ModelUtils::DomElementList(stateNodeList);
+    QList<QDomElement> parallels = ModelUtils::DomElementList(parallelNodeList);
 
     QList<QDomElement> allItems = states;
     allItems.append(parallels);

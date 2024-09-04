@@ -116,14 +116,6 @@ public: // Other accessors/mutators
 private: // Members
     PtngDGML *dgmlObject;
 
-private slots: // for QTest module
-    void shouldCreateDGMLFromNmap_data();
-    void shouldCreateDGMLFromNessus_data();
-    void shouldCreateDGMLFromSimple_data();
-    void shouldCreateDGMLFromNmap();
-    void shouldCreateDGMLFromNessus();
-    void shouldCreateDGMLFromSimple();
-
 };
 
 } // namespace ptng

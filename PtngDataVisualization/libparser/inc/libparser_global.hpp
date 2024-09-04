@@ -42,5 +42,4 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QColor>
 #include <QFont>
 #include <QFontInfo>
-#include <QTest>
-
+#include <QImage>

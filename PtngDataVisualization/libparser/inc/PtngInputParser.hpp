@@ -26,7 +26,6 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include "../inc/libparser_global.hpp"
-#include "../inc/PtngConfig.hpp"
 #include <QObject>
 
 #include "PtngEnums.hpp"
@@ -92,35 +91,6 @@ public: // Parser routines
     static QMap<QString,QString> parseAxfrNbtscan(const QString &inputFile);
     static QMap<QString,QString> parseAxfrHostScan(const QString &inputFile);
     static void addPorts(PtngHostBuilder* builder, const QDomNode &node);
-
-private slots: // for QTest module
-    // nmap & nessus
-    void shouldCountNmapHosts_data();
-    void shouldCountNessusHosts_data();
-    void shouldCountNessusIssues_data();
-    void shouldCountNessusSeverities_data();
-
-    void shouldCountNmapHosts();
-    void shouldCountNessusHosts();
-    void shouldCountNessusIssues();
-    void shouldCountNessusSeverities();
-
-    // AXFR files
-    void shouldCountDnsreconAXFRHosts_data();
-    void shouldCountNmapAXFRHosts_data();
-    void shouldCountNslookupWindowsAXFRHosts_data();
-    void shouldCountNslookupLinuxAXFRHosts_data();
-    void shouldCountArpscanAXFRHosts_data();
-    void shouldCountNbtscanAXFRHosts_data();
-    void shouldCountHostAXFRHosts_data();
-
-    void shouldCountDnsreconAXFRHosts();
-    void shouldCountNmapAXFRHosts();
-    void shouldCountNslookupWindowsAXFRHosts();
-    void shouldCountNslookupLinuxAXFRHosts();
-    void shouldCountArpscanAXFRHosts();
-    void shouldCountNbtscanAXFRHosts();
-    void shouldCountHostAXFRHosts();
 
 signals:
 

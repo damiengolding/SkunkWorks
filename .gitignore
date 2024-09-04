@@ -12,7 +12,9 @@
 *.dylib
 
 # Directories
-*Output/
+*Output*/
+*OutputStatic/
+*OutputShared/
 
 # Qt-es
 object_script.*.Release

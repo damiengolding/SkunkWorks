@@ -39,7 +39,7 @@ SOFTWARE.
 #include "PtngDGMLBuilder.hpp"
 #include "PtngDGMLConv.hpp"
 #include "PtngInputParser.hpp"
-#include "PtngConfig.hpp"
+
 using namespace ptng;
 
 class PtngTest : public QObject

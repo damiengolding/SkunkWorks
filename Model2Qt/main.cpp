@@ -26,7 +26,7 @@ SOFTWARE.
 #include <QCommandLineParser>
 #include <QList>
 
-#include "fsmutils.hpp"
+#include "modelutils.hpp"
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 }
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
-    app.setApplicationName("scxml2code");
+    app.setApplicationName("model2qt");
     app.setApplicationVersion("1.0.0");
     app.setOrganizationName("Golding's Gym");
     app.setOrganizationDomain("https://github.com/damiengolding");
@@ -61,7 +61,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
     parser.addHelpOption();
     parser.addVersionOption();
 
-    parser.setApplicationDescription("scxml2code Converts an scxml or class diagram UML file created with Qt Creator into classes, with pre-defined interfaces");
+    parser.setApplicationDescription("model2qt Converts an scxml or class diagram UML file created with Qt Creator into classes, with pre-defined interfaces");
     initArgumentOptions(app,parser);
     parser.process(app);
     processArgumentOptions(app, parser);
@@ -69,9 +69,9 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addOption({{"i","input"},"Input file","file"});
-    // parser.addPositionalArgument("preserve-case", "Preserve case for file names");
-    parser.addPositionalArgument("clobber", "Overwrite existing files");
-    parser.addPositionalArgument("namespaces", "Use package and component names (if available) as namespaces");
+    parser.addPositionalArgument("preserve-case", "Preserve case for file names - may be ignored for some input types");
+    parser.addPositionalArgument("clobber", "Overwrite existing files - may be ignored for some input types");
+    parser.addPositionalArgument("namespaces", "Use package and component names (if available) as namespaces - may be ignored for some input types");
     parser.addPositionalArgument("qtfsm", "Finite State Machine with QObjects");
     parser.addPositionalArgument("qtsmf", "Finite State Machine with QStates");
     parser.addPositionalArgument("qtclass", "Qt Creator class model diagram to QObjects");
@@ -87,7 +87,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 
     if( arguments.contains("clobber") ) clobberExisting = true;
     if( arguments.contains("namespaces") ) useNamespaces = true;
-    // if( arguments.contains("preserve-case") ) preserveCaseFileNames = true;
+    if( arguments.contains("preserve-case") ) preserveCaseFileNames = true;
 
     if( arguments.contains("qtfsm") ){
         qtFsm = true;
@@ -105,7 +105,6 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         qCritical() << "No positional argument is set for input type (qtfsm|qtsmf|qtclass)";
         parser.showHelp(2);
     }
-
 
 }
 

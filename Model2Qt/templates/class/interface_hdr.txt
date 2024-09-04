@@ -3,7 +3,7 @@
 %{ADDITIONAL_INCLUDES}
 
 %{START_NAMESPACE}
-class %{CLASS_NAME}
+class %{CLASS_NAME} {
 public:
     %{MEMBERS}
 

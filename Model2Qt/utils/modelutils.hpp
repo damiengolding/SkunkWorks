@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2024 Damien Golding
+Copyright (c) Damien Golding 2024
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,43 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 
-#include "../inc/ConversionUtils.hpp"
-using namespace GoldingsGym;
+#pragma once
 
-template<typename E>
-E ConversionUtils::ConversionUtils::EnumFromString(const QString &textValue)
+#include <QString>
+#include <QMetaEnum>
+#include <QDomDocument>
+#include <QDomNodeList>
+#include <QDomElement>
+#include <QList>
+#include <QFile>
+
+class ModelUtils : public QObject
 {
-    bool ok;
-    auto enumResult = static_cast<E>(QMetaEnum::fromType<E>().keyToValue(textValue,&ok));
-    if(!ok){
-        qDebug()<<"Could not convert" << textValue << "to enum.";
-        return{};
-    }
-    return(enumResult);
-}
+    Q_OBJECT
 
-template<typename E>
-QString ConversionUtils::StringFromEnum(E value)
-{
-    const int intRepresentation = static_cast<int>(value);
-    return( QString::fromUtf8(QMetaEnum::fromType<E>().valueToKey(intRepresentation)) );
-}
+public:
+    explicit ModelUtils(QObject *parent = nullptr);
+    ~ModelUtils();
 
-QList<QDomElement> ConversionUtils::domElementList(const QDomNodeList &list){
-    QList<QDomElement> ret;
-    for( int i = 0; i<list.count();++i ){
-        QDomNode node = list.at(i);
-        QDomElement elem = node.toElement();
-        ret.append(elem);
-    }
-    return(ret);
-}
+    // QMetaEnum conversion to string
+    template<typename E>
+    static E EnumFromString(const QString &textValue);
+
+    // QMetaEnum conversion from string
+    template<typename E>
+    static QString StringFromEnum(E value);
+
+    // QList of verified QDomElements from QDomNodeList
+    static QList<QDomElement> DomElementList(const QDomNodeList &list);
+
+    // Verified populated QDomDocument* from a QString file name
+    static QDomDocument* VerifiedDomDocument(const QString& fileName );
+
+private:
+
+signals:
+
+};
+

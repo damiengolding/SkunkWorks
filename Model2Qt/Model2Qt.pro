@@ -15,7 +15,7 @@ SOURCES += \
     commands/commands_qtsmf.cpp \
         main.cpp \
     uml/umlclass.cpp \
-    utils/fsmutils.cpp
+    utils/modelutils.cpp
 
 
 RESOURCES += \
@@ -27,7 +27,7 @@ STATECHARTS += \
 HEADERS += \
     commands/commands.hpp \
     uml/umlclass.hpp \
-    utils/fsmutils.hpp
+    utils/modelutils.hpp
 
 INCLUDEPATH += ./utils/ ./uml/ ./commands/
 

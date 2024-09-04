@@ -50,10 +50,6 @@ private:
 
 signals:
 
-private slots: // for QTest module
-    void shouldRecogniseFile_data();
-    void shouldRecogniseFile();
-
 };
 } // namespace ptng
 

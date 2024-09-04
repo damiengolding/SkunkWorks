@@ -239,21 +239,50 @@ bool UmlClass::isInterface() const
     return m_isInterface;
 }
 
+bool UmlClass::isClass() const
+{
+    return m_isClass;
+}
+
+bool UmlClass::isControl() const
+{
+    return m_isControl;
+}
+
+bool UmlClass::isBoundary() const
+{
+    return m_isBoundary;
+}
+
+bool UmlClass::isEntity() const
+{
+    return m_isEntity;
+}
+
+QString UmlClass::classUid() const
+{
+    return m_class_uid;
+}
+
 /*
     --- UmlClassFactory ---
 */
 UmlClass* UmlClassFactory::createClass(const QDomElement &elem, QStringList namespaces, QStringList includes)
 {
     UmlClass* umlClass(new UmlClass());
+
+    /*
+        --- Do all the basic stuff . . . ---
+    */
     umlClass->m_namespaces = namespaces;
     umlClass->m_additional_includes = includes;
     if( !namespaces.empty() ){
-        umlClass->m_namespace = namespaces.first();
+        umlClass->m_namespace = namespaces.first().replace("-", "::");
     }
+
     QDomElement nameElem = elem.firstChildElement("base-MObject")
             .firstChildElement("MObject")
             .firstChildElement("name").toElement();
-
     if( nameElem.isNull() ){
         qInfo() << "Name element is null";
         umlClass->m_isNull = true;
@@ -261,19 +290,64 @@ UmlClass* UmlClassFactory::createClass(const QDomElement &elem, QStringList name
     }
     umlClass->m_class_name = nameElem.text();
 
+    QDomElement uidElem = elem.firstChildElement("base-MObject")
+            .firstChildElement("MObject")
+            .firstChildElement("base-MElement")
+            .firstChildElement("MElement")
+            .firstChildElement("uid");
+    if( uidElem.isNull() ){
+        qInfo() << "UID element is null";
+        umlClass->m_isNull = true;
+        return( umlClass);
+    }
+    // qInfo() << "Class UID:"<<uidElem.text();
+    umlClass->m_class_uid = uidElem.text();
+
     /*
-        --- Is it an interface ---
+        --- What type is it ---
     */
-    QDomElement interfaceElem = elem.firstChildElement("base-MObject")
+    QDomElement stereotypeElem = elem.firstChildElement("base-MObject")
             .firstChildElement("MObject")
             .firstChildElement("base-MElement")
             .firstChildElement("MElement")
             .firstChildElement("stereotypes")
             .firstChildElement("qlist")
             .firstChildElement("item");
-    if( !interfaceElem.isNull() ){
-        if( interfaceElem.text() == "interface" ){
+    if( stereotypeElem.isNull() ){ // It's a class
+        umlClass->m_isClass = true;
+        umlClass->m_isInterface = false;
+        umlClass->m_isControl = false;
+        umlClass->m_isBoundary = false;
+        umlClass->m_isEntity = false;
+    }
+    else{
+        if( stereotypeElem.text() == "interface" ){
+            umlClass->m_isClass = false;
             umlClass->m_isInterface = true;
+            umlClass->m_isControl = false;
+            umlClass->m_isBoundary = false;
+            umlClass->m_isEntity = false;
+        }
+        else if( stereotypeElem.text() == "control" ){
+            umlClass->m_isClass = false;
+            umlClass->m_isInterface = false;
+            umlClass->m_isControl = true;
+            umlClass->m_isBoundary = false;
+            umlClass->m_isEntity = false;
+        }
+        else if( stereotypeElem.text() == "entity" ){
+            umlClass->m_isClass = false;
+            umlClass->m_isInterface = false;
+            umlClass->m_isControl = false;
+            umlClass->m_isBoundary = false;
+            umlClass->m_isEntity = true;
+        }
+        else if( stereotypeElem.text() == "boundary" ){
+            umlClass->m_isClass = false;
+            umlClass->m_isInterface = false;
+            umlClass->m_isControl = false;
+            umlClass->m_isBoundary = true;
+            umlClass->m_isEntity = false;
         }
     }
 
@@ -282,7 +356,7 @@ UmlClass* UmlClassFactory::createClass(const QDomElement &elem, QStringList name
     */
     QDomElement membersElem = elem.firstChildElement("members").firstChildElement("qlist");
     if( !membersElem.isNull() ) {
-        QList<QDomElement> members = FsmUtils::DomElementList( membersElem.elementsByTagName("item") );
+        QList<QDomElement> members = ModelUtils::DomElementList( membersElem.elementsByTagName("item") );
         for( auto member : members ){
             QDomElement memberElem = member.firstChildElement("MClassMember").toElement();
             if( memberElem.isNull() ){

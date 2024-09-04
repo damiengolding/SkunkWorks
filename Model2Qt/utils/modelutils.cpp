@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "fsmutils.hpp"
+#include "modelutils.hpp"
 
-FsmUtils::FsmUtils( QObject* parent) : QObject{parent}{}
-FsmUtils::~FsmUtils(){}
+ModelUtils::ModelUtils( QObject* parent) : QObject{parent}{}
+ModelUtils::~ModelUtils(){}
 
 template<typename E>
-E FsmUtils::EnumFromString(const QString &textValue)
+E ModelUtils::EnumFromString(const QString &textValue)
 {
     bool ok;
     auto enumResult = static_cast<E>(QMetaEnum::fromType<E>().keyToValue(textValue,&ok));
@@ -40,13 +40,13 @@ E FsmUtils::EnumFromString(const QString &textValue)
 }
 
 template<typename E>
-QString FsmUtils::StringFromEnum(E value)
+QString ModelUtils::StringFromEnum(E value)
 {
     const int intRepresentation = static_cast<int>(value);
     return( QString::fromUtf8(QMetaEnum::fromType<E>().valueToKey(intRepresentation)) );
 }
 
-QList<QDomElement> FsmUtils::DomElementList(const QDomNodeList &list){
+QList<QDomElement> ModelUtils::DomElementList(const QDomNodeList &list){
     QList<QDomElement> ret;
     for( int i = 0; i<list.count();++i ){
         QDomNode node = list.at(i);
@@ -59,7 +59,7 @@ QList<QDomElement> FsmUtils::DomElementList(const QDomNodeList &list){
     return(ret);
 }
 
-QDomDocument* FsmUtils::VerifiedDomDocument(const QString &fileName)
+QDomDocument* ModelUtils::VerifiedDomDocument(const QString &fileName)
 {
     QFile* file = new QFile(fileName);
     QDomDocument* doc = new QDomDocument("doc");

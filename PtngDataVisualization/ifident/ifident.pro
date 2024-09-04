@@ -5,18 +5,11 @@ isActiveConfig(debug,debug|release){
     QT += testlib
     LIBS += -llibparserd
     TARGET = ifidentd
-    LIBS += -L"C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\debug" -lWaifsAndStraysd
 }else{
     BUILD_TYPE = Release
     LIBS += -llibparser
     TARGET = ifident
-    LIBS += -L"C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\release" -lWaifsAndStrays
 }
-
-# libparser
-LIBS += -L"C:\Tools\GoldingsGymStatic\libparser"
-INCLUDEPATH += "C:\Tools\GoldingsGymStatic\libparser\inc"
-DEPENDPATH += "C:\Tools\GoldingsGymStatic\libparser\inc"
 
 # Additional static linkage for the ODBC portion of the Qt SQL module
 contains(QT,sql){
@@ -25,19 +18,11 @@ contains(QT,sql){
 
 CONFIG += c++20 cmdline warn_off
 
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
 SOURCES += \
         main.cpp
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
-# WaifsAndStrays
-INCLUDEPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
-DEPENDPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
-
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libparser/debug/ -llibparserd
+INCLUDEPATH += $$PWD/../libparser/inc
+DEPENDPATH += $$PWD/../libparser/inc

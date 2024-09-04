@@ -39,9 +39,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     GlobalIncludes.hpp
 
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libparser/debug/ -llibparserd
+INCLUDEPATH += $$PWD/../libparser/inc
+DEPENDPATH += $$PWD/../libparser/inc
 
-# WaifsAndStrays
-win32: LIBS += -L"C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\release" -lWaifsAndStrays
-INCLUDEPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
-DEPENDPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
 

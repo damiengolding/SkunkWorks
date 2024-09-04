@@ -11,11 +11,6 @@ isActiveConfig(debug,debug|release){
     TARGET = nviz
 }
 
-# libparser
-LIBS += -L"C:\Tools\GoldingsGymStatic\libparser"
-INCLUDEPATH += "C:\Tools\GoldingsGymStatic\libparser\inc"
-DEPENDPATH += "C:\Tools\GoldingsGymStatic\libparser\inc"
-
 # Additional static linkage for the ODBC portion of the Qt SQL module
 contains(QT,sql){
     LIBS += -lodbc32
@@ -42,7 +37,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-# WaifsAndStrays
-win32: LIBS += -L"C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\release" -lWaifsAndStrays
-INCLUDEPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
-DEPENDPATH += "C:\Users\damie\source\repos\WaifsAndStrays\WaifsAndStraysOutput\inc"
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libparser/debug/ -llibparserd
+INCLUDEPATH += $$PWD/../libparser/inc
+DEPENDPATH += $$PWD/../libparser/inc

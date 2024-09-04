@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2024 Damien Golding
+Copyright (c) Damien Golding 2024
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,33 +20,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#pragma once
 
-#include <QObject>
-#include <QDir>
+#include "commands.hpp"
 
-namespace GoldingsGym{
+void processQtSmf(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespacesr){
+    qInfo() << "Processing scxml" << QDir::toNativeSeparators( inputFile ) << "into Qt QStates";
 
-class Logger : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Logger(QObject *parent = nullptr);
-
-    static bool isLogging;
-    static QString fileName;
-    static void install();
-    static void uninstall();
-    static void messageHandler(QtMsgType type, const QMessageLogContext &ctxt, const QString &msg);
-
-private:
-    static QFile outFile;
-
-signals:
-
-};
-
-} // namespace GoldingsGym
+}

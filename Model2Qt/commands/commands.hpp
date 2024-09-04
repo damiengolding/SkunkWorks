@@ -35,7 +35,7 @@ SOFTWARE.
 #include <QFile>
 #include <QFileInfo>
 
-#include "fsmutils.hpp"
+#include "modelutils.hpp"
 
 void processQtFsm( const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces );
 void processQtSmf( const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespacesr );

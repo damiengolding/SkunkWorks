@@ -29,17 +29,13 @@ SOFTWARE.
 #include "uml/umlclass.hpp"
 
 void processDomDocument(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces);
-void processXmlStreamReader(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces);
+// void processXmlStreamReader(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces);
+
+// /qmt/project/root-package/instance/MPackage/base-MObject/MObject/children/handles/handles/qlist/item/handle/target/instance/MPackage/base-MObject/MObject/children/handles/handles/qlist/item/handle/target/instance/MClass/base-MObject/MObject
 
 void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces){
     qInfo() << "Processing class diagram" << QDir::toNativeSeparators( inputFile ) << "into Qt QObjects";
-    // processXmlStreamReader(inputFile, preserveCase, clobberExisting, useNamespaces);
-    processDomDocument(inputFile, preserveCase, clobberExisting, useNamespaces);
-}
-
-void processDomDocument(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces){
-    qInfo() << "Procesing with QDomDocument";
-    QDomDocument* doc = FsmUtils::VerifiedDomDocument(inputFile);
+    QDomDocument* doc = ModelUtils::VerifiedDomDocument(inputFile);
     Q_ASSERT( doc );
 
     if( doc->documentElement().tagName() != "qmt" ){
@@ -51,7 +47,7 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
         --- Package/Namespace names ---
     */
     QStringList namespaceNames;
-    QList<QDomElement> mPackages = FsmUtils::DomElementList( doc->elementsByTagName( "MPackage" ));
+    QList<QDomElement> mPackages = ModelUtils::DomElementList( doc->elementsByTagName( "MPackage" ));
     for( auto mPackage : mPackages ){
         QDomElement tempElement = mPackage.firstChildElement("base-MObject").firstChildElement("MObject").firstChildElement("name").toElement();
         if( tempElement.isNull() ){
@@ -70,7 +66,7 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
     /*
         --- Annotations ---
     */
-    QList<QDomElement> mAnnotations = FsmUtils::DomElementList( doc->elementsByTagName("DAnnotation") );
+    QList<QDomElement> mAnnotations = ModelUtils::DomElementList( doc->elementsByTagName("DAnnotation") );
     for( auto mAnnotation : mAnnotations ){
         QDomElement noteElem = mAnnotation.firstChildElement("text");
         if( noteElem.isNull() ){
@@ -92,7 +88,7 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
     /*
         --- Classes and interfaces ---
     */
-    QList<QDomElement> mClasses = FsmUtils::DomElementList( doc->elementsByTagName( "MClass" ));
+    QList<QDomElement> mClasses = ModelUtils::DomElementList( doc->elementsByTagName( "MClass" ));
     for( auto mClass : mClasses ){
         QDomElement nameElement = mClass.firstChildElement("base-MObject").firstChildElement("MObject").firstChildElement("name").toElement();
         if( nameElement.isNull() ){
@@ -118,7 +114,7 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
             classCount++;
         }
     }
-    qInfo() << "Packages (inc. the file package):" << namespaceNames.count();
+    qInfo() << "Packages:" << namespaceNames.count();
     for( auto package : namespaceNames ){
         qInfo() << "\tPackage:"<< package;
     }
@@ -127,31 +123,30 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
     qInfo() << "Annotations:" << mAnnotations.count();
 
     /*
-        --- The story so far . .  . ---
+        --- The story so far . . . ---
     */
-
     // Headerfiles
     for( auto mClass : umlClasses ){
-        QString headerFileName = mClass->className().toLower() + ".hpp";
-        QFileInfo headerFileInfo(headerFileName);
-        if( headerFileInfo.exists() && clobberExisting == false ){
-            qInfo() << "File exists (" << headerFileName << ") with no clobber set. Use the \"clobber\" positional argument to overwrite existing files";
-            continue;
+        if( mClass->isClass() || mClass->isInterface() ){
+            QString headerFileName = mClass->className().toLower() + ".hpp";
+            QFileInfo headerFileInfo(headerFileName);
+            if( headerFileInfo.exists() && clobberExisting == false ){
+                qInfo() << "File exists (" << headerFileName << ") with no clobber set. Use the \"clobber\" positional argument to overwrite existing files";
+                continue;
+            }
+            QFile headerFile(headerFileInfo.absoluteFilePath());
+            if( !headerFile.open(QIODevice::WriteOnly) ){
+                qInfo() << "Could not open file" << headerFileInfo.absoluteFilePath() << "for writing";
+                return;
+            }
+            headerFile.write(  mClass->toDeclaration( useNamespaces ).toLatin1() );
+            headerFile.close();
         }
-        QFile headerFile(headerFileInfo.absoluteFilePath());
-        if( !headerFile.open(QIODevice::WriteOnly) ){
-            qInfo() << "Could not open file" << headerFileInfo.absoluteFilePath() << "for writing";
-            return;
-        }
-        headerFile.write(  mClass->toDeclaration( useNamespaces ).toLatin1() );
-        headerFile.close();
     }
 
-    // Implentation files
+    // Implementation files
     for( auto mClass : umlClasses ){
-        if( mClass->isInterface() ){
-            continue;
-        }
+        if( mClass->isClass() ){
         QString sourceFileName = mClass->className().toLower() + ".cpp";
         QFileInfo sourceFileInfo(sourceFileName);
         if( sourceFileInfo.exists() && clobberExisting == false ){
@@ -163,66 +158,9 @@ void processDomDocument(const QString& inputFile, bool preserveCase, bool clobbe
             qInfo() << "Could not open file" << sourceFileInfo.absoluteFilePath() << "for writing";
             return;
         }
-
         sourceFile.write(  mClass->toDefinition( useNamespaces ).toLatin1() );
         sourceFile.close();
     }
 }
-
-void processXmlStreamReader(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces){
-    qInfo() << "Procesing with QXmlStreamReader (no, really)";
-    QFile file(inputFile);
-    if( !file.open(QIODevice::ReadOnly) ){
-        qInfo() << "Couldn't open" << inputFile << "for reading";
-        return;
-    }
-
-    QXmlStreamReader reader(&file);
-
-    while(!reader.atEnd())
-    {
-        QXmlStreamReader::TokenType tokenType = reader.readNext();
-        switch (tokenType) {
-        case QXmlStreamReader::StartDocument:
-            // Logical start of document
-            break;
-        case QXmlStreamReader::EndDocument:
-            // Logical end of document
-            break;
-        case QXmlStreamReader::StartElement:{
-            QString elementName = reader.name().toString();
-            if( elementName.toLower() == "instance" ){
-                QXmlStreamAttributes attrs = reader.attributes();
-                if( attrs.hasAttribute("type") ){
-                    QString instanceType = attrs.value("type").toString().toLower();
-                    // qInfo() << "Instance type:" << instanceType ;
-                    if( instanceType == "mclass" ){
-                        while( reader.readNextStartElement() ){
-                            QString readerName = reader.name().toString().toLower();
-                            if( readerName == "mobject" ){
-                                while( reader.readNextStartElement() ){
-                                    readerName= reader.name().toString().toLower();
-                                    if( readerName == "name" ){
-                                        qInfo() << "Name:" << reader.text();
-                                        break;
-                                    }
-                                }
-                            }
-                            // qInfo() << "\tNext token:" << reader.name() ;
-                        }
-                    }
-                }
-            }
-            break;
-        }
-        case QXmlStreamReader::EndElement:
-            // For completeness - don't really care about this
-            break;
-        }
-    }
-    if( file.isOpen()){
-        file.close();
-    }
 }
-
 

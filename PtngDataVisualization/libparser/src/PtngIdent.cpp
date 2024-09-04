@@ -24,7 +24,6 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #include "../inc/PtngIdent.hpp"
-#include "../inc/PtngConfig.hpp"
 #include "QtTest/qtestcase.h"
 
 namespace ptng {
@@ -257,62 +256,6 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
     }
 
     return(ret);
-}
-
-/*
-   Unit tests
-  */
-
-// QTest functions
-void PtngIdent::shouldRecogniseFile_data()
-{
-    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
-    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
-
-    if( !file->open(QIODevice::ReadOnly) ){
-        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
-        QFAIL(qPrintable(message));
-    }
-
-    if( !doc->setContent(file->readAll()) ){
-        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
-        QFAIL(qPrintable(message));
-    }
-
-    QDomNodeList testFiles = doc->elementsByTagName("ptngident");
-    // qInfo() << "ptngident elements:"<<testFiles.count();
-    QTest::addColumn<QString>("tool");
-    QTest::addColumn<QString>("file");
-
-    for( int i = 0; i< testFiles.count(); ++i ){
-        QDomNode node = testFiles.at(i);
-        QDomElement elem = node.toElement();
-        if( elem.isNull()){
-            continue;
-        }
-        QString name = elem.attribute("name");
-        QString value = elem.attribute("value");
-        QTest::addRow(qPrintable(name)) << name << value;
-    }
-
-}
-
-void PtngIdent::shouldRecogniseFile()
-{
-    QFETCH(QString,tool);
-    QFETCH(QString,file);
-    if( !QFile::exists(file) ){
-        QString message = QString(file % " does not exist. ");
-        QFAIL(qPrintable(message));
-    }
-    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(file);
-    if( tool == "unsupported" ){
-        QVERIFY( type == PtngEnums::NUM_SUPPORTED_INPUT_TYPES );
-    }
-    else{
-        QVERIFY( type != PtngEnums::NUM_SUPPORTED_INPUT_TYPES );
-    }
-
 }
 
 } // namespace ptng
