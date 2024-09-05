@@ -49,7 +49,7 @@
                          </base-DElement>
                          <object>{ebb97175-7b54-4c64-946c-88b56d51c82e}</object>
                          <name>PackageOne</name>
-                         <pos>x:465;y:355</pos>
+                         <pos>x:430;y:355</pos>
                          <rect>x:-490;y:-380;w:980;h:760</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -71,7 +71,7 @@
                          <object>{1e254415-7849-472d-a6e0-855a2bd5962c}</object>
                          <context>PackageOne</context>
                          <name>ComponentOne</name>
-                         <pos>x:150;y:130</pos>
+                         <pos>x:115;y:130</pos>
                          <rect>x:-130;y:-110;w:260;h:220</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -93,7 +93,7 @@
                          <object>{1144355f-f529-4b22-b78e-216551f77102}</object>
                          <context>PackageOne</context>
                          <name>ComponentTwo</name>
-                         <pos>x:610;y:125</pos>
+                         <pos>x:575;y:125</pos>
                          <rect>x:-300;y:-110;w:600;h:220</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -115,7 +115,7 @@
                          <object>{bc87af1a-b159-4bd0-9dd5-a513fb5e966b}</object>
                          <context>PackageOne</context>
                          <name>ClassOne</name>
-                         <pos>x:160;y:140</pos>
+                         <pos>x:125;y:140</pos>
                          <rect>x:-105;y:-80;w:210;h:160</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -137,7 +137,7 @@
                          <object>{5c04a1a9-108e-4ce1-89c1-ed061bfe4bc5}</object>
                          <context>PackageOne</context>
                          <name>ClassTwo</name>
-                         <pos>x:490;y:75</pos>
+                         <pos>x:455;y:75</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -163,7 +163,7 @@
                          </stereotypes>
                          <context>PackageOne</context>
                          <name>InterfaceOne</name>
-                         <pos>x:755;y:75</pos>
+                         <pos>x:720;y:75</pos>
                          <rect>x:-20;y:-20;w:40;h:40</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -185,7 +185,7 @@
                          <object>{f555d07a-9c97-447e-8317-29842b9eed4e}</object>
                          <context>PackageOne</context>
                          <name>ClassThree</name>
-                         <pos>x:490;y:185</pos>
+                         <pos>x:455;y:185</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -211,7 +211,7 @@
                          </stereotypes>
                          <context>PackageOne</context>
                          <name>ControlOne</name>
-                         <pos>x:50;y:375</pos>
+                         <pos>x:15;y:375</pos>
                          <rect>x:-20;y:-20;w:40;h:40</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -237,7 +237,7 @@
                          </stereotypes>
                          <context>PackageOne</context>
                          <name>EntityOne</name>
-                         <pos>x:50;y:545</pos>
+                         <pos>x:15;y:545</pos>
                          <rect>x:-20;y:-20;w:40;h:40</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -263,7 +263,7 @@
                          </stereotypes>
                          <context>PackageOne</context>
                          <name>BoundaryOne</name>
-                         <pos>x:49;y:460</pos>
+                         <pos>x:14;y:460</pos>
                          <rect>x:-24;y:-20;w:48;h:40</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -282,7 +282,7 @@
                        </base-DElement>
                        <text>#include &lt;QString&gt;
 #include &lt;QDomDOcument&gt;</text>
-                       <pos>x:-15;y:620</pos>
+                       <pos>x:-50;y:620</pos>
                        <rect>x:0;y:0;w:166;h:46</rect>
                       </DAnnotation>
                      </instance>
@@ -313,7 +313,7 @@
                          <object>{71b0b926-41a1-4e5f-8782-57072588bfd5}</object>
                          <context>PackageOne</context>
                          <name>ComponentThree</name>
-                         <pos>x:560;y:480</pos>
+                         <pos>x:525;y:480</pos>
                          <rect>x:-345;y:-230;w:690;h:460</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -335,7 +335,7 @@
                          <object>{5975f935-963b-4f85-b03b-187834fab55e}</object>
                          <context>PackageOne</context>
                          <name>ComponentFour</name>
-                         <pos>x:395;y:475</pos>
+                         <pos>x:360;y:475</pos>
                          <rect>x:-135;y:-105;w:270;h:210</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -357,7 +357,7 @@
                          <object>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</object>
                          <context>PackageOne</context>
                          <name>ClassFour</name>
-                         <pos>x:390;y:490</pos>
+                         <pos>x:355;y:490</pos>
                          <rect>x:-90;y:-60;w:180;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -379,7 +379,7 @@
                          <object>{5de07d46-a280-4968-aa62-6b10952e81c6}</object>
                          <context>PackageOne</context>
                          <name>ClassEight</name>
-                         <pos>x:830;y:555</pos>
+                         <pos>x:795;y:555</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -400,7 +400,7 @@
                          <object>{1cc3e0dd-7aaf-456c-876c-0ba9aeb77b14}</object>
                          <a>{b06220ba-ba49-44e6-999d-59d70f0dd7ea}</a>
                          <b>{96b929b6-e565-4e43-9dbb-e7a863a07756}</b>
-                         <name>Composition (part-of)</name>
+                         <name>Composition</name>
                         </DRelation>
                        </base-DRelation>
                        <a>
@@ -426,7 +426,7 @@
                          <object>{a069f0f4-ed6b-40ad-9e2b-156fe7266c85}</object>
                          <context>PackageOne</context>
                          <name>ClassFive</name>
-                         <pos>x:830;y:325</pos>
+                         <pos>x:795;y:325</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -447,7 +447,7 @@
                          <object>{616ec2a4-a10d-46ca-a729-e051da0c3ce8}</object>
                          <a>{b06220ba-ba49-44e6-999d-59d70f0dd7ea}</a>
                          <b>{ffe0fc2c-d0c1-4de2-b11a-0bfde8376ab9}</b>
-                         <name>Aggregation (has-a)</name>
+                         <name>Aggregation</name>
                         </DRelation>
                        </base-DRelation>
                        <a>
@@ -473,7 +473,7 @@
                          <object>{07ef379f-551b-419f-aa6d-fecb7ad770c9}</object>
                          <context>PackageOne</context>
                          <name>ClassSix</name>
-                         <pos>x:830;y:395</pos>
+                         <pos>x:795;y:400</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -494,7 +494,7 @@
                          <object>{ca60af71-3a81-4d41-870b-dcc6f7489690}</object>
                          <context>PackageOne</context>
                          <name>ClassSeven</name>
-                         <pos>x:830;y:480</pos>
+                         <pos>x:795;y:480</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -515,7 +515,7 @@
                          <object>{05ffc18a-2b3e-4555-9b43-91a2d741e84a}</object>
                          <a>{b0e2bb28-c0c6-40ad-9b19-d1e06f2b5f17}</a>
                          <b>{b06220ba-ba49-44e6-999d-59d70f0dd7ea}</b>
-                         <name>Realization/Generalization (implements or inherits)</name>
+                         <name>Realization</name>
                         </DRelation>
                        </base-DRelation>
                       </DInheritance>
@@ -534,7 +534,7 @@
                          <object>{4603f50e-b41d-4d1a-9818-9573b0837abb}</object>
                          <context>PackageOne</context>
                          <name>ClassNine</name>
-                         <pos>x:830;y:645</pos>
+                         <pos>x:795;y:645</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -555,7 +555,7 @@
                          <object>{6a0da37a-0e67-4916-85ce-a874e286321b}</object>
                          <a>{b06220ba-ba49-44e6-999d-59d70f0dd7ea}</a>
                          <b>{81a15db5-d2ba-4554-8c80-86a0da15f568}</b>
-                         <name>Dependency (references)</name>
+                         <name>Dependency</name>
                         </DRelation>
                        </base-DRelation>
                       </DDependency>
@@ -574,7 +574,7 @@
                          <object>{e7a6eceb-cb24-443e-8e6d-8ebee0d99163}</object>
                          <a>{a4953d96-7e25-4275-bf07-e8b7db94cba2}</a>
                          <b>{cabfd78d-5bb3-4b5f-b539-2f57178c3d0a}</b>
-                         <name>Realization/Generalization (implements or inherits)</name>
+                         <name>Realization</name>
                         </DRelation>
                        </base-DRelation>
                       </DInheritance>
@@ -593,7 +593,7 @@
                          <object>{80ca5f0d-fadf-41f3-8bf7-a992fa72f0dd}</object>
                          <a>{b06220ba-ba49-44e6-999d-59d70f0dd7ea}</a>
                          <b>{d99ccfa9-fd8b-4be8-8ce8-4012143cdddb}</b>
-                         <name>Association (has-a)</name>
+                         <name>Association</name>
                         </DRelation>
                        </base-DRelation>
                        <a>
@@ -617,7 +617,7 @@
                          <object>{15382a56-b479-4084-91f5-5c0d4ef4e682}</object>
                          <a>{cabfd78d-5bb3-4b5f-b539-2f57178c3d0a}</a>
                          <b>{72ff5e97-7796-42aa-bb84-f73a6822a3b5}</b>
-                         <name>Realization/Generalization (implements or inherits)</name>
+                         <name>Realization</name>
                         </DRelation>
                        </base-DRelation>
                       </DInheritance>
@@ -625,7 +625,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1725295914205</last-modified>
+                  <last-modified>1725498224863</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -781,50 +781,6 @@
                                 <qlist>
                                  <item>
                                   <handle>
-                                   <uid>{37e2f85d-bc9e-41a5-b9a7-9a8d9b8cc3a5}</uid>
-                                   <target>
-                                    <instance type="MDependency">
-                                     <MDependency>
-                                      <base-MRelation>
-                                       <MRelation>
-                                        <base-MElement>
-                                         <MElement>
-                                          <uid>{37e2f85d-bc9e-41a5-b9a7-9a8d9b8cc3a5}</uid>
-                                         </MElement>
-                                        </base-MElement>
-                                        <a>{5c04a1a9-108e-4ce1-89c1-ed061bfe4bc5}</a>
-                                        <b>{1144355f-f529-4b22-b78e-216551f77102}</b>
-                                       </MRelation>
-                                      </base-MRelation>
-                                     </MDependency>
-                                    </instance>
-                                   </target>
-                                  </handle>
-                                 </item>
-                                 <item>
-                                  <handle>
-                                   <uid>{df180dbb-7e6d-4192-8157-e881f9973f31}</uid>
-                                   <target>
-                                    <instance type="MDependency">
-                                     <MDependency>
-                                      <base-MRelation>
-                                       <MRelation>
-                                        <base-MElement>
-                                         <MElement>
-                                          <uid>{df180dbb-7e6d-4192-8157-e881f9973f31}</uid>
-                                         </MElement>
-                                        </base-MElement>
-                                        <a>{5c04a1a9-108e-4ce1-89c1-ed061bfe4bc5}</a>
-                                        <b>{b0c3992f-6af7-4859-9ac5-5615227fd69e}</b>
-                                       </MRelation>
-                                      </base-MRelation>
-                                     </MDependency>
-                                    </instance>
-                                   </target>
-                                  </handle>
-                                 </item>
-                                 <item>
-                                  <handle>
                                    <uid>{15382a56-b479-4084-91f5-5c0d4ef4e682}</uid>
                                    <target>
                                     <instance type="MInheritance">
@@ -836,7 +792,7 @@
                                           <uid>{15382a56-b479-4084-91f5-5c0d4ef4e682}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Realization/Generalization (implements or inherits)</name>
+                                        <name>Realization</name>
                                         <a>{5c04a1a9-108e-4ce1-89c1-ed061bfe4bc5}</a>
                                         <b>{b0c3992f-6af7-4859-9ac5-5615227fd69e}</b>
                                        </MRelation>
@@ -934,7 +890,7 @@
                                           <uid>{e7a6eceb-cb24-443e-8e6d-8ebee0d99163}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Realization/Generalization (implements or inherits)</name>
+                                        <name>Realization</name>
                                         <a>{f555d07a-9c97-447e-8317-29842b9eed4e}</a>
                                         <b>{5c04a1a9-108e-4ce1-89c1-ed061bfe4bc5}</b>
                                        </MRelation>
@@ -1106,7 +1062,7 @@
                                           <uid>{1cc3e0dd-7aaf-456c-876c-0ba9aeb77b14}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Composition (part-of)</name>
+                                        <name>Composition</name>
                                         <a>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</a>
                                         <b>{5de07d46-a280-4968-aa62-6b10952e81c6}</b>
                                        </MRelation>
@@ -1136,7 +1092,7 @@
                                           <uid>{616ec2a4-a10d-46ca-a729-e051da0c3ce8}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Aggregation (has-a)</name>
+                                        <name>Aggregation</name>
                                         <a>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</a>
                                         <b>{a069f0f4-ed6b-40ad-9e2b-156fe7266c85}</b>
                                        </MRelation>
@@ -1166,7 +1122,7 @@
                                           <uid>{6a0da37a-0e67-4916-85ce-a874e286321b}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Dependency (references)</name>
+                                        <name>Dependency</name>
                                         <a>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</a>
                                         <b>{4603f50e-b41d-4d1a-9818-9573b0837abb}</b>
                                        </MRelation>
@@ -1189,7 +1145,7 @@
                                           <uid>{80ca5f0d-fadf-41f3-8bf7-a992fa72f0dd}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Association (has-a)</name>
+                                        <name>Association</name>
                                         <a>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</a>
                                         <b>{07ef379f-551b-419f-aa6d-fecb7ad770c9}</b>
                                        </MRelation>
@@ -1250,43 +1206,6 @@
                               </MElement>
                              </base-MElement>
                              <name>ClassFive</name>
-                             <relations>
-                              <handles>
-                               <handles>
-                                <qlist>
-                                 <item>
-                                  <handle>
-                                   <uid>{ef583436-6004-4200-a276-27f8a8146cae}</uid>
-                                   <target>
-                                    <instance type="MAssociation">
-                                     <MAssociation>
-                                      <base-MRelation>
-                                       <MRelation>
-                                        <base-MElement>
-                                         <MElement>
-                                          <uid>{ef583436-6004-4200-a276-27f8a8146cae}</uid>
-                                         </MElement>
-                                        </base-MElement>
-                                        <a>{a069f0f4-ed6b-40ad-9e2b-156fe7266c85}</a>
-                                        <b>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</b>
-                                       </MRelation>
-                                      </base-MRelation>
-                                      <a>
-                                       <MAssociationEnd>
-                                        <cardinality>*</cardinality>
-                                        <navigable>true</navigable>
-                                        <kind>1</kind>
-                                       </MAssociationEnd>
-                                      </a>
-                                     </MAssociation>
-                                    </instance>
-                                   </target>
-                                  </handle>
-                                 </item>
-                                </qlist>
-                               </handles>
-                              </handles>
-                             </relations>
                             </MObject>
                            </base-MObject>
                           </MClass>
@@ -1308,42 +1227,6 @@
                               </MElement>
                              </base-MElement>
                              <name>ClassSix</name>
-                             <relations>
-                              <handles>
-                               <handles>
-                                <qlist>
-                                 <item>
-                                  <handle>
-                                   <uid>{470237ae-5603-42d4-9dd3-3366415e6a25}</uid>
-                                   <target>
-                                    <instance type="MAssociation">
-                                     <MAssociation>
-                                      <base-MRelation>
-                                       <MRelation>
-                                        <base-MElement>
-                                         <MElement>
-                                          <uid>{470237ae-5603-42d4-9dd3-3366415e6a25}</uid>
-                                         </MElement>
-                                        </base-MElement>
-                                        <name>Association (has-a)</name>
-                                        <a>{07ef379f-551b-419f-aa6d-fecb7ad770c9}</a>
-                                        <b>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</b>
-                                       </MRelation>
-                                      </base-MRelation>
-                                      <a>
-                                       <MAssociationEnd>
-                                        <navigable>true</navigable>
-                                       </MAssociationEnd>
-                                      </a>
-                                     </MAssociation>
-                                    </instance>
-                                   </target>
-                                  </handle>
-                                 </item>
-                                </qlist>
-                               </handles>
-                              </handles>
-                             </relations>
                             </MObject>
                            </base-MObject>
                           </MClass>
@@ -1382,7 +1265,7 @@
                                           <uid>{05ffc18a-2b3e-4555-9b43-91a2d741e84a}</uid>
                                          </MElement>
                                         </base-MElement>
-                                        <name>Realization/Generalization (implements or inherits)</name>
+                                        <name>Realization</name>
                                         <a>{ca60af71-3a81-4d41-870b-dcc6f7489690}</a>
                                         <b>{0b7969c8-a6a4-45b2-987f-e95545de1e8a}</b>
                                        </MRelation>

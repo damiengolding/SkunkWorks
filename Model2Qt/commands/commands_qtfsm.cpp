@@ -23,7 +23,6 @@ SOFTWARE.
 */
 
 #include "commands.hpp"
-
 #include <QDomDocument>
 
 void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces){

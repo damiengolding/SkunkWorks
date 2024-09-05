@@ -23,15 +23,10 @@ SOFTWARE.
 */
 
 #include "commands.hpp"
-#include <QXmlStreamReader>
-#include <QXmlStreamAttributes>
-
 #include "uml/umlclass.hpp"
+#include "uml/umlrelation.hpp"
 
-void processDomDocument(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces);
-// void processXmlStreamReader(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces);
-
-// /qmt/project/root-package/instance/MPackage/base-MObject/MObject/children/handles/handles/qlist/item/handle/target/instance/MPackage/base-MObject/MObject/children/handles/handles/qlist/item/handle/target/instance/MClass/base-MObject/MObject
+UmlClass* getClassByUid( QList<UmlClass*> list, const QString& uid );
 
 void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces){
     qInfo() << "Processing class diagram" << QDir::toNativeSeparators( inputFile ) << "into Qt QObjects";
@@ -50,9 +45,6 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
     QList<QDomElement> mPackages = ModelUtils::DomElementList( doc->elementsByTagName( "MPackage" ));
     for( auto mPackage : mPackages ){
         QDomElement tempElement = mPackage.firstChildElement("base-MObject").firstChildElement("MObject").firstChildElement("name").toElement();
-        if( tempElement.isNull() ){
-            qInfo() << "Packages: tempElement isNull";
-        }
         QString packageName = tempElement.text();
         namespaceNames << packageName;
     }
@@ -60,8 +52,8 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
     /*
         --- Containers ---
     */
-
     QList<UmlClass*> umlClasses;
+    QList<UmlRelation*> umlRelations;
     QStringList additionalIncludes;
     /*
         --- Annotations ---
@@ -69,14 +61,9 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
     QList<QDomElement> mAnnotations = ModelUtils::DomElementList( doc->elementsByTagName("DAnnotation") );
     for( auto mAnnotation : mAnnotations ){
         QDomElement noteElem = mAnnotation.firstChildElement("text");
-        if( noteElem.isNull() ){
-            qInfo() << "Annotation: text element isNull";
-        }
-        else{
+        if( !noteElem.isNull() ){
             QString annotationText = noteElem.text();
-            // qInfo() << "Annotation text" << annotationText;
             QStringList incList = annotationText.split("\n");
-            // qInfo() << "incList count:" << incList.count();
             for( auto inc : incList ){
                 if( inc.startsWith("#include") ){
                     additionalIncludes << inc;
@@ -91,13 +78,77 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
     QList<QDomElement> mClasses = ModelUtils::DomElementList( doc->elementsByTagName( "MClass" ));
     for( auto mClass : mClasses ){
         QDomElement nameElement = mClass.firstChildElement("base-MObject").firstChildElement("MObject").firstChildElement("name").toElement();
-        if( nameElement.isNull() ){
-            // qInfo() << "Classes: name element isNull";
-        }
-        else{
-            // qInfo() << "Name:" << nameElement.text();
+        if( !nameElement.isNull() ){
             umlClasses << UmlClassFactory::createClass( mClass, namespaceNames, additionalIncludes );
         }
+    }
+
+    /*
+        --- Relationships ---
+    */
+    for( auto mClass : mClasses ){
+        QDomElement relationElement = mClass.firstChildElement("base-MObject").firstChildElement("MObject").firstChildElement("relations").toElement();
+        if( !relationElement.isNull() ){
+            QDomElement relations = relationElement.firstChildElement("handles").firstChildElement("handles").firstChildElement("qlist").toElement();
+            QList<QDomElement> items = ModelUtils::DomElementList( relationElement.elementsByTagName("item") );
+            for( auto item : items ){
+                UmlRelation* umlRelation = new UmlRelation();
+                if( umlRelation->fromElement( item ) ){
+                    umlRelations << umlRelation;
+                }
+            }
+        }
+    }
+
+    for(  auto umlRelation : umlRelations ){
+        QString fromUid = umlRelation->fromUid();
+        QString toUid = umlRelation->toUid();
+        UmlClass* fromClass = getClassByUid( umlClasses, fromUid );
+        UmlClass* toClass = getClassByUid( umlClasses, toUid );
+
+        if( fromClass == nullptr || toClass == nullptr ){
+            continue;
+        }
+
+        QString newInclude;
+        QString newBaseClass;
+        QString newMember;
+        switch( umlRelation->relationType() ){
+        case UmlRelation::Dependency:{
+            newInclude = QString("#include \"%1.hpp\"").arg( fromClass->className().toLower() );
+            toClass->addInclude(newInclude);
+            break;
+        }
+        case UmlRelation::Realization:{
+            newInclude = QString("#include \"%1.hpp\"").arg( toClass->className().toLower() );
+            fromClass->addInclude(newInclude);
+            fromClass->addBaseClass( toClass->className() );
+            break;
+        }
+        case UmlRelation::Composition:{
+            newInclude = QString("#include \"%1.hpp\"").arg( toClass->className().toLower() );
+            fromClass->addInclude(newInclude);
+            newMember = QString("QList<%1*> m_%2;").arg(toClass->className()).arg( umlRelation->name().toLower() );
+            fromClass->addMemberDeclaration(newMember);
+            break;
+        }
+        case UmlRelation::Aggregation:{
+            newInclude = QString("#include \"%1.hpp\"").arg( toClass->className().toLower() );
+            fromClass->addInclude(newInclude);
+            newMember = QString("QList<%1*>* m_%2;").arg(toClass->className()).arg( umlRelation->name().toLower() );
+            fromClass->addMemberDeclaration(newMember);
+            break;
+        }
+        case UmlRelation::Association:{
+            newInclude = QString("#include \"%1.hpp\"").arg( toClass->className().toLower() );
+            fromClass->addInclude(newInclude);
+            break;
+        }
+        default:{
+            break;
+        }
+        }
+
     }
 
     /*
@@ -147,20 +198,29 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
     // Implementation files
     for( auto mClass : umlClasses ){
         if( mClass->isClass() ){
-        QString sourceFileName = mClass->className().toLower() + ".cpp";
-        QFileInfo sourceFileInfo(sourceFileName);
-        if( sourceFileInfo.exists() && clobberExisting == false ){
-            qInfo() << "File exists (" << sourceFileName << ") with no clobber set. Use the \"clobber\" positional argument to overwrite existing files";
-            continue;
+            QString sourceFileName = mClass->className().toLower() + ".cpp";
+            QFileInfo sourceFileInfo(sourceFileName);
+            if( sourceFileInfo.exists() && clobberExisting == false ){
+                qInfo() << "File exists (" << sourceFileName << ") with no clobber set. Use the \"clobber\" positional argument to overwrite existing files";
+                continue;
+            }
+            QFile sourceFile(sourceFileInfo.absoluteFilePath());
+            if( !sourceFile.open(QIODevice::WriteOnly) ){
+                qInfo() << "Could not open file" << sourceFileInfo.absoluteFilePath() << "for writing";
+                return;
+            }
+            sourceFile.write(  mClass->toDefinition( useNamespaces ).toLatin1() );
+            sourceFile.close();
         }
-        QFile sourceFile(sourceFileInfo.absoluteFilePath());
-        if( !sourceFile.open(QIODevice::WriteOnly) ){
-            qInfo() << "Could not open file" << sourceFileInfo.absoluteFilePath() << "for writing";
-            return;
-        }
-        sourceFile.write(  mClass->toDefinition( useNamespaces ).toLatin1() );
-        sourceFile.close();
     }
 }
+
+UmlClass* getClassByUid( QList<UmlClass*> list, const QString& uid ){
+    for( auto umlClass : list ){
+        if( umlClass->classUid() == uid ){
+            return( umlClass );
+        }
+    }
+    return( nullptr );
 }
 

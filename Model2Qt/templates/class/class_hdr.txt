@@ -1,10 +1,9 @@
 #pragma once
-
 #include <QObject>
 #include <QDebug>
 %{ADDITIONAL_INCLUDES}
 %{START_NAMESPACE}
-class %{CLASS_NAME} : public QObject
+class %{CLASS_NAME} : public QObject%{BASE_CLASS}
 {
     Q_OBJECT
 public:
@@ -17,7 +16,6 @@ public:
         debug.nospace() << "";
         return debug;
     }
-
 %{MEMBERS}
 public slots:
 

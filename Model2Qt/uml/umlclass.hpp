@@ -63,10 +63,21 @@ public:
 
     QString classUid() const;
 
+    inline void addInclude( const QString& header ){
+        m_additional_includes << header;
+    }
+    inline void addBaseClass( const QString& className ){
+        m_base_class = className;
+    }
+    inline void addMemberDeclaration( const QString& memberDeclaration ){
+        m_private_members << memberDeclaration;
+    }
+
 protected:
     QString m_namespace = {};
     QString m_class_name = {};
     QString m_class_uid = {};
+    QString m_base_class = {};
     QStringList m_namespaces;
     QStringList m_additional_includes;
     QStringList m_public_functions;

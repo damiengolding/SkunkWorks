@@ -40,6 +40,7 @@ UmlClass::~UmlClass()
         %{END_NAMESPACE}
     Header:
         %{ADDITIONAL_INCLUDES}
+        %{BASE_CLASS}
         %{CLASS_NAME}
         %{MEMBERS}
     Impl:
@@ -138,6 +139,13 @@ QString UmlClass::toDeclaration(bool useNamespaces)
 
         // All the obvious stuff
         ret.replace("%{CLASS_NAME}", m_class_name);
+        if( m_base_class.isEmpty() ){
+            ret.remove("%{BASE_CLASS}");
+        }
+        else{
+            QString baseClass = QString( ", public %1" ).arg( m_base_class );
+            ret.replace("%{BASE_CLASS}", baseClass);
+        }
 
         // Additional includes
         QString includes;
@@ -165,19 +173,47 @@ QString UmlClass::toDeclaration(bool useNamespaces)
         }
 
         // Members
-        QString allPublic = m_public_members.join("\n");
-        allPublic += "\n\t";
-        allPublic += m_public_functions.join("\n");
+        QString allPublic= "\npublic:";
+        QString allPrivate= "\nprivate:";
+        QString allProtected= "\nprotected:";
 
-        QString allPrivate = m_private_members.join("\n");
-        allPrivate += "\n\t";
-        allPrivate += m_private_functions.join("\n");
+        if( !m_public_members.empty() ){
+            allPublic += "\n\t";
+            allPublic += m_public_members.join("\n\t");
+        }
+        if( !m_public_functions.empty() ){
+            allPublic += "\n\t";
+            allPublic += m_public_functions.join("\n\t");
+        }
 
-        QString allProtected = m_protected_members.join("\n");
-        allProtected += "\n\t";
-        allProtected += m_protected_functions.join("\n");
+        if( !m_private_members.empty() ){
+            allPrivate += "\n\t";
+            allPrivate += m_private_members.join("\n\t");
+        }
+        if( !m_private_functions.empty() ){
+            allPrivate += "\n\t";
+            allPrivate += m_private_functions.join("\n\t");
+        }
 
-        QString members = QString( "public:\n\t%1\nprivate:\n\t%2\nprotected:\n\t%3" ).arg(allPublic).arg(allPrivate).arg(allProtected);
+        if( !m_protected_members.empty() ){
+            allProtected += "\n\t";
+            allProtected += m_protected_members.join("\n\t");
+        }
+        if( !m_protected_functions.empty() ){
+            allProtected += "\n\t";
+            allProtected += m_protected_functions.join("\n\t");
+        }
+
+        QString members;
+        if( allPublic != "\npublic:" ){
+            members += allPublic;
+        }
+        if( allPrivate != "\nprivate:" ){
+            members += allPrivate;
+        }
+        if( allProtected != "\nprotected:" ){
+            members += allProtected;
+        }
 
         ret.replace("%{MEMBERS}", members);
     }
@@ -224,6 +260,8 @@ QString UmlClass::toDefinition(bool useNamespaces)
     return(ret);
 }
 
+#pragma Accessors and mutators {
+
 bool UmlClass::isNull() const
 {
     return m_isNull;
@@ -263,6 +301,7 @@ QString UmlClass::classUid() const
 {
     return m_class_uid;
 }
+#pragma Accessors and mutators }
 
 /*
     --- UmlClassFactory ---

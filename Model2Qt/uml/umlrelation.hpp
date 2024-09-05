@@ -21,10 +21,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#pragma once
 
-#include "commands.hpp"
+#include <QString>
+#include <QDomDocument>
+#include <QDebug>
 
-void processQtSmf(const QString& inputFile, bool preserveCase, bool clobberExisting , bool useNamespaces){
-    qInfo() << "Processing scxml" << QDir::toNativeSeparators( inputFile ) << "into Qt QStates";
+class UmlRelation
+{
+public:
+    UmlRelation( const QString& uid = {}, const QString& fromUid = {}, const QString& toUid = {}, const QString& name = {} );
+    ~UmlRelation(){}
 
-}
+    enum RelationType{
+        Aggregation,
+        Composition,
+        Association,
+        Realization,
+        Dependency,
+        Undefined
+    };
+
+    QString uid() const;
+    QString fromUid() const;
+    QString toUid() const;
+    QString name() const;
+
+    bool fromElement( const QDomElement& elem );
+
+    RelationType relationType() const;
+
+private:
+    QString m_uid = {};
+    QString m_fromUid = {};
+    QString m_toUid = {};
+    QString m_name = {};
+    RelationType m_relationType;
+};
+
