@@ -68,10 +68,19 @@ QDomDocument* ModelUtils::VerifiedDomDocument(const QString &fileName)
         qDebug() << "Unable to open"<<fileName<<"for reading";
         return(nullptr);
     }
-    if( !doc->setContent(file->readAll())  ){
+    if( !doc->setContent(file->readAll(), QDomDocument::ParseOption::UseNamespaceProcessing)  ){
         qDebug() << "Unable to parse"<<fileName<<"into QDomDocument";
         return(nullptr);
     }
     return(doc);
 }
 
+QString ModelUtils::ToCamelCase(const QString& original ){
+    if( original.isEmpty() )
+        return(original);
+    QString ret = original;
+    QChar charOne = original[0];
+    QChar charTwo = charOne.toLower();
+    ret = ret.replace(0, 1, charTwo);
+    return( ret );
+}

@@ -1,0 +1,17 @@
+#include "statemanager.hpp"
+
+StateManager::StateManager(QObject *parent)
+    : QObject{parent}
+{
+
+}
+
+#pragma Machine and pushdown {
+void StateManager::stateMachineStarted(){}
+void StateManager::stateMachineStopped(){}
+void StateManager::stateMachineFinished(){}
+#pragma Machine and pushdown }
+
+#pragma State specific slots {
+%{STATE_SLOT_DEFINITIONS}
+#pragma State specific slots }

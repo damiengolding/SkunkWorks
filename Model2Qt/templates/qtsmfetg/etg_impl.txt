@@ -1,0 +1,34 @@
+#include ""
+
+void initStateMachine()
+{
+    %(STATE_MACHINE_VARIABLE} = new QStateMachine();
+
+    %{INIT_STATES}
+
+    %{ADD_STATES}
+
+    %{INITIAL_STATE}
+
+    %{TRANSITION_OBJECTS}
+
+    %{TRANSITION_TARGETS}
+
+    %{TRANSITION_QSTATES}
+}
+
+/*
+    Example useage:
+    1) Add teh transition back to your idle state
+    2) Post an event entering your current state
+    3) Don't do evil
+    4) POst the event to return to your idle state
+*/
+
+// void mySlot()
+// {
+//     ClosingState->addTransition(toIdle);
+//     m_statemachine->postEvent( new EnumEvent( EnumStruct::EnterClosing ) );
+//     doStuff();
+//     myStateMachine->postEvent( new EnumEvent( EnumStruct::EnterIdling) );
+// }

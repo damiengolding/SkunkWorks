@@ -8,5 +8,11 @@
         <file>templates/class/class_hdr.txt</file>
         <file>templates/class/class_impl.txt</file>
         <file>templates/class/interface_hdr.txt</file>
+        <file>templates/qtsmf/fsm_states.txt</file>
+        <file>templates/qtsmf/statemanager_hdr.txt</file>
+        <file>templates/qtsmf/statemanager_impl.txt</file>
+        <file>templates/qtsmfetg/etg_hdr.txt</file>
+        <file>templates/qtsmfetg/etg_impl.txt</file>
+        <file>templates/qtsmfetg/etg_struct_hdr.txt</file>
     </qresource>
 </RCC>

@@ -101,7 +101,6 @@ class UmlClassFactory
 {
 public:
     UmlClassFactory() {}
-
     static UmlClass* createClass( const QDomElement& elem, QStringList namespaces = QStringList(), QStringList includes = QStringList() );
 };
 

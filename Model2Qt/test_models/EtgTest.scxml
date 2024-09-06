@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="EtgTest-GoldingsGym::ETG" qt:editorversion="14.0.1" initial="IdleState">
+    <qt:editorinfo initialGeometry="63.46;42.99;-20;-20;40;40"/>
+    <qt:metadata>
+        <qt:item IdleState="Unknown"/>
+    </qt:metadata>
+    <state id="IdleState">
+        <qt:editorinfo geometry="319.35;192.45;-150;-50;120;100" scenegeometry="319.35;192.45;169.35;142.45;120;100"/>
+    </state>
+    <state id="OpeningState">
+        <qt:editorinfo geometry="505.65;133.07;-73;-50;146;100" scenegeometry="505.65;133.07;432.65;83.07;146;100"/>
+    </state>
+    <state id="LoadingState">
+        <qt:editorinfo geometry="505.65;300.94;-71;-50;142;100" scenegeometry="505.65;300.94;434.65;250.94;142;100"/>
+    </state>
+    <state id="ClosingState">
+        <qt:editorinfo geometry="699.11;441.16;-68.50;-50;137;100" scenegeometry="699.11;441.16;630.61;391.16;137;100"/>
+    </state>
+    <state id="EditingState">
+        <qt:editorinfo geometry="292.76;570.19;-67;-50;134;100" scenegeometry="292.76;570.19;225.76;520.19;134;100"/>
+    </state>
+    <state id="SavingState">
+        <qt:editorinfo geometry="270.22;348.02;-65.50;-50;131;100" scenegeometry="270.22;348.02;204.72;298.02;131;100"/>
+    </state>
+    <state id="ImportingState">
+        <qt:editorinfo geometry="822.96;287.63;-78.50;-50;157;100" scenegeometry="822.96;287.63;744.46;237.63;157;100"/>
+    </state>
+    <state id="ExportingState">
+        <qt:editorinfo geometry="613.12;570.19;-16.94;-50;155;100" scenegeometry="613.12;570.19;596.18;520.19;155;100"/>
+    </state>
+</scxml>

@@ -1,0 +1,14 @@
+#pragma once
+
+#include <QStateMachine>
+#include <QState>
+#include <QFinalState>
+#include <QAbstractState>
+
+#include "eventstruct.hpp"
+
+QStateMachine* %(STATE_MACHINE_VARIABLE};
+
+%{STATES}
+
+%{TRANSITIONS}

@@ -37,9 +37,9 @@ SOFTWARE.
 
 #include "uml/umlclass.hpp"
 #include "uml/umlrelation.hpp"
+#include "uml/umlstate.hpp"
 #include "modelutils.hpp"
 
 void processQtFsm( const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces );
-void processQtSmf( const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces );
+void processQtSmf( const QString& inputFile, bool preserveCase, bool useEtg, bool clobberExisting, bool useNamespaces );
 void processQtClass( const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces );
-// UmlClass* getClassByUid( QList<UmlClass*> list, const QString& uid );

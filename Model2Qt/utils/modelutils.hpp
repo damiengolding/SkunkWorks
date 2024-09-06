@@ -54,6 +54,9 @@ public:
     // Verified populated QDomDocument* from a QString file name
     static QDomDocument* VerifiedDomDocument(const QString& fileName );
 
+    // Just converts the first character to lower case
+    static QString ToCamelCase(const QString& original );
+
 private:
 
 signals:

@@ -42,6 +42,7 @@ bool qtSmf = false;
 bool qtClass = false;
 bool clobberExisting = false;
 bool useNamespaces = false;
+bool useEtg = false;
 
 int main(int argc, char *argv[])
 {
@@ -72,9 +73,10 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addPositionalArgument("preserve-case", "Preserve case for file names - may be ignored for some input types");
     parser.addPositionalArgument("clobber", "Overwrite existing files - may be ignored for some input types");
     parser.addPositionalArgument("namespaces", "Use package and component names (if available) as namespaces - may be ignored for some input types");
+    parser.addPositionalArgument("qtclass", "Qt Creator class model diagram to QObjects");
     parser.addPositionalArgument("qtfsm", "Finite State Machine with QObjects");
     parser.addPositionalArgument("qtsmf", "Finite State Machine with QStates");
-    parser.addPositionalArgument("qtclass", "Qt Creator class model diagram to QObjects");
+    parser.addPositionalArgument("etg", "Create classes for Events, Transitions Guards pattern. Only with \"qtsmf\" output flag");
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
@@ -88,6 +90,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( arguments.contains("clobber") ) clobberExisting = true;
     if( arguments.contains("namespaces") ) useNamespaces = true;
     if( arguments.contains("preserve-case") ) preserveCaseFileNames = true;
+    if( arguments.contains("etg") ) useEtg = true;
 
     if( arguments.contains("qtfsm") ){
         qtFsm = true;
@@ -95,7 +98,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     }
     else if( arguments.contains("qtsmf") ){
         qtSmf = true;
-        processQtSmf( inputFile, preserveCaseFileNames, clobberExisting, useNamespaces );
+        processQtSmf( inputFile, preserveCaseFileNames, useEtg, clobberExisting, useNamespaces );
     }
     else if( arguments.contains("qtclass") ){
         qtClass = true;

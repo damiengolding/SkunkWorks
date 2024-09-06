@@ -16,6 +16,7 @@ SOURCES += \
         main.cpp \
     uml/umlclass.cpp \
     uml/umlrelation.cpp \
+    uml/umlstate.cpp \
     utils/modelutils.cpp
 
 
@@ -23,16 +24,19 @@ RESOURCES += \
     Model2Qt.qrc
 
 STATECHARTS += \
+    test_models/EtgTest.scxml \
     test_models/FsmTest.scxml
 
 HEADERS += \
     commands/commands.hpp \
     uml/umlclass.hpp \
     uml/umlrelation.hpp \
+    uml/umlstate.hpp \
     utils/modelutils.hpp
 
 INCLUDEPATH += ./utils/ ./uml/ ./commands/
 
 DISTFILES += \
+    templates/qtsmfetg/etg_hdr.txt \
     test_models/ClassTest.qmodel
 

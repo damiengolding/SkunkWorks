@@ -1,0 +1,54 @@
+#include <QAbstractTransition>
+#include <QEvent>
+
+#pragma once
+
+/*!
+ * \brief The EnumStruct class
+ */
+
+struct EnumStruct{
+    enum Events{
+        %{EVENT_DEFINITIONS}
+    };
+};
+
+/*!
+ * \brief The EnumEvent class
+ */
+
+struct EnumEvent : public QEvent
+{
+    EnumEvent(EnumStruct::Events eventEnum)
+    : QEvent(QEvent::Type(QEvent::User+1)),
+      value(eventEnum) {}
+
+    EnumStruct::Events value;
+};
+
+/*!
+ * \brief The EnumTransition class
+ */
+
+class EnumTransition : public QAbstractTransition
+{
+    Q_OBJECT
+
+public:
+    EnumTransition(EnumStruct::Events eventEnum)
+        : m_value(eventEnum) {}
+
+protected:
+    bool eventTest(QEvent *e) override
+    {
+        if (e->type() != QEvent::Type(QEvent::User+1)) // EnumEvent
+            return false;
+        EnumEvent *ee = static_cast<EnumEvent*>(e);
+        return (m_value == ee->value);
+    }
+
+    void onTransition(QEvent *) override {}
+
+private:
+    EnumStruct::Events m_value;
+};

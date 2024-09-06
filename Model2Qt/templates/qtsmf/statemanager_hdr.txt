@@ -1,0 +1,21 @@
+#pragma once
+
+#include <QObject>
+#include <QDebug>
+#include <QCoreApplication>
+
+class StateManager : public QObject
+{
+    Q_OBJECT
+public:
+    explicit StateManager(QObject *parent = nullptr);
+
+public slots:
+    void stateMachineStarted();
+    void stateMachineStopped();
+    void stateMachineFinished();
+
+#pragma State specific slots {
+%{STATE_SLOT_DECLARATIONS}
+#pragma State specific slots }
+};

@@ -22,27 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "commands.hpp"
 #include <QDomDocument>
+#include "commands.hpp"
+// #include "../utils/modelutils.hpp"
 
 void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExisting, bool useNamespaces){
     qInfo() << "Processing scxml" << QDir::toNativeSeparators( inputFile ) << "into Qt QObjects";
-    QString fsmName;
     QDomDocument* doc = ModelUtils::VerifiedDomDocument(inputFile);
     Q_ASSERT( doc != nullptr );
     qInfo() << "Scxml doc is OK";
-    QDomNodeList stateNodeList = doc->elementsByTagName("state");
-    QDomNodeList parallelNodeList = doc->elementsByTagName("parallel");
+    QString fsmName = doc->documentElement().toElement().attribute("name");
+    qInfo() << "State machine name is:"<<fsmName;
 
-    qInfo() << "States:"<<stateNodeList.count();
-    qInfo() << "Parallels:"<<parallelNodeList.count();
-
-    QList<QDomElement> states = ModelUtils::DomElementList(stateNodeList);
-    QList<QDomElement> parallels = ModelUtils::DomElementList(parallelNodeList);
-
+    QList<QDomElement> states = ModelUtils::DomElementList(doc->elementsByTagName("state"));
+    QList<QDomElement> parallels = ModelUtils::DomElementList(doc->elementsByTagName("parallel"));
     QList<QDomElement> allItems = states;
     allItems.append(parallels);
 
+    qInfo() << "States:"<<states.count();
+    qInfo() << "Parallels:"<<parallels.count();
     qInfo() << "All state objects:"<<allItems.count();
 
     // Interface file
@@ -53,20 +51,26 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
     QString fsmTemplate = fi.readAll();
     fi.close();
 
-    QString interfaceFileName = "ifinitestatemachine.hpp";
-    QFile fo(interfaceFileName);
-    if( !fo.open(QIODevice::WriteOnly) ){
-        qFatal() << "Unable to open header file" << interfaceFileName <<  "for writing.";
+    QFile fo;
+    QTextStream ts;
+    // Write file out
+    if( QFileInfo::exists("ifinitestatemachine.hpp") && !clobberExisting ){
+        qInfo() << "Refusing to overwrite an existing file.";
     }
-    QTextStream ts( &fo );
-    ts << fsmTemplate;
-    ts.flush();
-    fo.close();
+    else{
+        QString interfaceFileName = "ifinitestatemachine.hpp";
+        fo.setFileName(interfaceFileName);
+        if( !fo.open(QIODevice::WriteOnly) ){
+            qFatal() << "Unable to open header file" << interfaceFileName <<  "for writing.";
+        }
+        QTextStream ts( &fo );
+        ts << fsmTemplate;
+        ts.flush();
+        fo.close();
+    }
 
     // State machine proper
     QDomElement fsmState = allItems.first();
-    fsmName = fsmState.attribute("id");
-    qInfo() << "FSM Name:"<<fsmState.attribute("id");
     QString headerFile;
     QString implFile;
     QString itemName;
@@ -86,14 +90,21 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
     fi.close();
 
     QString outputText = templateText.replace("%{FSM_CLASS}", fsmName);
-    fo.setFileName(headerFile);
-    if( !fo.open(QIODevice::WriteOnly) ){
-        qFatal() << "Unable to open State Machine template file for writing";
+
+    // Write file out
+    if( QFileInfo::exists(headerFile) && !clobberExisting ){
+        qInfo() << "Refusing to overwrite an existing file.";
     }
-    ts.setDevice(&fo);
-    ts << outputText;
-    ts.flush();
-    fo.close();
+    else{
+        fo.setFileName(headerFile);
+        if( !fo.open(QIODevice::WriteOnly) ){
+            qFatal() << "Unable to open State Machine template file for writing";
+        }
+        ts.setDevice(&fo);
+        ts << outputText;
+        ts.flush();
+        fo.close();
+    }
 
     // Implementation
     fi.setFileName(":/templates/qtfsm/fsm_impl.txt");
@@ -105,14 +116,21 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
 
     outputText = templateText.replace("%{FSM_CLASS}", fsmName);
     outputText = outputText.replace("%{FSM_HDR}",headerFile);
-    fo.setFileName(implFile);
-    if( !fo.open(QIODevice::WriteOnly) ){
-        qFatal() << "Unable to open State Machine template file for writing";
+
+    // Write file out
+    if( QFileInfo::exists(implFile) && !clobberExisting ) {
+        qInfo() << "Refusing to overwrite an existing file.";
     }
-    ts.setDevice(&fo);
-    ts << outputText;
-    ts.flush();
-    fo.close();
+    else{
+        fo.setFileName(implFile);
+        if( !fo.open(QIODevice::WriteOnly) ){
+            qFatal() << "Unable to open State Machine template file for writing";
+        }
+        ts.setDevice(&fo);
+        ts << outputText;
+        ts.flush();
+        fo.close();
+    }
 
 #pragma Top level FSM }
 
@@ -150,44 +168,63 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
         // Header file
         QString outputText = hdrTemplate;
         outputText.replace("%{STATE_CLASS}", stateName);
-        fo.setFileName(stateHeader);
-        if( !fo.open(QIODevice::WriteOnly) ){
-            qFatal() << "Unable to open State Machine template file for writing";
+
+        // Write file out
+        if( QFileInfo::exists(stateHeader) && !clobberExisting ) {
+            qInfo() << "Refusing to overwrite an existing file.";
         }
-        ts.setDevice(&fo);
-        ts << outputText;
-        ts.flush();
-        fo.close();
+        else{
+            fo.setFileName(stateHeader);
+            if( !fo.open(QIODevice::WriteOnly) ){
+                qFatal() << "Unable to open State Machine template file for writing";
+            }
+            ts.setDevice(&fo);
+            ts << outputText;
+            ts.flush();
+            fo.close();
+        }
 
         // Impl file
         outputText = implTemplate;
         outputText.replace("%{STATE_CLASS}", stateName);
         outputText = outputText.replace("%{STATE_HDR}", stateHeader);
-        fo.setFileName(stateImpl);
-        if( !fo.open(QIODevice::WriteOnly) ){
-            qFatal() << "Unable to open State Machine template file for writing";
+
+        // Write file out
+        if( QFileInfo::exists(stateImpl) && !clobberExisting ) {
+            qInfo() << "Refusing to overwrite an existing file.";
         }
-        ts.setDevice(&fo);
-        ts << outputText;
-        ts.flush();
-        fo.close();
+        else{
+            fo.setFileName(stateImpl);
+            if( !fo.open(QIODevice::WriteOnly) ){
+                qFatal() << "Unable to open State Machine template file for writing";
+            }
+            ts.setDevice(&fo);
+            ts << outputText;
+            ts.flush();
+            fo.close();
+        }
 
     }
 #pragma Remaining states }
 
 #pragma fsm_includes {
-
-    fo.setFileName("fsm_includes.hpp");
-    if( !fo.open(QIODevice::WriteOnly) ){
-        qFatal() << "Unable to open State Machine template file for writing";
+    // Write file out
+    if( QFileInfo::exists("fsm_includes.hpp") && !clobberExisting ) {
+        qInfo() << "Refusing to overwrite an existing file.";
     }
-    ts.setDevice(&fo);
-    ts << "#pragma once\r\n";
-    for( auto header : allHeaders ){
-        ts << "#include \"" << header <<"\"\r\n";
+    else{
+        fo.setFileName("fsm_includes.hpp");
+        if( !fo.open(QIODevice::WriteOnly) ){
+            qFatal() << "Unable to open State Machine template file for writing";
+        }
+        ts.setDevice(&fo);
+        ts << "#pragma once\r\n";
+        for( auto header : allHeaders ){
+            ts << "#include \"" << header <<"\"\r\n";
+        }
+        ts << "\r";
+        ts.flush();
     }
-    ts << "\r";
-    ts.flush();
     fo.close();
 
 #pragma fsm_includes }

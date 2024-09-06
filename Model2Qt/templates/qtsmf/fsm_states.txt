@@ -1,0 +1,35 @@
+#pragma once
+
+#include <QStateMachine>
+#include <QState>
+#include <QAbstractState>
+#include <QFinalState>
+
+#include "statemanager.hpp"
+
+// QStateMachine
+QStateMachine* %(STATE_MACHINE_NAME);
+StateManager* stateManager;
+
+%{STATE_DECLARATIONS}
+
+void initializeStates(){
+// Initialize state machine and stateManager
+    %(STATE_MACHINE_NAME) = new QStateMachine();
+    %(STATE_MACHINE_NAME)->setObjectName("%(STATE_MACHINE_NAME)");
+    stateManager = new StateManager();
+    stateManager->setObjectName("stateManager");
+
+%{STATE_DEFINITIONS}
+
+%{STATE_OBJECT_NAMES}
+
+%{STATE_TRANSITIONS}
+
+// StateMachine entered and exited
+    QObject::connect( %(STATE_MACHINE_NAME), &QStateMachine::started, stateManager, &StateManager::stateMachineStarted, Qt::QueuedConnection );
+    QObject::connect( %(STATE_MACHINE_NAME), &QStateMachine::stopped, stateManager, &StateManager::stateMachineStopped, Qt::QueuedConnection );
+    QObject::connect( %(STATE_MACHINE_NAME), &QStateMachine::finished, stateManager, &StateManager::stateMachineFinished, Qt::QueuedConnection );
+
+%{STATE_CONNECTIONS}
+}
