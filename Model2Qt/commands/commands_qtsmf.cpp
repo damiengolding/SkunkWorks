@@ -295,7 +295,7 @@ void processQtSmfStandard(const QString& inputFile, bool preserveCase, bool clob
         fsmNamespace = fsmFullSplit.at(1);
     }
     qInfo() << "State machine name is:"<< ModelUtils::ToCamelCase( fsmName );
-    qInfo() << "FSM namspace is:"<<fsmNamespace;
+    qInfo() << "State machine namspace is:"<<fsmNamespace;
     qInfo() << "State machine initial state is:"<< ModelUtils::ToCamelCase( machineInitialState );
 
     /*
@@ -458,7 +458,7 @@ void processQtSmfStandard(const QString& inputFile, bool preserveCase, bool clob
     connections.clear();
     // connections << "// Custom state slot definitions";
     for( auto umlState : umlStates ){
-        QString connection = QString("void %1EnteredAction(){}")
+        QString connection = QString("void StateManager::%1EnteredAction(){}")
                 .arg(umlState->variableName());
         connections << connection;
     }

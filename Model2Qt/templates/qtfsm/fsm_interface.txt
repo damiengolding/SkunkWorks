@@ -1,6 +1,6 @@
 #pragma once
 #include <QObject>
-
+%{START_NAMESPACE}
 class IFiniteState;
 
 /*!
@@ -128,3 +128,4 @@ inline void IFiniteState::setAsynchronous(bool newAsynchronous)
     asynchronous = newAsynchronous;
     emit isAsynchronousChanged();
 }
+%{END_NAMESPACE}

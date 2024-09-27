@@ -72,7 +72,7 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addOption({{"i","input"},"Input file","file"});
     parser.addPositionalArgument("preserve-case", "Preserve case for file names - may be ignored for some input types");
     parser.addPositionalArgument("clobber", "Overwrite existing files - may be ignored for some input types");
-    parser.addPositionalArgument("namespaces", "Use package and component names (if available) as namespaces - may be ignored for some input types");
+    parser.addPositionalArgument("namespace", "Use package and component names (if available) as namespaces - may be ignored for some input types");
     parser.addPositionalArgument("qtclass", "Qt Creator class model diagram to QObjects");
     parser.addPositionalArgument("qtfsm", "Finite State Machine with QObjects");
     parser.addPositionalArgument("qtsmf", "Finite State Machine with QStates");
@@ -88,7 +88,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     QStringList arguments = parser.positionalArguments();
 
     if( arguments.contains("clobber") ) clobberExisting = true;
-    if( arguments.contains("namespaces") ) useNamespaces = true;
+    if( arguments.contains("namespace") ) useNamespaces = true;
     if( arguments.contains("preserve-case") ) preserveCaseFileNames = true;
     if( arguments.contains("etg") ) useEtg = true;
 

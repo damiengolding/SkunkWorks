@@ -1,5 +1,6 @@
 #include "%{STATE_HDR}"
-
+%{START_NAMESPACE}
 void %{STATE_CLASS}::enter()
 {
 }
+%{END_NAMESPACE}

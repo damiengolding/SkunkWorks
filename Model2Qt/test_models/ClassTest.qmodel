@@ -12,7 +12,7 @@
          <uid>{9860948f-eda5-44d1-9093-db26fbc4edbe}</uid>
         </MElement>
        </base-MElement>
-       <name>GoldingsGym::ClassTest::namespace</name>
+       <name>GoldingsGym::ClassTest</name>
        <children>
         <handles>
          <handles>

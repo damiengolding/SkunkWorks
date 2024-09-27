@@ -31,8 +31,22 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
     QDomDocument* doc = ModelUtils::VerifiedDomDocument(inputFile);
     Q_ASSERT( doc != nullptr );
     qInfo() << "Scxml doc is OK";
-    QString fsmName = doc->documentElement().toElement().attribute("name");
+    QString nameTemp = doc->documentElement().toElement().attribute("name");
+    QString fsmName;
+    QString fsmNamespace;
+    QStringList nameSplit = nameTemp.split("-");
+    if( nameSplit.count() == 2 ){
+        fsmName = nameSplit.at(0);
+        fsmNamespace = nameSplit.at(1);
+    }
+    else if( nameSplit.count() == 1 ){
+        fsmName = nameTemp;
+    }
+    else{
+       fsmName = "anonymous";
+    }
     qInfo() << "State machine name is:"<<fsmName;
+    qInfo() << "State machine namespace is:"<<fsmNamespace;
 
     QList<QDomElement> states = ModelUtils::DomElementList(doc->elementsByTagName("state"));
     QList<QDomElement> parallels = ModelUtils::DomElementList(doc->elementsByTagName("parallel"));
@@ -50,6 +64,24 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
     }
     QString fsmTemplate = fi.readAll();
     fi.close();
+
+    // Namespace
+    if( useNamespaces ){
+        if( !fsmNamespace.isEmpty() ){
+            QString startNamespace = QString( "namespace %1 {" ).arg(fsmNamespace);
+            QString endNamespace = QString( "} // End of namespace %1" ).arg(fsmNamespace);
+            fsmTemplate.replace("%{START_NAMESPACE}", startNamespace);
+            fsmTemplate.replace("%{END_NAMESPACE}",endNamespace);
+        }
+        else{
+            fsmTemplate.replace("%{START_NAMESPACE}", "");
+            fsmTemplate.replace("%{END_NAMESPACE}","");
+        }
+    }
+    else{
+        fsmTemplate.replace("%{START_NAMESPACE}", "");
+        fsmTemplate.replace("%{END_NAMESPACE}","");
+    }
 
     QFile fo;
     QTextStream ts;
@@ -91,6 +123,24 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
 
     QString outputText = templateText.replace("%{FSM_CLASS}", fsmName);
 
+    // Namespace
+    if( useNamespaces ){
+        if( !fsmNamespace.isEmpty() ){
+            QString startNamespace = QString( "namespace %1 {" ).arg(fsmNamespace);
+            QString endNamespace = QString( "} // End of namespace %1" ).arg(fsmNamespace);
+            outputText.replace("%{START_NAMESPACE}", startNamespace);
+            outputText.replace("%{END_NAMESPACE}",endNamespace);
+        }
+        else{
+            outputText.replace("%{START_NAMESPACE}", "");
+            outputText.replace("%{END_NAMESPACE}","");
+        }
+    }
+    else{
+        outputText.replace("%{START_NAMESPACE}", "");
+        outputText.replace("%{END_NAMESPACE}","");
+    }
+
     // Write file out
     if( QFileInfo::exists(headerFile) && !clobberExisting ){
         qInfo() << "Refusing to overwrite an existing file.";
@@ -116,6 +166,24 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
 
     outputText = templateText.replace("%{FSM_CLASS}", fsmName);
     outputText = outputText.replace("%{FSM_HDR}",headerFile);
+
+    // Namespace
+    if( useNamespaces ){
+        if( !fsmNamespace.isEmpty() ){
+            QString startNamespace = QString( "namespace %1 {" ).arg(fsmNamespace);
+            QString endNamespace = QString( "} // End of namespace %1" ).arg(fsmNamespace);
+            outputText.replace("%{START_NAMESPACE}", startNamespace);
+            outputText.replace("%{END_NAMESPACE}",endNamespace);
+        }
+        else{
+            outputText.replace("%{START_NAMESPACE}", "");
+            outputText.replace("%{END_NAMESPACE}","");
+        }
+    }
+    else{
+        outputText.replace("%{START_NAMESPACE}", "");
+        outputText.replace("%{END_NAMESPACE}","");
+    }
 
     // Write file out
     if( QFileInfo::exists(implFile) && !clobberExisting ) {
@@ -169,6 +237,24 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
         QString outputText = hdrTemplate;
         outputText.replace("%{STATE_CLASS}", stateName);
 
+        // Namespace
+        if( useNamespaces ){
+            if( !fsmNamespace.isEmpty() ){
+                QString startNamespace = QString( "namespace %1 {" ).arg(fsmNamespace);
+                QString endNamespace = QString( "} // End of namespace %1" ).arg(fsmNamespace);
+                outputText.replace("%{START_NAMESPACE}", startNamespace);
+                outputText.replace("%{END_NAMESPACE}",endNamespace);
+            }
+            else{
+                outputText.replace("%{START_NAMESPACE}", "");
+                outputText.replace("%{END_NAMESPACE}","");
+            }
+        }
+        else{
+            outputText.replace("%{START_NAMESPACE}", "");
+            outputText.replace("%{END_NAMESPACE}","");
+        }
+
         // Write file out
         if( QFileInfo::exists(stateHeader) && !clobberExisting ) {
             qInfo() << "Refusing to overwrite an existing file.";
@@ -188,6 +274,24 @@ void processQtFsm(const QString& inputFile, bool preserveCase, bool clobberExist
         outputText = implTemplate;
         outputText.replace("%{STATE_CLASS}", stateName);
         outputText = outputText.replace("%{STATE_HDR}", stateHeader);
+
+        // Namespace
+        if( useNamespaces ){
+            if( !fsmNamespace.isEmpty() ){
+                QString startNamespace = QString( "namespace %1 {" ).arg(fsmNamespace);
+                QString endNamespace = QString( "} // End of namespace %1" ).arg(fsmNamespace);
+                outputText.replace("%{START_NAMESPACE}", startNamespace);
+                outputText.replace("%{END_NAMESPACE}",endNamespace);
+            }
+            else{
+                outputText.replace("%{START_NAMESPACE}", "");
+                outputText.replace("%{END_NAMESPACE}","");
+            }
+        }
+        else{
+            outputText.replace("%{START_NAMESPACE}", "");
+            outputText.replace("%{END_NAMESPACE}","");
+        }
 
         // Write file out
         if( QFileInfo::exists(stateImpl) && !clobberExisting ) {

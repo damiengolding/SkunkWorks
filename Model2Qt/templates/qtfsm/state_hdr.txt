@@ -2,7 +2,7 @@
 
 #include <QObject>
 #include "ifinitestatemachine.hpp"
-
+%{START_NAMESPACE}
 class %{STATE_CLASS} : public IFiniteState
 {
     Q_OBJECT
@@ -17,3 +17,4 @@ public slots:
 signals:
 
 };
+%{END_NAMESPACE}

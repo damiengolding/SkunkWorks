@@ -8,8 +8,8 @@
 #include "statemanager.hpp"
 
 // QStateMachine
-QStateMachine* %(STATE_MACHINE_NAME);
-StateManager* stateManager;
+    QStateMachine* %(STATE_MACHINE_NAME);
+    StateManager* stateManager;
 
 %{STATE_DECLARATIONS}
 

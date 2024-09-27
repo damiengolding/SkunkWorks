@@ -1,5 +1,5 @@
 #include "%{FSM_HDR}"
-
+%{START_NAMESPACE}
 void %{FSM_CLASS}::start()
 {
 }
@@ -11,3 +11,4 @@ void %{FSM_CLASS}::stop()
 void %{FSM_CLASS}::initActions()
 {
 }
+%{END_NAMESPACE}
