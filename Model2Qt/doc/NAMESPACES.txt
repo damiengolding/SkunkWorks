@@ -1,3 +1,0 @@
-For class model diagrams, modify the top level 'Name' tag to the namespace, e.g. GoldingsGym::MyLibrary.
-
-For state charts (inc. ETG state charts) modeify the attributes 'name' tag to add the namespace onto the state machine name with a hyphen delimiter, e.g. MyFsm-GoldingsGym::MyFsm
