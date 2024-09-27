@@ -1,0 +1,9 @@
+-QColor m_criticalColor = QColor("#bc4543");
+-QColor m_highColor = QColor("#d66a23");
+-QColor m_mediumColor = QColor("#afe196");
+-QColor m_lowColor = QColor("#f1e897");
+-QColor m_infoColor = QColor("#75a0c6");
+-QColor m_fillColor = QColor("#b3c4af");
+-QFont m_headingFont = QFont("Open Sans",22);
+-QFont m_bodyFont = QFont("Source Sans Pro",12);
+-QFont m_codeFont = QFont("JetBrains Mono",12);

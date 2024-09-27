@@ -165,6 +165,7 @@ void processQtClass(const QString& inputFile, bool preserveCase, bool clobberExi
             classCount++;
         }
     }
+    qInfo() << "Namespace:" << namespaceNames.first();
     qInfo() << "Packages:" << namespaceNames.count();
     for( auto package : namespaceNames ){
         qInfo() << "\tPackage:"<< package;

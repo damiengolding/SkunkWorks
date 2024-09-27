@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512pt" height="512pt" viewBox="0 0 512 512" version="1.1">
+<defs>
+<image id="image85" width="166" height="162" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAACiCAIAAABEeyE2AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVR4nO3BMQEAAADCoPVPbQlPoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgbO9UAAWp7yBYAAAAASUVORK5CYII="/>
+<pattern id="pattern0" patternUnits="userSpaceOnUse" width="166" height="162"  patternTransform="matrix(1,0,0,1,46,75)">
+  <use xlink:href="#image85"/>
+</pattern>
+<image id="image88" width="232" height="199" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAADHCAIAAACcMYjMAAAABmJLR0QA/wD/AP+gvaeTAAAAnUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAODYd7QABrnzoOAAAAABJRU5ErkJggg=="/>
+<pattern id="pattern1" patternUnits="userSpaceOnUse" width="232" height="199"  patternTransform="matrix(1,0,0,1,243,38)">
+  <use xlink:href="#image88"/>
+</pattern>
+<image id="image91" width="232" height="198" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAADGCAIAAABXbVtpAAAABmJLR0QA/wD/AP+gvaeTAAAAnElEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMCLARs0AAEjdtkAAAAAAElFTkSuQmCC"/>
+<pattern id="pattern2" patternUnits="userSpaceOnUse" width="232" height="198"  patternTransform="matrix(1,0,0,1,243,268)">
+  <use xlink:href="#image91"/>
+</pattern>
+<image id="image94" width="166" height="162" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAACiCAIAAABEeyE2AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVR4nO3BMQEAAADCoPVPbQlPoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgbO9UAAWp7yBYAAAAASUVORK5CYII="/>
+<pattern id="pattern3" patternUnits="userSpaceOnUse" width="166" height="162"  patternTransform="matrix(1,0,0,1,46,268)">
+  <use xlink:href="#image94"/>
+</pattern>
+</defs>
+<g id="surface81">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern0);" d="M 211.21875 235.84375 L 211.21875 75.671875 L 47.203125 98.75 L 47.203125 235.84375 L 211.21875 235.84375 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern1);" d="M 244.015625 235.84375 L 473.640625 235.84375 L 473.640625 39.03125 L 244.015625 71.0625 L 244.015625 235.84375 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern2);" d="M 244.015625 268.65625 L 244.015625 433.4375 L 473.640625 464.953125 L 473.640625 268.65625 L 244.015625 268.65625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern3);" d="M 211.21875 268.65625 L 47.203125 268.65625 L 47.203125 406.53125 L 211.21875 429.078125 L 211.21875 268.65625 "/>
+</g>
+</svg>

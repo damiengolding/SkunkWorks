@@ -40,7 +40,7 @@ namespace ptng {
 
    \see PtngIdent, PtngEnums
  */
-// HPCOMP calls to parseNessus***** need to be amalgamated, otherwise both calls mead reading a large nessus file twice
+// HPCOMP calls to parseNessus***** need to be amalgamated, otherwise both calls mean reading a large nessus file twice
 // HPCOMP nmap and nessus fles can be large, refactor with QXmlStreamReader
 class PtngInputParser : public QObject
 {

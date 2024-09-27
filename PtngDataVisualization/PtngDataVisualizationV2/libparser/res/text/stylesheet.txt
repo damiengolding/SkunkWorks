@@ -1,0 +1,9 @@
+criticalColor = #bc4543
+highColor = #d66a23
+mediumColor = #afe196
+lowColor = #f1e897
+infoColor = #75a0c6
+fillColor = #b3c4af
+headingFont = "Open Sans",22
+bodyFont = "Source Sans Pro",12
+codeFont = "JetBrains Mono",12
