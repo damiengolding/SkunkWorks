@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include "../inc/ptngdgmlloader.hpp"
-#include "ConversionUtils.hpp"
+#include "../inc/conversionutils.hpp"
 
 PtngDgmlLoader::PtngDgmlLoader(const QString &dgmlFile, QObject *parent)
     : QObject{parent}
@@ -45,10 +45,10 @@ void PtngDgmlLoader::load()
         emit loadCompleted( false );
     }
     qInfo() << "DGML file"<<inputFile<<"Parsed";
-    QList<QDomElement> dgmlNodes = ConversionUtils::domElementList( doc->elementsByTagName("Node") );
+    QList<QDomElement> dgmlNodes = ConversionUtils::DomElementList( doc->elementsByTagName("Node") );
     qInfo() << "DGML Nodes:"<<dgmlNodes.count();
 
-    QList<QDomElement> dgmlLinks = ConversionUtils::domElementList( doc->elementsByTagName("Link") );
+    QList<QDomElement> dgmlLinks = ConversionUtils::DomElementList( doc->elementsByTagName("Link") );
     qInfo() << "DGML Links:"<<dgmlLinks.count();
 
     emit loadCompleted( true );

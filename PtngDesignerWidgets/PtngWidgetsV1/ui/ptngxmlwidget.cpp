@@ -30,7 +30,6 @@ using namespace ptng;
 
 #include <QClipboard>
 #include <QMessageBox>
-#include <StyleSheet.hpp>
 
 using namespace ptng;
 
@@ -221,7 +220,7 @@ void PtngXmlWidget::displayDnsrecon(QDomDocument *doc, QStandardItemModel *model
     QString name;
     QString zone_server;
     QString address;
-    QList<QDomElement> elements = ConversionUtils::domElementList(doc->elementsByTagName("record"));
+    QList<QDomElement> elements = ConversionUtils::DomElementList(doc->elementsByTagName("record"));
     QStandardItem *ipv4List = new QStandardItem("IPv4");
     QStandardItem *ipv6List = new QStandardItem("IPv6");
     // IPV4 first
@@ -274,7 +273,7 @@ void PtngXmlWidget::displayDnsrecon(QDomDocument *doc, QStandardItemModel *model
 // HPCOMP 2 calls to PtngInputParser::parse*** means reading a large nessus file twice
 // TODO - needs error handling for nodes
 void PtngXmlWidget::displayNessus(QDomDocument *doc, QStandardItemModel *model, const QString &inputFile)
-{    
+{
     QStandardItem *root = model->invisibleRootItem();
     model->setHorizontalHeaderLabels( { "Host" } );
     QMap<QString,QString> severities = PtngInputParser::parseNesusSeverities( inputFile );

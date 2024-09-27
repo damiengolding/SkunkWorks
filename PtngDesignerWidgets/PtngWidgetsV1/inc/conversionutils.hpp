@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) %date% %author%
+Copyright (c) Damien Golding 2024
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,49 +21,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef GLOBAL_INC_HPP
-#define GLOBAL_INC_HPP
 
-#include <QtCore/qglobal.h>
+#pragma once
+
+#include <QString>
+#include <QMetaEnum>
 #include <QDomDocument>
-#include <QDomNode>
 #include <QDomNodeList>
 #include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QFileInfo>
-#include <QTextStream>
-#include <QMap>
 #include <QList>
-#include <QDebug>
-#include <QScopedPointer>
-#include <QStringBuilder>
-#include <QColor>
-#include <QMessageBox>
-#include <QFont>
-#include <QFontInfo>
-#include <QStandardItemModel>
-#include <QStandardItem>
-#include <QUndoCommand>
-#include <QUndoGroup>
-#include <QUndoStack>
-#include <QUndoView>
+#include <QFile>
 
-#include "PtngDGMLBuilder.hpp"
-#include "PtngDGMLConv.hpp"
-#include "PtngHostBuilder.hpp"
-#include "PtngEnums.hpp"
-#include "PtngIP4Address.hpp"
-#include "PtngIdent.hpp"
-#include "PtngSpecifications.hpp"
-#include "PtngDGMLBuilder.hpp"
-#include "PtngDGMLConv.hpp"
-#include "PtngInputParser.hpp"
-#include "PtngConfig.hpp"
-using namespace ptng;
+class ConversionUtils : public QObject
+{
+    Q_OBJECT
 
-#include "ConversionUtils.hpp"
-using namespace GoldingsGym;
+public:
+    explicit ConversionUtils(QObject *parent = nullptr);
+    ~ConversionUtils();
 
-#endif // GLOBAL_INC_HPP
+    // QMetaEnum conversion to string
+    template<typename E>
+    static E EnumFromString(const QString &textValue);
+
+    // QMetaEnum conversion from string
+    template<typename E>
+    static QString StringFromEnum(E value);
+
+    // QList of verified QDomElements from QDomNodeList
+    static QList<QDomElement> DomElementList(const QDomNodeList &list);
+
+    // Verified populated QDomDocument* from a QString file name
+    static QDomDocument* VerifiedDomDocument(const QString& fileName );
+
+private:
+
+signals:
+
+};
+
