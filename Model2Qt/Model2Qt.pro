@@ -37,6 +37,7 @@ HEADERS += \
 INCLUDEPATH += ./utils/ ./uml/ ./commands/
 
 DISTFILES += \
+    NAMESPACES.txt \
     templates/qtsmfetg/etg_hdr.txt \
     test_models/ClassTest.qmodel
 
