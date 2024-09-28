@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 }
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
-    app.setApplicationName("qsslrecon");
+    app.setApplicationName("qhostrecon");
     app.setApplicationVersion("0.0.1");
     app.setOrganizationName("Golding's Gym");
     app.setOrganizationDomain("https://github.com/damiengolding");
@@ -62,7 +62,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
     // Convenience options
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.setApplicationDescription("qsslrecon Queries an SSL server and examines certificate details. Can also provide details of internal networking configuration.");
+    parser.setApplicationDescription("qhostrecon Provides details of internal  and remote host networking configuration.");
 
     initArgumentOptions(app,parser);
     parser.process(app);
