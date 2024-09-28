@@ -289,7 +289,7 @@
                          </base-DElement>
                          <object>{a05df5df-0402-43a6-8877-411e40688d97}</object>
                          <name>PtngInputSslScan</name>
-                         <pos>x:-445;y:20</pos>
+                         <pos>x:-485;y:20</pos>
                          <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -327,7 +327,7 @@
                          </base-DElement>
                          <object>{279c4dfd-f669-4f79-9667-4eece9935ef9}</object>
                          <name>PtngInputDnsRecon</name>
-                         <pos>x:-335;y:100</pos>
+                         <pos>x:-380;y:100</pos>
                          <rect>x:-60;y:-30;w:120;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -403,7 +403,7 @@
                          </base-DElement>
                          <object>{26fa5436-631f-4460-ae87-59b350ed3952}</object>
                          <name>PtngInputNslookupWin</name>
-                         <pos>x:-180;y:105</pos>
+                         <pos>x:-300;y:10</pos>
                          <rect>x:-70;y:-30;w:140;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -555,7 +555,7 @@
                          </base-DElement>
                          <object>{e1667bd3-8075-4c16-9f6c-b84d5bdeb42c}</object>
                          <name>PtngInputHost</name>
-                         <pos>x:0;y:135</pos>
+                         <pos>x:-130;y:80</pos>
                          <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -583,7 +583,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1727449097168</last-modified>
+                  <last-modified>1727489580215</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>

@@ -71,7 +71,7 @@
 #include &lt;QFont&gt;
 #include &lt;QFile&gt;
 #include &lt;QFileInfo&gt;</text>
-                       <pos>x:745;y:40</pos>
+                       <pos>x:650;y:40</pos>
                        <rect>x:0;y:0;w:124;h:76</rect>
                       </DAnnotation>
                      </instance>
@@ -100,7 +100,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1727468493282</last-modified>
+                  <last-modified>1727506134864</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -238,70 +238,70 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{602d0084-10b1-46d0-8140-90cce36ccae3}</uid>
+                    <uid>{ccdd3122-06d6-4f1b-bd9a-6bcd8e18c545}</uid>
                     <type>1</type>
                     <declaration>-QColor m_criticalColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e9a99ce5-b628-451f-96b0-519479130860}</uid>
+                    <uid>{e6c794a7-acb6-4d50-84ca-0fdcb6b06f8e}</uid>
                     <type>1</type>
                     <declaration>-QColor m_highColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f1265ae6-b666-4d30-8d08-b8938a10ae4e}</uid>
+                    <uid>{5fcf9513-4fca-4360-9a24-6a309d8396a3}</uid>
                     <type>1</type>
                     <declaration>-QColor m_mediumColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{b6ad060f-4920-4e19-8760-60851978a9bc}</uid>
+                    <uid>{ada1de38-3945-4324-b327-21fd01e2fb1e}</uid>
                     <type>1</type>
                     <declaration>-QColor m_lowColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{7e09b298-be9a-4b3c-b4ae-422d034c8966}</uid>
+                    <uid>{ca59f0a1-2cc8-4274-b159-dbbd0400702b}</uid>
                     <type>1</type>
                     <declaration>-QColor m_infoColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{52d7a0ef-1f7b-41df-bfdf-e0a7e7eda9aa}</uid>
+                    <uid>{d1da1801-1810-41d3-aa1f-d04a6320d99a}</uid>
                     <type>1</type>
                     <declaration>-QColor m_fillColor</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f1f6df61-8d03-4cb3-a1cf-088aeeb8475c}</uid>
+                    <uid>{1bc6965b-434a-4abc-a9b7-974fe3363bbc}</uid>
                     <type>1</type>
                     <declaration>-QFont m_headingFont</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{533e3764-8180-4c97-8a6b-0676781f789d}</uid>
+                    <uid>{0b199007-f18a-4133-8060-843a329ded9c}</uid>
                     <type>1</type>
                     <declaration>-QFont m_bodyFont</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{28220b6e-803e-412e-9888-f5b79a27f0fa}</uid>
+                    <uid>{723cd37c-dc6e-41ba-9e4c-a8b9090c41f1}</uid>
                     <type>1</type>
                     <declaration>-QFont m_codeFont</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d081357e-6fd1-4ed7-a662-cf48144047f4}</uid>
+                    <uid>{e86db5b5-0142-4043-a01b-9815432b09d0}</uid>
                     <type>2</type>
                     <declaration>+void LoadFromFile( const QString&amp; file )</declaration>
                    </MClassMember>
