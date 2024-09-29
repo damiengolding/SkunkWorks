@@ -12,7 +12,7 @@
          <uid>{4ca0f76f-aa83-4ec9-9f14-62ccc8b2658b}</uid>
         </MElement>
        </base-MElement>
-       <name>GoldingsGym::ptng</name>
+       <name>GoldingsGym::Ptng</name>
        <children>
         <handles>
          <handles>
@@ -74,7 +74,7 @@
                            <item>interface</item>
                           </qlist>
                          </stereotypes>
-                         <name>AbstractPtngConvertor</name>
+                         <name>AbstractPtngOutput</name>
                          <pos>x:-80;y:-450</pos>
                          <rect>x:-20;y:-20;w:40;h:40</rect>
                          <visual-role>0</visual-role>
@@ -95,9 +95,9 @@
                           </DElement>
                          </base-DElement>
                          <object>{bfeae271-4de7-4b02-9c1c-3f763c39e274}</object>
-                         <name>PtngDotConvertor</name>
-                         <pos>x:-255;y:-265</pos>
-                         <rect>x:-55;y:-30;w:110;h:60</rect>
+                         <name>PtngDotOutput</name>
+                         <pos>x:-215;y:-295</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -133,9 +133,9 @@
                           </DElement>
                          </base-DElement>
                          <object>{4450b016-66ce-481d-916d-9e39576e55db}</object>
-                         <name>PtngDgmlConvertor</name>
-                         <pos>x:-20;y:-265</pos>
-                         <rect>x:-60;y:-30;w:120;h:60</rect>
+                         <name>PtngDgmlOutput</name>
+                         <pos>x:0;y:-285</pos>
+                         <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -212,9 +212,9 @@
                           </DElement>
                          </base-DElement>
                          <object>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</object>
-                         <name>PtngInputNmapScan</name>
-                         <pos>x:-660;y:0</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <name>PtngInputNmapAxfr</name>
+                         <pos>x:-700;y:-50</pos>
+                         <rect>x:-60;y:-30;w:120;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -251,7 +251,7 @@
                          </base-DElement>
                          <object>{fdcdb460-a85b-44e9-9c88-0789338dd527}</object>
                          <name>PtngInputNessus</name>
-                         <pos>x:-615;y:95</pos>
+                         <pos>x:-545;y:30</pos>
                          <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -289,7 +289,7 @@
                          </base-DElement>
                          <object>{a05df5df-0402-43a6-8877-411e40688d97}</object>
                          <name>PtngInputSslScan</name>
-                         <pos>x:-485;y:20</pos>
+                         <pos>x:-455;y:-40</pos>
                          <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -327,7 +327,7 @@
                          </base-DElement>
                          <object>{279c4dfd-f669-4f79-9667-4eece9935ef9}</object>
                          <name>PtngInputDnsRecon</name>
-                         <pos>x:-380;y:100</pos>
+                         <pos>x:-365;y:95</pos>
                          <rect>x:-60;y:-30;w:120;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -581,9 +581,47 @@
                       </DInheritance>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{d3644731-a064-4ba5-a14d-d59a59d6595a}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</object>
+                         <name>PtngInputNmapEnumeration</name>
+                         <pos>x:-700;y:80</pos>
+                         <rect>x:-85;y:-30;w:170;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{40a4f0cf-d006-4b79-838b-0d1d83ef2a0f}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{90a4ef40-3fcb-42f8-83d4-f1ddbf9dd326}</object>
+                         <a>{d3644731-a064-4ba5-a14d-d59a59d6595a}</a>
+                         <b>{340d57e8-6f21-4404-a55f-11c296cccc38}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1727489580215</last-modified>
+                  <last-modified>1727544132234</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -631,14 +669,14 @@
                     </stereotypes>
                    </MElement>
                   </base-MElement>
-                  <name>AbstractPtngConvertor</name>
+                  <name>AbstractPtngOutput</name>
                  </MObject>
                 </base-MObject>
                 <members>
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{6d73717a-ee8d-4225-b65a-c9e32291f9bf}</uid>
+                    <uid>{297cd938-071d-4c31-92b8-32370caa4e1f}</uid>
                     <type>2</type>
                     <properties>2</properties>
                     <declaration>+virtual QString convert( QStandardItemModel* model, bool&amp; ok)</declaration>
@@ -664,7 +702,7 @@
                     <uid>{bfeae271-4de7-4b02-9c1c-3f763c39e274}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>PtngDotConvertor</name>
+                  <name>PtngDotOutput</name>
                   <relations>
                    <handles>
                     <handles>
@@ -715,7 +753,7 @@
                     <uid>{4450b016-66ce-481d-916d-9e39576e55db}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>PtngDgmlConvertor</name>
+                  <name>PtngDgmlOutput</name>
                   <relations>
                    <handles>
                     <handles>
@@ -804,7 +842,7 @@
                     <uid>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>PtngInputNmapScan</name>
+                  <name>PtngInputNmapAxfr</name>
                   <relations>
                    <handles>
                     <handles>
@@ -1282,6 +1320,57 @@
                               </MElement>
                              </base-MElement>
                              <a>{e1667bd3-8075-4c16-9f6c-b84d5bdeb42c}</a>
+                             <b>{59e26a76-4edb-493c-86da-2030e96c7987}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>PtngInputNmapEnumeration</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{90a4ef40-3fcb-42f8-83d4-f1ddbf9dd326}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{90a4ef40-3fcb-42f8-83d4-f1ddbf9dd326}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</a>
                              <b>{59e26a76-4edb-493c-86da-2030e96c7987}</b>
                             </MRelation>
                            </base-MRelation>
