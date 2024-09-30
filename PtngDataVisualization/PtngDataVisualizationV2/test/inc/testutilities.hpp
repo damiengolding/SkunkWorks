@@ -51,7 +51,7 @@ public:
     static QString StringFromEnum(E value);
 
     // QList of verified QDomElements from QDomNodeList
-    static QList<QDomElement> DomElementList(const QDomNodeList &list);
+    static QList<QDomElement> VerifiedDomElementList(const QDomNodeList &list);
 
     // Verified populated QDomDocument* from a QString file name
     static QDomDocument* VerifiedDomDocument(const QString& fileName );

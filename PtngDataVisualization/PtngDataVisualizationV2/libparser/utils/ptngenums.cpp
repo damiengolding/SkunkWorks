@@ -22,12 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "../inc/libparser.hpp"
+#include "ptngenums.hpp"
 
-void LibParser::MustRecognizeNmapFiles(){
-    QFAIL("TDD");
+namespace GoldingsGym::Ptng {
+PtngEnums::PtngEnums(QObject *parent)
+    : QObject{parent}
+{
+
 }
 
-void LibParser::MustRecognizeNessusFiles(){
-    QFAIL("TDD");
+PtngEnums::~PtngEnums()
+{
+
 }
+} // End of namespace GoldingsGym::Ptng

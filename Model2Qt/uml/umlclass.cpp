@@ -241,7 +241,12 @@ QString UmlClass::toDefinition(bool useNamespaces)
         // Namespace
         if( useNamespaces ){
             if( !m_namespace.isEmpty() ){
-                QString startNamespace = QString( "using namespace %1 {" ).arg(m_namespace);
+                // QString startNamespace = QString( "using namespace %1 {" ).arg(m_namespace);
+                // QString endNamespace = QString( "} // End of namespace %1" ).arg(m_namespace);
+                // ret.replace("%{START_NAMESPACE}", startNamespace);
+                // ret.replace("%{END_NAMESPACE}",endNamespace);
+
+                QString startNamespace = QString( "namespace %1 {" ).arg(m_namespace);
                 QString endNamespace = QString( "} // End of namespace %1" ).arg(m_namespace);
                 ret.replace("%{START_NAMESPACE}", startNamespace);
                 ret.replace("%{END_NAMESPACE}",endNamespace);

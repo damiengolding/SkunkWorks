@@ -129,84 +129,84 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{bc7f2e0d-a214-41dc-bf29-838bb91f4efb}</uid>
+                    <uid>{2a8c09dd-2d6c-479c-91d1-938e0e92aa43}</uid>
                     <type>1</type>
                     <declaration>+enum SupportedInputTypes { }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{c8a587bb-72e5-4302-88c3-c89ef603762e}</uid>
+                    <uid>{51301218-d7b3-4649-8c88-203926c1b166}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(SupportedInputTypes)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{eb5235d6-d93a-4bb6-95da-8f8c4a61fdfd}</uid>
+                    <uid>{727527e6-6616-40ae-903e-251248b356dd}</uid>
                     <type>1</type>
                     <declaration>+enum NetworkNodeRoles { }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{46581406-83a3-48d5-aef1-f04db04235bd}</uid>
+                    <uid>{73811491-5e9e-4ad2-a044-bbafba291857}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(NetworkNodeRoles)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{a0ae7f8d-68a1-4616-b2aa-0071bf62358b}</uid>
+                    <uid>{3a218b06-7dbc-4f94-a54e-a26ddface5b1}</uid>
                     <type>1</type>
                     <declaration>+enum ProcessorStates { }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{89dbe126-40fe-4ddc-b560-c7adf87e1dc6}</uid>
+                    <uid>{657fd23c-8c64-4f35-ae81-7286fae8bbf1}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(ProcessorStates)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f99bd1de-8fb9-47ac-921c-7425aee091eb}</uid>
+                    <uid>{bd03792f-4abf-4eb0-aab6-1775de8af825}</uid>
                     <type>1</type>
                     <declaration>+enum IssueSeverity { }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{666ec897-f4ca-4086-9cbb-492fcb981055}</uid>
+                    <uid>{7873a2bd-8704-4cbb-aee2-f1dc2ac1a1ad}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(IssueSeverity)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{432d26a7-f4e1-4d4a-a6d5-0b9275d22261}</uid>
+                    <uid>{25194819-b2d9-45d2-9b49-004470aa89c4}</uid>
                     <type>1</type>
                     <declaration>+enum Protocol{ }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{ea9e7d6d-3245-46c8-a47c-d19de1ab3207}</uid>
+                    <uid>{52e9c0c9-8d54-4883-98a9-aaae30f32b45}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(Protocol)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f55b382c-f67e-4896-8418-9e29888b055f}</uid>
+                    <uid>{c9ba8061-0b87-4364-acf1-b517f8d62906}</uid>
                     <type>1</type>
                     <declaration>+enum NessusPluginFamily { }</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d8474d9e-090d-4983-8f6a-6335ff272b9c}</uid>
+                    <uid>{ed562afe-42a8-401e-a00a-2c57640dddf1}</uid>
                     <type>2</type>
                     <declaration>+Q_ENUM(NessusPluginFamily)</declaration>
                    </MClassMember>

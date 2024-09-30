@@ -21,10 +21,14 @@ contains(BUILD, SHARED){
 DEFINES += LIBPARSER_LIBRARY
 CONFIG += c++20 warn_off
 
-SOURCES +=
+SOURCES += \
+    utils/ptngenums.cpp \
+    utils/ptngstylesheet.cpp
 
 HEADERS += \
-    libparser_global.hpp
+    libparser_global.hpp \
+    utils/ptngenums.hpp \
+    utils/ptngstylesheet.hpp
 
 DISTFILES += \
     models/ptngdata.qmodel \

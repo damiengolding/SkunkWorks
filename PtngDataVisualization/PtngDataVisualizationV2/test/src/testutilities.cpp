@@ -46,7 +46,7 @@ QString TestUtilities::StringFromEnum(E value)
     return( QString::fromUtf8(QMetaEnum::fromType<E>().valueToKey(intRepresentation)) );
 }
 
-QList<QDomElement> TestUtilities::DomElementList(const QDomNodeList &list){
+QList<QDomElement> TestUtilities::VerifiedDomElementList(const QDomNodeList &list){
     QList<QDomElement> ret;
     for( int i = 0; i<list.count();++i ){
         QDomNode node = list.at(i);
@@ -66,12 +66,17 @@ QDomDocument* TestUtilities::VerifiedDomDocument(const QString &fileName)
 
     if( !file->open(QIODevice::ReadOnly) ){
         qDebug() << "Unable to open"<<fileName<<"for reading";
+        file->deleteLater();
         return(nullptr);
     }
     if( !doc->setContent(file->readAll())  ){
         qDebug() << "Unable to parse"<<fileName<<"into QDomDocument";
+        file->close();
+        file->deleteLater();
         return(nullptr);
     }
+    file->close();
+    file->deleteLater();
     return(doc);
 }
 

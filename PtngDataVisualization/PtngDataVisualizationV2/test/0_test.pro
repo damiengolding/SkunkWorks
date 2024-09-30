@@ -15,7 +15,6 @@ else{
 }
 
 SOURCES +=  tst_libparser.cpp \
-    src/fileident.cpp \
     src/libparser.cpp \
     src/testutilities.cpp
 

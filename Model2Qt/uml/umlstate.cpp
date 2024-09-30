@@ -23,7 +23,7 @@ SOFTWARE.
 */
 #include "umlstate.hpp"
 
-/*
+    /*
         --- UmlState ---
     */
 UmlState::UmlState()
@@ -100,7 +100,7 @@ QString UmlState::variableName() const
 
 #pragma Accessors and mutators }
 
-/*
+    /*
         --- UmlStateFactory ---
     */
 UmlStateFactory::UmlStateFactory()

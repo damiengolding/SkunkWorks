@@ -33,6 +33,8 @@ SOFTWARE.
 #include <QDomNodeList>
 #include <QDomElement>
 
+#include "testutilities.hpp"
+
 class LibParser : public QObject
 {
     Q_OBJECT
@@ -40,12 +42,63 @@ class LibParser : public QObject
 public:
     LibParser();
     ~LibParser();
-    QString config = "parserlib_test.xml";
+    QString runControl = "parserlib_test.xml";
 
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    void MustRecognizeNmapFiles();
-    void MustRecognizeNessusFiles();
+
+#pragma All tests - decl {
+#pragma PtngIdent {
+    void MustRecogniseRuncontrol_data();
+    void MustRecogniseRuncontrol();
+#pragma PtngIdent }
+
+#pragma PtnigInputParser {
+    // nmap & nessus
+    void MustCountNmapHosts_data();
+    void MustCountNessusHosts_data();
+    void MustCountNessusIssues_data();
+    void MustCountNessusSeverities_data();
+
+    void MustCountNmapHosts();
+    void MustCountNessusHosts();
+    void MustCountNessusIssues();
+    void MustCountNessusSeverities();
+
+    // AXFR files
+    void MustCountDnsreconAXFRHosts_data();
+    void MustCountNmapAXFRHosts_data();
+    void MustCountNslookupWindowsAXFRHosts_data();
+    void MustCountNslookupLinuxAXFRHosts_data();
+    void MustCountArpscanAXFRHosts_data();
+    void MustCountNbtscanAXFRHosts_data();
+    void MustCountHostAXFRHosts_data();
+
+    void MustCountDnsreconAXFRHosts();
+    void MustCountNmapAXFRHosts();
+    void MustCountNslookupWindowsAXFRHosts();
+    void MustCountNslookupLinuxAXFRHosts();
+    void MustCountArpscanAXFRHosts();
+    void MustCountNbtscanAXFRHosts();
+    void MustCountHostAXFRHosts();
+#pragma PtnigInputParser }
+
+#pragma PtngDgmlBuilder {
+    void MustCreateDGMLFromNmap_data();
+    void MustCreateDGMLFromNessus_data();
+    void MustCreateDGMLFromSimple_data();
+    void MustCreateDGMLFromNmap();
+    void MustCreateDGMLFromNessus();
+    void MustCreateDGMLFromSimple();
+#pragma PtngDGMLBuilder }
+
+#pragma PtngDGMLConv {
+    void MustCreateDotrunControl_data();
+    void MustCreateDotrunControl();
+#pragma PtngDGMLConv }
+
+#pragma All tests - decl }
+
 
 };
