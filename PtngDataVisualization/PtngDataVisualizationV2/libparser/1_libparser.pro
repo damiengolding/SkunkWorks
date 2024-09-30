@@ -22,10 +22,10 @@ DEFINES += LIBPARSER_LIBRARY
 CONFIG += c++20 warn_off
 
 SOURCES += \
-    utils/ptngenums.cpp \
     utils/ptngstylesheet.cpp
 
 HEADERS += \
+    inc/libparser_global.hpp \
     libparser_global.hpp \
     utils/ptngenums.hpp \
     utils/ptngstylesheet.hpp
