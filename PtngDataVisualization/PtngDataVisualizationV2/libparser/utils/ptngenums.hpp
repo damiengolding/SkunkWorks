@@ -36,8 +36,8 @@ class PtngEnums : public QObject
 {
     Q_OBJECT
 public:
-    explicit PtngEnums(QObject* parent = nullptr);
-    virtual ~PtngEnums();
+    explicit PtngEnums(QObject* parent = nullptr){}
+    virtual ~PtngEnums(){}
 
     friend QDebug operator<<(QDebug debug, const PtngEnums &c)
     {
@@ -47,6 +47,11 @@ public:
     }
 
 public:
+    /*!
+     * \brief The SupportedInputTypes enum
+     *
+     * The list of file formats supported by PtngIdent
+     */
     enum SupportedInputTypes {
         CODE,
         TSV,
@@ -76,6 +81,11 @@ public:
         WAPITI,
         NUM_SUPPORTED_INPUT_TYPES
     };
+    /*!
+     * \brief The NetworkNodeRoles enum
+     *
+     * The roles a node plays in a network model
+     */
     enum NetworkNodeRoles {
         ROOT,
         SUBNET,
@@ -85,6 +95,11 @@ public:
         LEAF,
         NUM_NMAP_NODE_ROLES
     };
+    /*!
+     * \brief The ProcessorStates enum
+     *
+     * Finite State Machine state types
+     */
     enum ProcessorStates {
         START_STATE_CREATED,
         START_STATE_ENTERED,
@@ -97,19 +112,40 @@ public:
         FINAL_STATE_EXITED,
         NUM_PROCESSOR_STATES
     };
+    /*!
+     * \brief The IssueSeverity enum
+     *
+     * Severity levels (bsased on Nessus severities)
+     */
     enum IssueSeverity {
-        NONE,
+        INDETERMINATE,
+        INFO,
         LOW,
         MEDIUM,
         HIGH,
         CRITICAL,
         NUM_ISSUE_SEVERITIES
     };
+    /*!
+     * \brief The Protocol enum
+     *
+     * Broad protocol types
+     */
     enum Protocol{
         UDP,
         TCP,
+        HTTP,
+        HTTPS,
+        FTP,
+        SMTP,
+        SSH,
         NUM_PROTOCOLS
     };
+    /*!
+     * \brief The NessusPluginFamily enum
+     *
+     * A categorisation of Nessus plugin families. Ptng specific.
+     */
     enum NessusPluginFamily {
         WINDOWS,
         LINUX,
@@ -132,6 +168,7 @@ public:
     Q_ENUM(IssueSeverity)
     Q_ENUM(Protocol)
     Q_ENUM(NessusPluginFamily)
+
 public slots:
 
 signals:

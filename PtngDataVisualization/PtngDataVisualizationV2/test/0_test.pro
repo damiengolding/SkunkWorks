@@ -1,5 +1,4 @@
-QT += testlib xml
-QT -= gui
+QT += gui core testlib xml
 
 CONFIG += qt console c++20 warn_off depend_includepath testcase
 CONFIG -= app_bundle
@@ -21,6 +20,12 @@ SOURCES +=  tst_libparser.cpp \
 HEADERS += \
     inc/libparser.hpp \
     inc/testutilities.hpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../StaticOutput/libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../StaticOutput/libparser/debug/ -llibparserd
+
+INCLUDEPATH += $$PWD/../libparser
+DEPENDPATH += $$PWD/../libparser
 
 
 !build_pass:message("Build type: " $$BUILD_TYPE)

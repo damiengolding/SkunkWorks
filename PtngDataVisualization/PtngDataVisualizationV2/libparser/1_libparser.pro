@@ -41,3 +41,6 @@ contains(QT,sql){
     LIBS += -lodbc32
     !build_pass:message("Including reference to odbc32")
 }
+
+RESOURCES += \
+    res/resources.qrc

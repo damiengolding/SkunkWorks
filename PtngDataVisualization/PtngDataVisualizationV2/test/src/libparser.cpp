@@ -52,7 +52,7 @@ void LibParser::cleanupTestCase()
 
 #pragma All tests - impl {
 
-#pragma PtngIdent {
+#pragma Miscellaneous {
 void LibParser::MustRecogniseRuncontrol_data()
 {
     // QFAIL("TDD");
@@ -105,7 +105,30 @@ void LibParser::MustRecogniseRuncontrol()
     //     QVERIFY( type != PtngEnums::NUM_SUPPORTED_INPUT_TYPES );
     // }
 }
+
+void LibParser::MustPopulateSylesheet_data()
+{
+    QFAIL("TDD");
+}
+
+void LibParser::MustPopulateSylesheet()
+{
+    QFAIL("TDD");
+}
+#pragma Miscellaneous }
+
+#pragma PtngIdent {
+
+void LibParser::MustRecogniseFiles_data(){
+    QFAIL("TDD");
+}
+
+void LibParser::MustRecogniseFiles(){
+    QFAIL("TDD");
+}
+
 #pragma PtngIdent }
+
 
 #pragma PtnigInputParser {
 void LibParser::MustCountNmapHosts_data()

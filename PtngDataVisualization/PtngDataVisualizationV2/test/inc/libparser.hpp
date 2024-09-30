@@ -35,6 +35,14 @@ SOFTWARE.
 
 #include "testutilities.hpp"
 
+#pragma Includes {
+    #include "utils/ptngenums.hpp"
+    #include "utils/ptngstylesheet.hpp"
+
+    using namespace GoldingsGym::Ptng;
+#pragma Includes }
+
+
 class LibParser : public QObject
 {
     Q_OBJECT
@@ -49,9 +57,17 @@ private slots:
     void cleanupTestCase();
 
 #pragma All tests - decl {
-#pragma PtngIdent {
+#pragma Miscellaneous {
     void MustRecogniseRuncontrol_data();
     void MustRecogniseRuncontrol();
+
+    void MustPopulateSylesheet_data();
+    void MustPopulateSylesheet();
+#pragma Miscellaneous }
+
+#pragma PtngIdent {
+    void MustRecogniseFiles_data();
+    void MustRecogniseFiles();
 #pragma PtngIdent }
 
 #pragma PtnigInputParser {
