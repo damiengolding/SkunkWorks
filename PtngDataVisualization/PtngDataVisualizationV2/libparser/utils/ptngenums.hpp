@@ -32,6 +32,11 @@ SOFTWARE.
 
 namespace GoldingsGym::Ptng {
 
+/*!
+ * \brief The PtngEnums class
+ *
+ * All enumerations used in PtngDataVisualization
+ */
 class PtngEnums : public QObject
 {
     Q_OBJECT

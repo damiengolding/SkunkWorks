@@ -1,0 +1,24 @@
+strict digraph core_process{
+	rankdir=LR;
+	graph [fontname="JetBrains Mono",fontsize="12"];
+	compound=true;labelloc="t";label="Schematic 01 - core process";
+	
+	// Vertices
+	tool_output [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Tool output",style="solid"];
+	file_type [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Inspect file",style="solid"];
+	file_type_supported [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="File type is supported",style="solid"];
+	file_type_unsupported [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="File type is not supported",style="solid"];
+	parse_file [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Parse file",style="solid"];
+	common_format [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Convert to a common model format\n(QStandardItemModel and QStandardItem derivatives)",style="solid"];
+	display [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Display model\n(Designer Item Views)",style="solid"];
+	convert [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Output, e.g. *.dot, *.dgml",style="solid"];
+	
+	// Edges
+	tool_output->file_type [color="Black",label=""];
+	file_type->file_type_supported [color="Black",label=""];
+	file_type->file_type_unsupported [color="Black",label=""];
+	file_type_supported->parse_file [color="Black",label=""];
+	parse_file->common_format [color="Black",label=""];
+	common_format->display [color="Black",label=""];
+	common_format->convert [color="Black",label=""];
+}
