@@ -227,10 +227,16 @@
                          <uid>{26079796-aa4e-4d3c-b809-03561906cd09}</uid>
                         </DElement>
                        </base-DElement>
-                       <text>#include &lt;QStandardItemModel&gt;
-#include &lt;QStandardItem&gt;</text>
-                       <pos>x:650;y:-275</pos>
-                       <rect>x:0;y:0;w:188;h:46</rect>
+                       <text>#include &lt;QObject&gt;
+#include &lt;QStandardItemModel&gt;
+#include &lt;QStandardItem&gt;
+#include &lt;QDomDocument&gt;
+#include &lt;QDomElement&gt;
+#include &lt;QDomNode&gt;
+#include &lt;QDomNodeList&gt;
+#include &quot;abstractitemspec.hpp&quot;</text>
+                       <pos>x:635;y:-315</pos>
+                       <rect>x:0;y:0;w:188;h:136</rect>
                       </DAnnotation>
                      </instance>
                     </item>
@@ -433,7 +439,7 @@
                          </base-DElement>
                          <object>{7fbbd8f5-f338-459a-9a83-128924338349}</object>
                          <name>PtngIssueBuilder</name>
-                         <pos>x:140;y:-225</pos>
+                         <pos>x:321.667;y:-135</pos>
                          <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -454,8 +460,8 @@
                          </base-DElement>
                          <object>{911f9f73-b395-40cb-b968-d6694af9536c}</object>
                          <name>PtngIPV4AddressBuilder</name>
-                         <pos>x:-50;y:-225</pos>
-                         <rect>x:-85;y:-35;w:170;h:70</rect>
+                         <pos>x:138.333;y:-135</pos>
+                         <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -475,8 +481,8 @@
                          </base-DElement>
                          <object>{734cd5ff-3130-4a7b-830a-1ba56b8cf685}</object>
                          <name>PtngHostBuilder</name>
-                         <pos>x:-50;y:-130</pos>
-                         <rect>x:-80;y:-35;w:160;h:70</rect>
+                         <pos>x:-50;y:-135</pos>
+                         <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -496,7 +502,7 @@
                          </base-DElement>
                          <object>{17697adf-5ff4-478f-adb0-71eb30efe0b8}</object>
                          <name>PtngPortBuilder</name>
-                         <pos>x:140;y:-135</pos>
+                         <pos>x:495;y:-135</pos>
                          <rect>x:-75;y:-35;w:150;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -505,9 +511,107 @@
                       </DClass>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{6c1743d4-dfea-4aaa-8368-4205cceb8a4f}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{eee471f2-5f4f-403f-9d9b-992748dd1247}</object>
+                         <stereotypes>
+                          <qlist>
+                           <item>interface</item>
+                          </qlist>
+                         </stereotypes>
+                         <name>AbstractBuilder</name>
+                         <pos>x:230;y:-375</pos>
+                         <rect>x:-20;y:-20;w:40;h:40</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{59051af9-bb14-449c-b496-1e21ac92894e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{5574fa51-7ccb-4803-b2ce-2afac986ad81}</object>
+                         <a>{027d8a62-a8ec-48a5-afe2-e21509627714}</a>
+                         <b>{6c1743d4-dfea-4aaa-8368-4205cceb8a4f}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{eb581cd5-2150-494f-b517-7e7c0d15c927}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{1cdf1016-d7c5-4ada-a7ac-2123480492b8}</object>
+                         <a>{0fa7f531-01e2-4516-a35f-d5298769a0ae}</a>
+                         <b>{6c1743d4-dfea-4aaa-8368-4205cceb8a4f}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{d0076fd8-a57f-4845-9915-01031cdab816}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{10d258ac-5254-4df9-859e-057f5636f508}</object>
+                         <a>{dc7ba5a7-6097-429f-903d-24056a051a8e}</a>
+                         <b>{6c1743d4-dfea-4aaa-8368-4205cceb8a4f}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{99831044-cead-48e1-b8cc-497cb87570af}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{92353bd4-1e99-416d-bf8f-9fbcef17c557}</object>
+                         <a>{43a837ef-5dc5-4c42-8734-ae05dc07ef47}</a>
+                         <b>{6c1743d4-dfea-4aaa-8368-4205cceb8a4f}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1727543675952</last-modified>
+                  <last-modified>1727908004255</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -775,7 +879,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{a472cbf7-0f75-4f53-a48f-494fd9a39588}</uid>
+                    <uid>{8d7e11ad-dff7-4c5a-af43-b38eeb2f9304}</uid>
                     <type>2</type>
                     <properties>2</properties>
                     <declaration>+virtual QObject* ParseReportn(const QString&amp; file)</declaration>
@@ -1076,6 +1180,36 @@
                    </MElement>
                   </base-MElement>
                   <name>PtngIssueBuilder</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{10d258ac-5254-4df9-859e-057f5636f508}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{10d258ac-5254-4df9-859e-057f5636f508}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{7fbbd8f5-f338-459a-9a83-128924338349}</a>
+                             <b>{eee471f2-5f4f-403f-9d9b-992748dd1247}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
                  </MObject>
                 </base-MObject>
                </MClass>
@@ -1097,6 +1231,36 @@
                    </MElement>
                   </base-MElement>
                   <name>PtngIPV4AddressBuilder</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{1cdf1016-d7c5-4ada-a7ac-2123480492b8}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{1cdf1016-d7c5-4ada-a7ac-2123480492b8}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{911f9f73-b395-40cb-b968-d6694af9536c}</a>
+                             <b>{eee471f2-5f4f-403f-9d9b-992748dd1247}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
                  </MObject>
                 </base-MObject>
                </MClass>
@@ -1118,6 +1282,36 @@
                    </MElement>
                   </base-MElement>
                   <name>PtngHostBuilder</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{5574fa51-7ccb-4803-b2ce-2afac986ad81}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{5574fa51-7ccb-4803-b2ce-2afac986ad81}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{734cd5ff-3130-4a7b-830a-1ba56b8cf685}</a>
+                             <b>{eee471f2-5f4f-403f-9d9b-992748dd1247}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
                  </MObject>
                 </base-MObject>
                </MClass>
@@ -1139,8 +1333,82 @@
                    </MElement>
                   </base-MElement>
                   <name>PtngPortBuilder</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{92353bd4-1e99-416d-bf8f-9fbcef17c557}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{92353bd4-1e99-416d-bf8f-9fbcef17c557}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{17697adf-5ff4-478f-adb0-71eb30efe0b8}</a>
+                             <b>{eee471f2-5f4f-403f-9d9b-992748dd1247}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
                  </MObject>
                 </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{eee471f2-5f4f-403f-9d9b-992748dd1247}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{eee471f2-5f4f-403f-9d9b-992748dd1247}</uid>
+                    <stereotypes>
+                     <qlist>
+                      <item>interface</item>
+                     </qlist>
+                    </stereotypes>
+                   </MElement>
+                  </base-MElement>
+                  <name>AbstractBuilder</name>
+                 </MObject>
+                </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{ff777d35-9bd4-4f0c-864e-667bb15c33e4}</uid>
+                    <type>2</type>
+                    <declaration>-AbstractBuilder&amp; Add(const QDomElement&amp; element)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{57c51f1a-5ab5-422d-a4ce-5cd6cb9924d8}</uid>
+                    <type>2</type>
+                    <declaration>#AbstractBuilder&amp; Add(const QString&amp; entry)</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
                </MClass>
               </instance>
              </target>

@@ -10,7 +10,7 @@ The library is written in pure Qt (version 6.7.2 at the time of going to press) 
 
 The classes associated with each step are detailed in the main body of this documentation.
 
-# Tools (sub-projects) provided with the libparser library subdirs project
+# Tools (sub-projects) provided with the PtngDataVisualizationV2 library subdirs project
 
 ifident.exe: Input file identifier - takes an arbitrary file, usually output from a penetration test/assessment tool, and attempts to identify the source tool.
 

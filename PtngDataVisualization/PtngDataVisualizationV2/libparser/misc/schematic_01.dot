@@ -11,7 +11,7 @@ strict digraph core_process{
 	parse_file [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Parse file",style="solid"];
 	common_format [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Convert to a common model format\n(QStandardItemModel and QStandardItem derivatives)",style="solid"];
 	display [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Display model\n(Designer Item Views)",style="solid"];
-	convert [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Output, e.g. *.dot, *.dgml",style="solid"];
+	convert [shape=box,fontcolor="Black",color="#000000",fontname="JetBrains Mono",fontsize="12",label="Output, e.g. *.dot, *.dgml, Namicsoft",style="solid"];
 	
 	// Edges
 	tool_output->file_type [color="Black",label=""];

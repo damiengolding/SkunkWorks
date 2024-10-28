@@ -53,11 +53,11 @@ public:
 
 public:
     /*!
-     * \brief The SupportedInputTypes enum
+     * \brief The SupportedInputType enum
      *
-     * The list of file formats supported by PtngIdent
+     * The list of file formats supported by PtngIdent.
      */
-    enum SupportedInputTypes {
+    enum SupportedInputType {
         CODE,
         TSV,
         CSV,
@@ -87,11 +87,11 @@ public:
         NUM_SUPPORTED_INPUT_TYPES
     };
     /*!
-     * \brief The NetworkNodeRoles enum
+     * \brief The NetworkNodeRole enum
      *
-     * The roles a node plays in a network model
+     * The roles a node plays in a Ptng network model.
      */
-    enum NetworkNodeRoles {
+    enum NetworkNodeRole {
         ROOT,
         SUBNET,
         ACLASS,
@@ -101,11 +101,11 @@ public:
         NUM_NMAP_NODE_ROLES
     };
     /*!
-     * \brief The ProcessorStates enum
+     * \brief The ProcessorState enum
      *
-     * Finite State Machine state types
+     * Finite State Machine state types.
      */
-    enum ProcessorStates {
+    enum ProcessorState {
         START_STATE_CREATED,
         START_STATE_ENTERED,
         START_STATE_EXITED,
@@ -120,7 +120,7 @@ public:
     /*!
      * \brief The IssueSeverity enum
      *
-     * Severity levels (bsased on Nessus severities)
+     * Severity levels (bsased on Nessus severities).
      */
     enum IssueSeverity {
         INDETERMINATE,
@@ -134,7 +134,7 @@ public:
     /*!
      * \brief The Protocol enum
      *
-     * Broad protocol types
+     * Broad protocol types.
      */
     enum Protocol{
         UDP,
@@ -167,9 +167,9 @@ public:
         MISCELLANEOUS,
         NUM_NESSUS_PLUGIN_FAMILIES
     };
-    Q_ENUM(SupportedInputTypes)
-    Q_ENUM(NetworkNodeRoles)
-    Q_ENUM(ProcessorStates)
+    Q_ENUM(SupportedInputType)
+    Q_ENUM(NetworkNodeRole)
+    Q_ENUM(ProcessorState)
     Q_ENUM(IssueSeverity)
     Q_ENUM(Protocol)
     Q_ENUM(NessusPluginFamily)

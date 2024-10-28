@@ -49,12 +49,13 @@
                          </base-DElement>
                          <object>{5ca1239c-2f5a-447b-ba48-f1d7797619de}</object>
                          <name>PtngIdentifier</name>
-                         <pos>x:-560;y:-425</pos>
-                         <rect>x:-95;y:-55;w:190;h:110</rect>
+                         <pos>x:-640;y:-405</pos>
+                         <rect>x:-205;y:-55;w:410;h:110</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -96,7 +97,7 @@
                          </base-DElement>
                          <object>{bfeae271-4de7-4b02-9c1c-3f763c39e274}</object>
                          <name>PtngDotOutput</name>
-                         <pos>x:-215;y:-295</pos>
+                         <pos>x:-270;y:-305</pos>
                          <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -134,7 +135,7 @@
                          </base-DElement>
                          <object>{4450b016-66ce-481d-916d-9e39576e55db}</object>
                          <name>PtngDgmlOutput</name>
-                         <pos>x:0;y:-285</pos>
+                         <pos>x:-80;y:-305</pos>
                          <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -168,10 +169,20 @@
                          <uid>{59165391-6e0b-46fc-b2c5-beb58631e4d0}</uid>
                         </DElement>
                        </base-DElement>
-                       <text>#include &lt;QStandardItemModel&gt;
-#include &lt;QMap&gt;</text>
-                       <pos>x:-660;y:-315</pos>
-                       <rect>x:0;y:0;w:188;h:46</rect>
+                       <text>#include &lt;QString&gt;
+#include &lt;QFile&gt;
+#include &lt;QFileInfo&gt;
+#include &lt;QDir&gt;
+#include &lt;QTextStream&gt;
+#include &lt;QDomDocument&gt;
+#include &lt;QDomElement&gt;
+#include &lt;QDomNode&gt;
+#include &lt;QDomNodeList&gt;
+#include &quot;../data/abstractreportspec.hpp&quot;
+#include &quot;../data/abstractitemspec.hpp&quot;
+#include &quot;../utils/ptngenums.hpp&quot;</text>
+                       <pos>x:-780;y:-710</pos>
+                       <rect>x:0;y:0;w:229;h:196</rect>
                       </DAnnotation>
                      </instance>
                     </item>
@@ -208,50 +219,12 @@
                         <DObject>
                          <base-DElement>
                           <DElement>
-                           <uid>{d7287155-2265-499e-86d0-e379ea9909ff}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</object>
-                         <name>PtngInputNmapAxfr</name>
-                         <pos>x:-700;y:-50</pos>
-                         <rect>x:-60;y:-30;w:120;h:60</rect>
-                         <visual-role>0</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DClass>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{565197f4-c7bc-4815-b467-7e4ede581fe5}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{eec32c14-d26f-442e-98ed-0ed28665c95e}</object>
-                         <a>{d7287155-2265-499e-86d0-e379ea9909ff}</a>
-                         <b>{340d57e8-6f21-4404-a55f-11c296cccc38}</b>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DClass">
-                      <DClass>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
                            <uid>{55840fe8-155e-4f43-88ad-7e539c591e4c}</uid>
                           </DElement>
                          </base-DElement>
                          <object>{fdcdb460-a85b-44e9-9c88-0789338dd527}</object>
                          <name>PtngInputNessus</name>
-                         <pos>x:-545;y:30</pos>
+                         <pos>x:-575;y:20</pos>
                          <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -347,44 +320,6 @@
                          </base-DElement>
                          <object>{1eb9fa80-7fe9-4d99-a543-f8ea06ebd398}</object>
                          <a>{81b6551f-d977-46ed-bfe5-18c6a4b876d1}</a>
-                         <b>{340d57e8-6f21-4404-a55f-11c296cccc38}</b>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DClass">
-                      <DClass>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{6a31c97e-3d4a-4e3b-8b24-e19855769fc5}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{708ecf60-bc6e-4f70-b55c-4daeb1e7b838}</object>
-                         <name>PtngInputNmapAxfr</name>
-                         <pos>x:-700;y:-145</pos>
-                         <rect>x:-60;y:-30;w:120;h:60</rect>
-                         <visual-role>0</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DClass>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{73b68df2-504b-4dcd-bfd2-8840eef3b74e}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{22654819-ea9f-47b4-87ab-72f23b6dc108}</object>
-                         <a>{6a31c97e-3d4a-4e3b-8b24-e19855769fc5}</a>
                          <b>{340d57e8-6f21-4404-a55f-11c296cccc38}</b>
                         </DRelation>
                        </base-DRelation>
@@ -593,7 +528,7 @@
                          </base-DElement>
                          <object>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</object>
                          <name>PtngInputNmapEnumeration</name>
-                         <pos>x:-700;y:80</pos>
+                         <pos>x:-715;y:85</pos>
                          <rect>x:-85;y:-30;w:170;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -619,9 +554,85 @@
                       </DInheritance>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{a66e0cc7-576b-4081-beac-0d48c77f7f86}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d6f45a90-7a0e-41ca-b84e-bbc4f14513db}</object>
+                         <name>PtngNamicsoftOutput</name>
+                         <pos>x:105;y:-305</pos>
+                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{40085a84-3ca4-4b9b-a755-b3097aa4bb41}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{c57c325f-e6aa-4791-85e4-b07e1f1abc17}</object>
+                         <a>{a66e0cc7-576b-4081-beac-0d48c77f7f86}</a>
+                         <b>{4403cfc4-e320-4094-877c-3c1959ccef96}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{bc6a214b-b959-41ab-9b42-a9fc8a85207b}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{708ecf60-bc6e-4f70-b55c-4daeb1e7b838}</object>
+                         <name>PtngInputNmapAxfr</name>
+                         <pos>x:-775;y:-105</pos>
+                         <rect>x:-60;y:-30;w:120;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{046cc8e8-3d80-4d36-ad6e-82cde3042457}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{22654819-ea9f-47b4-87ab-72f23b6dc108}</object>
+                         <a>{bc6a214b-b959-41ab-9b42-a9fc8a85207b}</a>
+                         <b>{340d57e8-6f21-4404-a55f-11c296cccc38}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1727544132234</last-modified>
+                  <last-modified>1727808734878</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -646,6 +657,31 @@
                   <name>PtngIdentifier</name>
                  </MObject>
                 </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{f70d1568-7407-4b93-8e38-7d2234306cfa}</uid>
+                    <type>2</type>
+                    <declaration>+static PtngEnums::SupportedInputTypes checkFile(const QString &amp;file)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{54244269-dc9d-49fc-9b82-3e8bc86ca24f}</uid>
+                    <type>2</type>
+                    <declaration>-static PtngEnums::SupportedInputTypes checkXmlFile(const QString &amp;file)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{4fdc1ca4-b35c-41a5-8023-283e561ed9c6}</uid>
+                    <type>2</type>
+                    <declaration>-static PtngEnums::SupportedInputTypes checkTextFile(const QString &amp;file)</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
                </MClass>
               </instance>
              </target>
@@ -676,10 +712,10 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{297cd938-071d-4c31-92b8-32370caa4e1f}</uid>
+                    <uid>{8ca48b7e-27b9-4b8a-a43f-9d1cf581ede6}</uid>
                     <type>2</type>
                     <properties>2</properties>
-                    <declaration>+virtual QString convert( QStandardItemModel* model, bool&amp; ok)</declaration>
+                    <declaration>+virtual qint64 Write( QStandardItemModel* model, const QString&amp; file, bool&amp; ok)</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
@@ -816,65 +852,14 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{3420dcc6-6c34-4800-8e95-d211f6202989}</uid>
+                    <uid>{8f16cbbf-e234-4c6d-bf66-64036f3f828b}</uid>
                     <type>2</type>
                     <properties>2</properties>
-                    <declaration>+virtual QMap&lt;QString,QString&gt; parse( const QString&amp; file )</declaration>
+                    <declaration>+virtual AbstractReportSpec* ParseReport(const QString&amp; file)</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
                 </members>
-               </MClass>
-              </instance>
-             </target>
-            </handle>
-           </item>
-           <item>
-            <handle>
-             <uid>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</uid>
-             <target>
-              <instance type="MClass">
-               <MClass>
-                <base-MObject>
-                 <MObject>
-                  <base-MElement>
-                   <MElement>
-                    <uid>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</uid>
-                   </MElement>
-                  </base-MElement>
-                  <name>PtngInputNmapAxfr</name>
-                  <relations>
-                   <handles>
-                    <handles>
-                     <qlist>
-                      <item>
-                       <handle>
-                        <uid>{eec32c14-d26f-442e-98ed-0ed28665c95e}</uid>
-                        <target>
-                         <instance type="MInheritance">
-                          <MInheritance>
-                           <base-MRelation>
-                            <MRelation>
-                             <base-MElement>
-                              <MElement>
-                               <uid>{eec32c14-d26f-442e-98ed-0ed28665c95e}</uid>
-                              </MElement>
-                             </base-MElement>
-                             <a>{f553f389-0f5d-4f89-ae04-52dfdf431d66}</a>
-                             <b>{59e26a76-4edb-493c-86da-2030e96c7987}</b>
-                            </MRelation>
-                           </base-MRelation>
-                          </MInheritance>
-                         </instance>
-                        </target>
-                       </handle>
-                      </item>
-                     </qlist>
-                    </handles>
-                   </handles>
-                  </relations>
-                 </MObject>
-                </base-MObject>
                </MClass>
               </instance>
              </target>
@@ -1372,6 +1357,57 @@
                              </base-MElement>
                              <a>{a4a57da6-3458-4c86-8c22-2efbebc7b168}</a>
                              <b>{59e26a76-4edb-493c-86da-2030e96c7987}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{d6f45a90-7a0e-41ca-b84e-bbc4f14513db}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{d6f45a90-7a0e-41ca-b84e-bbc4f14513db}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>PtngNamicsoftOutput</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{c57c325f-e6aa-4791-85e4-b07e1f1abc17}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{c57c325f-e6aa-4791-85e4-b07e1f1abc17}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{d6f45a90-7a0e-41ca-b84e-bbc4f14513db}</a>
+                             <b>{05936488-920d-43c5-9659-93103e0bd212}</b>
                             </MRelation>
                            </base-MRelation>
                           </MInheritance>
